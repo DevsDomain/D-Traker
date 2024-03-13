@@ -1,9 +1,7 @@
-<h1 align="center">:file_cabinet: DevsDomain.md</h1>
+<h1 align="center">🗺️ D-Traker</h1>
 
 ## :memo: Desafio
-ipsu loren
-
-
+O desafio proposto é desenvolver uma ferramenta de gerenciamento exclusivamente para o gestor de projetos, onde ele poderá administrar os dados apontados pelo editor e pelo revisor. O sistema deve permitir que o gestor delimite a área do projeto, carregue dados de suporte, cadastre usuários (editores e revisores), atribua áreas de trabalho e extraia estatísticas. Dessa forma, a ferramenta visa melhorar a eficiência e a qualidade dos projetos de mapeamento, centralizando as tarefas de gerenciamento dos dados fornecidos pelos colaboradores envolvidos no processo.
 
 
 [Link Para o protótipo no FIGMA](https://www.figma.com)
@@ -13,31 +11,30 @@ ipsu loren
 
 Cada entrega foi realizada a partir da criação de uma **tag** Observe a relação a seguir:
 | Sprint | Previsão de entrega | Status | Release | Kanban | BurnDown |
-|:--:|:----------:|:-------------------|:-------------------------------------------------:|:-------------------------------------------------:|:-------------------------------------------------:|
+|:--:|:----------:|:-------------------|:-------------------:|:-------------------:|:-------------------:|
+| 01 | 03/04/2024 | 🚧 Em andamento| [Ver release]() | [Ver Sprint 1](1) | [Ver BurnDown#1]() |
+| 02 | 16/05/2024 | 🛑 Não iniciada| [Ver release]() | [Ver Sprint 2](2) | [Ver BurnDown#1]() |
+| 03 | 13/06/2024 | 🛑 Não iniciada| [Ver release]() | [Ver Sprint 3](3) | [Ver BurnDown#1]() |
 
-| 01 | 03/04/2024 | 🚧 Em andamento| [Ver release]() |
-| 02 | 16/05/2024 | 🛑 Não iniciada| [Ver release]() |
-| 03 | 13/06/2024 | 🛑 Não iniciada| [Ver release]() |
-
-🚧 Em andamento /🛑 Não iniciada/:heavy_check_mark: Entregue 
-
+🚧 Em andamento /🛑 Não iniciada/✔️ Entregue 
 
 
-## :wrench: Tecnologias utilizadas
+
+## 🔧 Tecnologias utilizadas
 
 #### Backend
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
 #### Frontend
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
-
+![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
 
 <span id="equipe">
 
