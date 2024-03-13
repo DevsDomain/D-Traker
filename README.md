@@ -4,17 +4,15 @@
 O desafio proposto é desenvolver uma ferramenta de gerenciamento exclusivamente para o gestor de projetos, onde ele poderá administrar os dados apontados pelo editor e pelo revisor. O sistema deve permitir que o gestor delimite a área do projeto, carregue dados de suporte, cadastre usuários (editores e revisores), atribua áreas de trabalho e extraia estatísticas. Dessa forma, a ferramenta visa melhorar a eficiência e a qualidade dos projetos de mapeamento, centralizando as tarefas de gerenciamento dos dados fornecidos pelos colaboradores envolvidos no processo.
 
 
-[Link Para o protótipo no FIGMA](https://www.figma.com)
-
 
 ### 🏁 Entregas de Sprints
 
 Cada entrega foi realizada a partir da criação de uma **tag** Observe a relação a seguir:
 | Sprint | Previsão de entrega | Status | Release | Kanban | BurnDown |
 |:--:|:----------:|:-------------------|:-------------------:|:-------------------:|:-------------------:|
-| 01 | 03/04/2024 | 🚧 Em andamento| [Ver release]() | [Ver Sprint 1](1) | [Ver BurnDown#1]() |
-| 02 | 16/05/2024 | 🛑 Não iniciada| [Ver release]() | [Ver Sprint 2](2) | [Ver BurnDown#1]() |
-| 03 | 13/06/2024 | 🛑 Não iniciada| [Ver release]() | [Ver Sprint 3](3) | [Ver BurnDown#1]() |
+| 01 | 03/04/2024 | 🚧 Em andamento| [Ver release 1]() | [Ver Sprint 1](1) | [Ver BurnDown #1]() |
+| 02 | 16/05/2024 | 🛑 Não iniciada| [Ver release 2]() | [Ver Sprint 2](2) | [Ver BurnDown #2]() |
+| 03 | 13/06/2024 | 🛑 Não iniciada| [Ver release 3]() | [Ver Sprint 3](3) | [Ver BurnDown #3]() |
 
 🚧 Em andamento /🛑 Não iniciada/✔️ Entregue 
 
