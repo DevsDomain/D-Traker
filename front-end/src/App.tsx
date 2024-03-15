@@ -1,9 +1,7 @@
-import React from 'react';
-import TabelaGestores from './components/TabelaGestores';
-
+import { Routes } from './routes/routes';
 function App() {
   return (
-   <TabelaGestores/>
+   <h1>D-TRACKER MAIN PAGE</h1>
   );
 }
 

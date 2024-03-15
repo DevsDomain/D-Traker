@@ -10,29 +10,21 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import Pesquisa from '../Pesquisa';
 
-import { gestores, gestoresType } from '../../utils/gestores';
-import { useEffect, useState } from 'react';
+import { gestoresType } from '../../utils/gestores';
 
 function noop(): void {
     // do nothing
 }
-export default function TabelaGestores() {
-    const [gestoresList, setGestoresList] = useState<gestoresType[]>(gestores)
 
-    function toggleGestor(gestor: gestoresType) {
-        gestor.isActive = !gestor.isActive
+interface TabelaGestoresProps{
+    gestores: readonly gestoresType[];
+}
 
-    }
-
-    function handlePesquisa(value: string) {
-        setGestoresList(gestores.filter(({ name }) => name.toLowerCase().includes(value.toLowerCase())))
-    }
-
+export default function TabelaGestores({gestores}:TabelaGestoresProps) {
     return (
         <Card>
-            <Pesquisa placeholder='Pesquisar gestor por nome' handlePesquisa={handlePesquisa} />
+        
             <Box sx={{ overflowX: 'auto' }}>
                 <Table sx={{ maxWidth: '800px' }}>
                     <TableHead>
@@ -46,7 +38,7 @@ export default function TabelaGestores() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {gestoresList.map((gestor) => {
+                        {gestores.map((gestor:gestoresType) => {
                             return (
                                 <TableRow hover key={gestor.id}>
 
@@ -61,7 +53,7 @@ export default function TabelaGestores() {
                                     <TableCell>
                                         <Checkbox
                                             checked={gestor.isActive}
-                                            onClick={() => toggleGestor(gestor)}
+                                           
                                         />
                                     </TableCell>
 
