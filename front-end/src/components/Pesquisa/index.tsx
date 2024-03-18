@@ -7,9 +7,8 @@ import { PesquisaProps } from '../../types/gestaoDeAcesso';
 
 export default function Pesquisa({ placeholder, handlePesquisa }: PesquisaProps) {
 
-
     return (
-        <Card sx={{ p: 2 }}>
+        <Card>
             <OutlinedInput
                 defaultValue=""
                 fullWidth
@@ -19,7 +18,7 @@ export default function Pesquisa({ placeholder, handlePesquisa }: PesquisaProps)
                         <MagnifyingGlassIcon fontSize="var(--icon-fontSize-md)" />
                     </InputAdornment>
                 }
-                sx={{ maxWidth: '450px' }}
+                sx={{ minWidth: '400px' }}
                 onChange={e => handlePesquisa(e.target.value)}
             />
         </Card>

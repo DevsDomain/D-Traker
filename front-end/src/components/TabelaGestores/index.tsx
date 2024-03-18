@@ -10,35 +10,54 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+
+
+
 
 import { gestoresType } from '../../utils/gestores';
+import { setDefaultResultOrder } from 'dns';
 
 function noop(): void {
     // do nothing
 }
 
-interface TabelaGestoresProps{
+interface TabelaGestoresProps {
     gestores: readonly gestoresType[];
 }
 
-export default function TabelaGestores({gestores}:TabelaGestoresProps) {
+export default function TabelaGestores({ gestores }: TabelaGestoresProps) {
+    const statusMap = {
+        Suspended: { label: 'Suspended', color: 'warning' },
+        Active: { label: 'Active', color: 'success' },
+        Closed: { label: 'Closed', color: 'error' },
+    } as const;
+
+
     return (
         <Card>
-        
+
             <Box sx={{ overflowX: 'auto' }}>
                 <Table sx={{ maxWidth: '800px' }}>
                     <TableHead>
                         <TableRow>
 
-                            <TableCell>Name</TableCell>
-                            <TableCell>Email</TableCell>
+                            <TableCell>Nome</TableCell>
                             <TableCell>Projeto</TableCell>
-                            <TableCell>Ativo</TableCell>
+                            <TableCell>Papel</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell>Conceder Acesso Total</TableCell>
+
 
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {gestores.map((gestor:gestoresType) => {
+                        {gestores.map((gestor: gestoresType) => {
+                            const { label, color } = statusMap[gestor.status] ?? {
+                                label: 'Unknown',
+                                color: 'default'
+                            };
+
                             return (
                                 <TableRow hover key={gestor.id}>
 
@@ -48,14 +67,19 @@ export default function TabelaGestores({gestores}:TabelaGestoresProps) {
                                         </Stack>
                                     </TableCell>
 
-                                    <TableCell>{gestor.email}</TableCell>
                                     <TableCell>{gestor.projeto}</TableCell>
-                                    <TableCell>
+                                    <TableCell>{gestor.papel}</TableCell>
+
+                                        <TableCell>
+                                            <Chip color={color} label={label} size="small" />
+                                        </TableCell>
+
+                                        <TableCell>
                                         <Checkbox
                                             checked={gestor.isActive}
-                                           
+
                                         />
-                                    </TableCell>
+                                        </TableCell>
 
 
                                 </TableRow>
