@@ -6,12 +6,12 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { PesquisaPapelProps } from '../../types/gestaoDeAcesso';
 
-export default function BasicSelect({ handlePesquisaByPapel }: PesquisaPapelProps) {
+export default function BasicSelect({ handlePesquisaByPapel, papeis }: PesquisaPapelProps) {
     const [papel, setPapel] = React.useState('');
 
     const handleChange = (event: SelectChangeEvent) => {
         setPapel(event.target.value as string);
-        handlePesquisaByPapel(event.target.value as string)
+        handlePesquisaByPapel(event.target.value as string);
     };
 
     return (
@@ -26,9 +26,11 @@ export default function BasicSelect({ handlePesquisaByPapel }: PesquisaPapelProp
                     onChange={handleChange}
                 >
                     <MenuItem value={""}>Papel</MenuItem>
-                    <MenuItem value={"Revisor"}>Revisor</MenuItem>
-                    <MenuItem value={"Editor"}>Editor</MenuItem>
-                    <MenuItem value={"Gestor"}>Gestor</MenuItem>
+                    {papeis.map((papelItem, index) => (
+                        papelItem && (
+                            <MenuItem key={index} value={papelItem}>{papelItem}</MenuItem>
+                        ) 
+                    ))}
                 </Select>
             </FormControl>
         </Box>

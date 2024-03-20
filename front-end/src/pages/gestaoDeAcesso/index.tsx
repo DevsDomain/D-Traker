@@ -1,27 +1,44 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-import Pesquisa from "../../components/Pesquisa"
 import TabelaGestores from "../../components/TabelaGestores"
-import { useState } from "react"
-import { gestoresType, gestores } from "../../utils/gestores"
+import { useEffect, useState } from "react"
 import BasicSelect from '../../components/Select';
+import { fetchAdmin } from '../../services/admin';
+import { ResponseAdminApi } from '../../types/gestaoDeAcesso';
 
 export default function GestaoDeAcesso() {
-    const [gestoresList, setGestoresList] = useState<gestoresType[]>(gestores)
-
-    function toggleGestor(gestor: gestoresType) {
-        gestor.isActive = !gestor.isActive
-
-    }
-    function handlePesquisa(value: string) {
-        setGestoresList(gestores.filter(({ name }) => name.toLowerCase().includes(value.toLowerCase())))
-    }
+    const [gestoresList, setGestoresList] = useState<ResponseAdminApi[]>([]);
+    const [filteredGestoresList, setFilteredGestoresList] = useState<ResponseAdminApi[]>([]);
+    const [papeis, setPapeis] = useState<string[]>([]);
+    const [selectedPapel, setSelectedPapel] = useState<string>('');
 
     function handlePesquisaByPapel(value: string) {
-        console.log(value)
-        setGestoresList(gestores.filter(({ papel }) => papel.toLowerCase().includes(value.toLowerCase())))
+        setSelectedPapel(value);
+        const filter = gestoresList.filter(({ papel }) => papel === value);
+
+        setFilteredGestoresList(filter);
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchAdmin();
+                const papeisUnicos: string[] = [...new Set((data as ResponseAdminApi[]).map((item: ResponseAdminApi) => item.papel))];
+                setPapeis(papeisUnicos);
+                setGestoresList(data);
+                setFilteredGestoresList(data);
+                console.log(data.map((item: ResponseAdminApi) => {
+                    if (!item.papel) {
+                        console.log(item)
+                    }
+                }))
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <Stack spacing={3}>
@@ -30,14 +47,10 @@ export default function GestaoDeAcesso() {
                     <Typography variant="h4">Gestão De Acesso</Typography>
                 </Stack>
             </Stack>
-            <Stack  spacing={3} direction={"row"} alignItems="center" minWidth={500}>
-            <Pesquisa placeholder='Pesquisar gestor por nome' handlePesquisa={handlePesquisa} />
-            <BasicSelect handlePesquisaByPapel={handlePesquisaByPapel} />
+            <Stack spacing={3} direction={"row"} alignItems="center" minWidth={500}>
+                <BasicSelect handlePesquisaByPapel={handlePesquisaByPapel} papeis={papeis} />
             </Stack>
-            <TabelaGestores gestores={gestoresList} />
+            <TabelaGestores gestores={selectedPapel === '' ? gestoresList : filteredGestoresList} />
         </Stack>
-
-
-
-    )
+    );
 }

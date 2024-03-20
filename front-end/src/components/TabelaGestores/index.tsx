@@ -1,103 +1,72 @@
-import Box from '@mui/material/Box';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+import TablePagination from '@mui/material/TablePagination';
 import Chip from '@mui/material/Chip';
+import { ResponseAdminApi } from '../../types/gestaoDeAcesso';
 
-
-
-
-import { gestoresType } from '../../utils/gestores';
-import { setDefaultResultOrder } from 'dns';
-
-function noop(): void {
-    // do nothing
-}
-
-interface TabelaGestoresProps {
-    gestores: readonly gestoresType[];
-}
-
-export default function TabelaGestores({ gestores }: TabelaGestoresProps) {
+function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] }) {
     const statusMap = {
-        Suspended: { label: 'Suspended', color: 'warning' },
-        Active: { label: 'Active', color: 'success' },
-        Closed: { label: 'Closed', color: 'error' },
+        finalizado: { label: 'Finalizado', color: 'success' },
+        andamento: { label: 'Em andamento', color: 'warning' },
+
     } as const;
 
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(50);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     return (
         <Card>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Projeto</TableCell>
+                        <TableCell>Papel</TableCell>
+                        <TableCell>Status</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {gestores.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((gestor) => {
+                        const { label, color } = statusMap[gestor.status] ?? { label: 'Não atribuído', color: 'default' };
 
-            <Box sx={{ overflowX: 'auto' }}>
-                <Table sx={{ maxWidth: '800px' }}>
-                    <TableHead>
-                        <TableRow>
-
-                            <TableCell>Nome</TableCell>
-                            <TableCell>Projeto</TableCell>
-                            <TableCell>Papel</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Conceder Acesso Total</TableCell>
-
-
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {gestores.map((gestor: gestoresType) => {
-                            const { label, color } = statusMap[gestor.status] ?? {
-                                label: 'Unknown',
-                                color: 'default'
-                            };
-
-                            return (
-                                <TableRow hover key={gestor.id}>
-
-                                    <TableCell>
-                                        <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-                                            <Typography variant="subtitle2">{gestor.name}</Typography>
-                                        </Stack>
-                                    </TableCell>
-
-                                    <TableCell>{gestor.projeto}</TableCell>
-                                    <TableCell>{gestor.papel}</TableCell>
-
-                                        <TableCell>
-                                            <Chip color={color} label={label} size="small" />
-                                        </TableCell>
-
-                                        <TableCell>
-                                        <Checkbox
-                                            checked={gestor.isActive}
-
-                                        />
-                                        </TableCell>
-
-
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </Box>
+                        return (
+                            <TableRow hover key={gestor.idPropriedade}>
+                                <TableCell>{gestor.idProjeto}</TableCell>
+                                <TableCell>{gestor.papel}</TableCell>
+                                <TableCell>
+                                    <Chip color={color} label={label} size="small" />
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
             <Divider />
             <TablePagination
                 component="div"
                 count={gestores.length}
-                page={0}
-                rowsPerPage={5}
-                rowsPerPageOptions={[5, 10, 25]}
-                onPageChange={noop}
-                onRowsPerPageChange={noop}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                rowsPerPageOptions={[50, 75, 100]}
             />
         </Card>
     );
 }
+
+export default TabelaGestores;
