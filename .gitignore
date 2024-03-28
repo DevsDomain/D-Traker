@@ -1,0 +1,14 @@
+# Arquivos do PowerShell
+*.ps1
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+*.tmp
+
+# Arquivos de configuração local
+*.env
+
+# Diretórios
+node_modules/
