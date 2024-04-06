@@ -7,7 +7,7 @@ export interface Gestor {
     password: string;
 }
 
-const gestorSchema = new Schema<Gestor>({
+export const gestorSchema = new Schema<Gestor>({
     name: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true }

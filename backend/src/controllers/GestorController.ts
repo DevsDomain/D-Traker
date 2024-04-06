@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import gestorModel from '../models/gestores';
+import gestorModel, { Gestor } from '../models/gestores';
+import GradeAtuacaoModel from '../models/cruzeiro';
 
 class GestorController {
 
@@ -47,6 +48,51 @@ class GestorController {
             return res.status(500).json({ err: error.message });
         }
     }
+
+    async vincularProjeto(req: Request, res: Response): Promise<Response> {
+        try {
+            const { idGestor, idProjeto } = req.body;
+            const gestor = await gestorModel.findById(idGestor);
+
+            if (!gestor) {
+                return res.status(404).json({ err: "Gestor não encontrado!" });
+            }
+
+            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { gestor: gestor } });
+            console.log("Update result:", projectLinkedToGestor);
+
+
+            if (projectLinkedToGestor.modifiedCount === 0) {
+                return res.status(404).json({ err: "Projeto não atualizado!" });
+
+            }
+
+            return res.status(201).json("Projeto atualizado com sucesso!");
+        } catch (error: any) {
+
+            return res.status(500).json({ err: error.message });
+        }
+    }
+
+    async MichaelGambiarra(): Promise<void> {
+        try {
+            const filter = {};
+            const update = {
+                $set: {
+                    gestor: null 
+                }
+            };
+
+            // Update all documents in the collection
+            const result = await GradeAtuacaoModel.updateMany(filter, update);
+
+            // Log the result
+            console.log(`${result.modifiedCount} documents atualizados.`);
+        } catch (error: any) {
+            console.error("ERROR", error.message);
+        }
+    }
+
 }
 
 

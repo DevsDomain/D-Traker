@@ -35,7 +35,7 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                 <TableHead>
                     <TableRow>
                         <TableCell>Projeto</TableCell>
-                        <TableCell>Papel</TableCell>
+                        <TableCell>Gestor</TableCell>
                         <TableCell>Status</TableCell>
                     </TableRow>
                 </TableHead>
@@ -44,9 +44,9 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                         const { label, color } = statusMap[gestor.status] ?? { label: 'Não atribuído', color: 'default' };
 
                         return (
-                            <TableRow hover key={gestor.idPropriedade}>
-                                <TableCell>{gestor.idProjeto}</TableCell>
-                                <TableCell>{gestor.papel}</TableCell>
+                            <TableRow hover key={gestor.idProjeto}>
+                                <TableCell>{gestor.NomeProjeto}</TableCell>
+                                <TableCell>{gestor.GestorNome}</TableCell>
                                 <TableCell>
                                     <Chip color={color} label={label} size="small" />
                                 </TableCell>
