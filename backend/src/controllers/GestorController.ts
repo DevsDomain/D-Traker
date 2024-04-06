@@ -7,7 +7,11 @@ class GestorController {
     async getAll(req: Request, res: Response): Promise<Response> {
         try {
             const gestores = await gestorModel.find({});
-            return res.status(201).json(gestores);
+            const responseGestor = gestores.map((gestor: Gestor) => ({
+                idGestor: gestor._id,
+                nomeGestor: gestor.name
+            }))
+            return res.status(201).json(responseGestor);
         } catch (error: any) {
             return res.status(500).json({ err: error.message });
         }
@@ -79,7 +83,7 @@ class GestorController {
             const filter = {};
             const update = {
                 $set: {
-                    gestor: null 
+                    gestor: null
                 }
             };
 

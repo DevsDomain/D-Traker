@@ -1,11 +1,13 @@
 export interface PesquisaProps {
     placeholder: string,
-    handlePesquisa(typedValue: string): void
+    handleInput(typedValue: string): void,
+    type:string
 }
 
 export interface PesquisaPapelProps {
-    handlePesquisaByPapel(selectedValue: string): void
-    papeis: string[]
+    handlePesquisaByProjeto(selectedValue: string): void
+    projeto:{key:string; value:string}[]
+    placeHolder:string;
 }
 
 export interface ResponseAdminApi {
@@ -14,4 +16,9 @@ export interface ResponseAdminApi {
     "GestorNome": string,
     "GestorId": string
     "status": "finalizado" | "andamento"
+}
+
+export interface GestoresApiResponse{
+    "idGestor": string,
+    "nomeGestor": string
 }

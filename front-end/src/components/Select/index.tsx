@@ -6,29 +6,31 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { PesquisaPapelProps } from '../../types/gestaoDeAcesso';
 
-export default function BasicSelect({ handlePesquisaByPapel, papeis }: PesquisaPapelProps) {
-    const [papel, setPapel] = React.useState('');
+export default function BasicSelect({ handlePesquisaByProjeto, projeto,placeHolder }: PesquisaPapelProps) {
+    const [projetos, setProjeto] = React.useState('');
+
+    console.log(projeto)
 
     const handleChange = (event: SelectChangeEvent) => {
-        setPapel(event.target.value as string);
-        handlePesquisaByPapel(event.target.value as string);
+        setProjeto(event.target.value as string);
+        handlePesquisaByProjeto(event.target.value as string);
     };
 
     return (
-        <Box minWidth={200}>
+        <Box maxWidth={300}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Papel</InputLabel>
+                <InputLabel id="demo-simple-select-label">{placeHolder}</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={papel}
-                    label="Papel"
+                    value={projetos}
+                    label="Projeto"
                     onChange={handleChange}
                 >
-                    <MenuItem value={""}>Papel</MenuItem>
-                    {papeis.map((papelItem, index) => (
+                    <MenuItem value={""}>{placeHolder}</MenuItem>
+                    {projeto.map((papelItem, index) => (
                         papelItem && (
-                            <MenuItem key={index} value={papelItem}>{papelItem}</MenuItem>
+                            <MenuItem key={index} value={papelItem.key}>{papelItem.value}</MenuItem>
                         ) 
                     ))}
                 </Select>
