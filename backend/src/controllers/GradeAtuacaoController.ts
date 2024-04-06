@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
-import GradeAtuacaoCruzeiroModel, { Properties } from '../models/cruzeiro';
+
+import GradeAtuacaoModel from '../models/cruzeiro';
 import { Feature } from '../models/cruzeiro';
 
-class CruzeiroController {
+class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
         try {
-            const { features } = await GradeAtuacaoCruzeiroModel.findOne({}, { features: 1, _id: 0 }) || { features: [] };
+            const { features } = await GradeAtuacaoModel.findOne({}, { features: 1, _id: 0 }) || { features: [] };
             return res.status(201).json(features)
-
+ 
         } catch (error: any) {
             return res.status(500).json({ err: error.message });
         }
@@ -16,7 +17,7 @@ class CruzeiroController {
     public async getUnique(req: Request, res: Response): Promise<Response> {
         try {
 
-            const { features } = await GradeAtuacaoCruzeiroModel.findOne({}, { features: 1, _id: 0 }) || { features: [] };
+            const { features } = await GradeAtuacaoModel.findOne({}, { features: 1, _id: 0 }) || { features: [] };
             return res.status(201).json(features[0])
 
         } catch (error: any) {
@@ -26,7 +27,7 @@ class CruzeiroController {
 
     public async Admin(req: Request, res: Response): Promise<Response> {
         try {
-            const { features } = await GradeAtuacaoCruzeiroModel.findOne({}, { features: 1, _id: 0 }) || { features: [] };
+            const { features } = await GradeAtuacaoModel.findOne    ({}, { features: 1, _id: 0 }) || { features: [] };
             console.log(features)
             const adminData = features.map((feature: Feature) => ({
                 "idProjeto": feature._id,
@@ -44,4 +45,4 @@ class CruzeiroController {
     }
 }
 
-export default new CruzeiroController();
+export default new GradeAtuacaoController();
