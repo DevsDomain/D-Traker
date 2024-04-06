@@ -12,6 +12,8 @@ routes.get("/admin",GradeAtuacaoController.Admin)
 routes.post("/admin",GestorController.create)
 routes.get("/gestores",GestorController.getAll)
 routes.get("/gestor",GestorController.findGestor)
+routes.post("/gestorProjeto",GestorController.vincularProjeto);
+routes.post("/michael",GestorController.MichaelGambiarra);
 
 
 

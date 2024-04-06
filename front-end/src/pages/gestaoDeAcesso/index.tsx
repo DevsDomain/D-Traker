@@ -14,7 +14,7 @@ export default function GestaoDeAcesso() {
 
     function handlePesquisaByPapel(value: string) {
         setSelectedPapel(value);
-        const filter = gestoresList.filter(({ papel }) => papel === value);
+        const filter = gestoresList.filter(({ NomeProjeto }) => NomeProjeto === value);
 
         setFilteredGestoresList(filter);
     }
@@ -23,15 +23,12 @@ export default function GestaoDeAcesso() {
         const fetchData = async () => {
             try {
                 const data = await fetchAdmin();
-                const papeisUnicos: string[] = [...new Set((data as ResponseAdminApi[]).map((item: ResponseAdminApi) => item.papel))];
+                const papeisUnicos: string[] = [...new Set((data as ResponseAdminApi[]).map((item: ResponseAdminApi) => item.NomeProjeto))];
                 setPapeis(papeisUnicos);
                 setGestoresList(data);
                 setFilteredGestoresList(data);
-                console.log(data.map((item: ResponseAdminApi) => {
-                    if (!item.papel) {
-                        console.log(item)
-                    }
-                }))
+
+
             } catch (error) {
                 console.error(error);
             }

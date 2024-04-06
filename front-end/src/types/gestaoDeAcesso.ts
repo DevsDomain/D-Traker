@@ -5,12 +5,13 @@ export interface PesquisaProps {
 
 export interface PesquisaPapelProps {
     handlePesquisaByPapel(selectedValue: string): void
-    papeis:string[]
+    papeis: string[]
 }
 
 export interface ResponseAdminApi {
-    "idProjeto": string
-    "idPropriedade": number,
-    "papel": string,
+    "NomeProjeto": string
+    "idProjeto": string,
+    "GestorNome": string,
+    "GestorId": string
     "status": "finalizado" | "andamento"
 }

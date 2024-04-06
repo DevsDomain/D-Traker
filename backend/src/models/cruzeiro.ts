@@ -1,12 +1,12 @@
 import mongoose, { Document, Model, Schema, mongo } from "mongoose";
-
+import { Gestor, gestorSchema } from "./gestores";
 interface Geometry {
     type: string;
     coordinates: number[][][][];
 }
 
 export interface Feature {
-    _id:mongoose.Types.ObjectId
+    _id: mongoose.Types.ObjectId
     type: string;
     properties: Properties;
     geometry: Geometry;
@@ -22,11 +22,12 @@ export interface Properties {
     area_km2: number;
 }
 
-export interface GradeAtuacaoCruzeiro {
+export interface GradeAtuacao{
     type: string;
     _id: mongoose.Types.ObjectId;
     name: string;
     crs: any; // Adjust based on the actual structure
+    gestor: Gestor;
     features: Feature[];
 }
 
@@ -50,14 +51,15 @@ const featureSchema = new Schema<Feature>({
 });
 
 
-const gradeAtuacaoCruzeiroSchema = new Schema<GradeAtuacaoCruzeiro>({
+const gradeAtuacaoSchema = new Schema<GradeAtuacao>({
     type: { type: String, required: true },
     _id: { type: mongoose.Schema.Types.ObjectId, required: true },
     name: { type: String, required: true },
-    crs: { type: Object }, // Adjust type accordingly based on the actual structure
+    crs: { type: Object },
+    gestor: { type: gestorSchema },
     features: { type: [featureSchema], required: true }
 });
 
-const GradeAtuacaoCruzeiroModel: Model<GradeAtuacaoCruzeiro> = mongoose.model("grade_atuacao_cruzeiro", gradeAtuacaoCruzeiroSchema);
+const GradeAtuacaoModel: Model<GradeAtuacao> = mongoose.model("grade_atuacao", gradeAtuacaoSchema);
 
-export default GradeAtuacaoCruzeiroModel;
+export default GradeAtuacaoModel;
