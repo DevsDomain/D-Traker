@@ -8,6 +8,8 @@ import { fetchAdmin } from '../../services/admin';
 import { GestoresApiResponse, ResponseAdminApi } from '../../types/gestaoDeAcesso';
 import Input from '../../components/Input';
 import { fetchGestores } from '../../services/gestores';
+import { cadastrarGestor } from '../../controller/cadastrarGestor';
+import { atribuirGestorProjeto } from '../../controller/linkGestorProjeto';
 
 export default function GestaoDeAcesso() {
     const [gestoresList, setGestoresList] = useState<ResponseAdminApi[]>([]);
@@ -21,6 +23,9 @@ export default function GestaoDeAcesso() {
     const [gestorMail, setGestorMail] = useState<string>('');
     const [gestorPassword, setGestorPassword] = useState<string>('');
 
+    // VINCULAR GESTOR A PROJETO
+    const [idGestor, setIdGestor] = useState<string>('');
+    const [idProjeto, setIdProjeto] = useState<string>('');
 
     function handlePesquisaByProjeto(value: string) {
         setSelectedProjeto(value);
@@ -30,11 +35,11 @@ export default function GestaoDeAcesso() {
     }
 
     function selectedProjetoGestor(value: string) {
-        console.log("ID DO PROJETO", value)
+        setIdProjeto(value)
     }
 
     function selectedGestor(value: string) {
-        console.log("ID DO GESTOR", value)
+        setIdGestor(value)
     }
 
     function handleGestorNome(value: string) {
@@ -47,6 +52,29 @@ export default function GestaoDeAcesso() {
 
     function handleGestorPassword(value: string) {
         setGestorPassword(value);
+    }
+
+    async function CadastarGestor() {
+        const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword);
+        if (response.status === 201) {
+            setGestores(prevGestores => [...prevGestores, { key: response.data, value: gestorNome }])
+            alert("Gestor Cadastrado com sucesso!")
+        }
+        else {
+            alert("Problemas ao cadastrar")
+
+        }
+    }
+
+    async function AtribuirGestorProjeto() {
+        const response = await atribuirGestorProjeto(idGestor, idProjeto)
+        if (response.status === 201) {
+            alert("Atribuido com sucesso!")
+            window.location.reload()
+        }
+        else {
+            alert("Problemas ao atribuir")
+        }
     }
 
     useEffect(() => {
@@ -89,7 +117,7 @@ export default function GestaoDeAcesso() {
                     <Typography variant="h4">Vincular gestor a um projeto</Typography>
                     <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
                     <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
-                    <Button variant="outlined" style={{ width: 300 }}>Atribuir</Button>
+                    <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
 
 
 
@@ -101,7 +129,7 @@ export default function GestaoDeAcesso() {
                     <Input placeholder='email' handleInput={handleGestorMail} type='email' />
                     <Input placeholder='senha' handleInput={handleGestorPassword} type='password' />
 
-                    <Button variant="outlined" >Cadastrar</Button>
+                    <Button variant="outlined" onClick={() => CadastarGestor()} >Cadastrar</Button>
                 </Stack>
             </Stack>
         </Stack>
