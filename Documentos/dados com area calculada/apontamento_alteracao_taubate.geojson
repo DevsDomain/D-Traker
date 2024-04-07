@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "apontamento_alteracao_taubate",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::31983" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 430786.328004135575611, 7455756.711109979078174 ] } },
+{ "type": "Feature", "properties": { "id": 2, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 430898.738904067664407, 7457011.218857441097498 ] } },
+{ "type": "Feature", "properties": { "id": 3, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 432683.829010425077286, 7457438.381463181227446 ] } },
+{ "type": "Feature", "properties": { "id": 4, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 429923.009209120355081, 7458108.35079294256866 ] } },
+{ "type": "Feature", "properties": { "id": 5, "correcao": "corrigir atributo", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 430440.101855505548883, 7456853.843321222811937 ] } }
+]
+}

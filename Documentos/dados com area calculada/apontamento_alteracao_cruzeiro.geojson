@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "apontamento_alteracao_cruzeiro",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::31983" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "correcao": "fazer alteração", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 489612.019951056805439, 7512078.815591415390372 ] } },
+{ "type": "Feature", "properties": { "id": 2, "correcao": "fazer alerta", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 490392.689943615987431, 7509691.766960320994258 ] } }
+]
+}

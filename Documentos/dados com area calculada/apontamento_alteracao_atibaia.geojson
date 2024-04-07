@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "apontamento_alteracao_atibaia",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::31983" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 331977.050645590410568, 7452399.973613988608122 ] } },
+{ "type": "Feature", "properties": { "id": 2, "correcao": "excluir", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 329810.690463498234749, 7454159.505592870526016 ] } },
+{ "type": "Feature", "properties": { "id": 3, "correcao": "fazer alerta", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 329393.691555208235513, 7452928.850278160534799 ] } },
+{ "type": "Feature", "properties": { "id": 4, "correcao": "fazer alerta", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 330044.61668034340255, 7451332.049580562859774 ] } },
+{ "type": "Feature", "properties": { "id": 5, "correcao": "corrigir atributo de imagem", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 328813.961365634168033, 7451749.048488853499293 ] } },
+{ "type": "Feature", "properties": { "id": 6, "correcao": "corrigir atributo de imagem", "status": null, "obs": null }, "geometry": { "type": "Point", "coordinates": [ 327817.232267770275939, 7454067.969247148372233 ] } }
+]
+}
