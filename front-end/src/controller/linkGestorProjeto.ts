@@ -7,7 +7,12 @@ export const atribuirGestorProjeto = async (idGestor: string, idProjeto: string)
         })
         return response;
     } catch (err: any) {
-        throw new Error("Erro ao vincular gestor a projeto", err.message);
+        if (err.response && err.response.data) {
+            throw new Error(err.response.data);
+
+        }
+        throw new Error("Problemas ao vincular projeto a gestor");
+
     }
 
 }

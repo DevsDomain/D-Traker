@@ -37,6 +37,7 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                     <TableRow>
                         <TableCell>Projeto</TableCell>
                         <TableCell>Gestor</TableCell>
+                        <TableCell>E-mail do gestor(a)</TableCell>
                         <TableCell>Status</TableCell>
                         <TableCell>Acesso</TableCell>
 
@@ -50,6 +51,8 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                             <TableRow hover key={gestor.idProjeto}>
                                 <TableCell>{gestor.NomeProjeto}</TableCell>
                                 <TableCell>{gestor.GestorNome}</TableCell>
+                                <TableCell>{gestor.emailGestor}</TableCell>
+
                                 <TableCell>
                                     <Chip color={color} label={label} size="small" />
                                 </TableCell>

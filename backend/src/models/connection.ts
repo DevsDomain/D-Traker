@@ -1,15 +1,16 @@
 import mongoose from "mongoose";
 
-const uri = "mongodb://localhost:27017/dbVisiona";
+const uri = "mongodb+srv://devsdomain88:gid3AfCsphigMiAS@api3visiona.ix0g9fk.mongodb.net/dbVisiona"
 
 export default function connect() {
     mongoose.connection.on("connected", () => console.log("Database Connected"));
     mongoose.connection.on("disconnected", () => console.log("Database Disconnected"));
-
-
+ 
+ 
     mongoose.connect(uri, {
         serverSelectionTimeoutMS: 5000,
-        maxPoolSize: 10
+        maxPoolSize: 10,
+        serverApi:{version:'1',strict:true, deprecationErrors:true}
     })
         .then(() => console.log("Connected to MongoDB"))
         .catch((e) => {

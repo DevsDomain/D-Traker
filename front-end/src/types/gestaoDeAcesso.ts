@@ -14,11 +14,13 @@ export interface ResponseAdminApi {
     "NomeProjeto": string
     "idProjeto": string,
     "GestorNome": string,
-    "GestorId": string
+    "GestorId": string,
+    "emailGestor": string
     "status": "finalizado" | "andamento"
 }
 
 export interface GestoresApiResponse{
     "idGestor": string,
-    "nomeGestor": string
+    "nomeGestor": string,
+    "emailGestor": string
 }

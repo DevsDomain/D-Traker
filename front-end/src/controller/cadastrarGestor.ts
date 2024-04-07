@@ -6,9 +6,17 @@ export const cadastrarGestor = async (nome: string, email: string, password: str
             email,
             password
         })
-        return response;
+
+        return response
+
+
     } catch (err: any) {
-        throw new Error("Erro ao cadastrar gestor", err.message);
+        if (err.response && err.response.data) {
+            throw new Error(err.response.data);
+
+        }
+        throw new Error("Problemas ao cadastrar Gestor");
+
     }
 
 }

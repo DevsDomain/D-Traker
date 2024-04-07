@@ -55,34 +55,39 @@ export default function GestaoDeAcesso() {
     }
 
     async function CadastarGestor() {
-        const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword);
-        if (response.status === 201) {
-            setGestores(prevGestores => [...prevGestores, { key: response.data, value: gestorNome }])
-            alert("Gestor Cadastrado com sucesso!")
-        }
-        else {
-            alert("Problemas ao cadastrar")
+        try {
+            const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword);
+            if (response.status === 201) {
+                setGestores(prevGestores => [...prevGestores, { key: response.data, value: gestorNome }])
+                alert("Gestor Cadastrado com sucesso!")
+            }
 
+        } catch (error: any) {
+            console.error("Erro ao cadastrar gestor:", error);
+            alert("Erro: " + error.message);
         }
     }
 
     async function AtribuirGestorProjeto() {
-        const response = await atribuirGestorProjeto(idGestor, idProjeto)
-        if (response.status === 201) {
-            alert("Atribuido com sucesso!")
-            window.location.reload()
-        }
-        else {
-            alert("Problemas ao atribuir")
+        try {
+            const response = await atribuirGestorProjeto(idGestor, idProjeto)
+            if (response.status === 201) {
+                alert("Atribuido com sucesso!")
+                window.location.reload()
+            }
+        } catch (error: any) {
+            console.error("Erro ao vincular gestor a projeto", error.message);
+            alert("Erro: " + error.message);
         }
     }
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchAdmin();
+                const projetos = await fetchAdmin();
                 const gestores = await fetchGestores();
-                const projetosUnicos: { key: string; value: string }[] = data.map((projeto: ResponseAdminApi) => ({
+
+                const projetosUnicos: { key: string; value: string }[] = projetos.map((projeto: ResponseAdminApi) => ({
                     key: projeto.idProjeto,
                     value: projeto.NomeProjeto
                 }));
@@ -94,8 +99,8 @@ export default function GestaoDeAcesso() {
 
                 setProjeto(projetosUnicos);
                 setGestores(gestoresUnicos);
-                setGestoresList(data);
-                setFilteredGestoresList(data);
+                setGestoresList(projetos);
+                setFilteredGestoresList(projetos);
             } catch (error) {
                 console.error(error);
             }
@@ -104,33 +109,33 @@ export default function GestaoDeAcesso() {
     }, []);
 
     return (
-        <Stack spacing={3} margin="5% auto" maxWidth={"100vw"} justifyContent="space-evenly">
+        <Stack spacing={3} margin="2% auto">
 
 
-            <Stack display={"flex"} direction="row" spacing={10} alignItems="center" justifyContent="space-evenly">
-                <Stack spacing={3} direction={"column"} alignItems="left" minWidth={500}>
-                    <Typography variant="h4">Gestores e projetos</Typography>
-                    <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
-                    <TabelaGestores gestores={selectedProjeto === '' ? gestoresList : filteredGestoresList} />
+            <Stack spacing={3}>
+                <Typography variant="h4">Gestores e projetos</Typography>
+                <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
+                <TabelaGestores gestores={selectedProjeto === '' ? gestoresList : filteredGestoresList} />
+            </Stack>
 
+            <Stack direction="row" spacing={10} pl={1}>
 
-                    <Typography variant="h4">Vincular gestor a um projeto</Typography>
-                    <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
-                    <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
-                    <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
-
-
-
-                </Stack>
-
-                <Stack spacing={2}>
-                    <Typography variant="h4">Cadastrar novo gestor(a)</Typography>
+                <Stack spacing={3} >
+                    <Typography variant="h5">Cadastrar novo gestor(a)</Typography>
                     <Input placeholder='Nome do gestor(a)' handleInput={handleGestorNome} type='text' />
                     <Input placeholder='email' handleInput={handleGestorMail} type='email' />
                     <Input placeholder='senha' handleInput={handleGestorPassword} type='password' />
 
                     <Button variant="outlined" onClick={() => CadastarGestor()} >Cadastrar</Button>
                 </Stack>
+
+                <Stack spacing={3}>
+                    <Typography variant="h5">Vincular gestor a um projeto</Typography>
+                    <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
+                    <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
+                    <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
+                </Stack>
+
             </Stack>
         </Stack>
 

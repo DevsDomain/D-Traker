@@ -28,9 +28,9 @@ export default function BasicSelect({ handlePesquisaByProjeto, projeto,placeHold
                     onChange={handleChange}
                 >
                     <MenuItem value={""}>{placeHolder}</MenuItem>
-                    {projeto.map((papelItem, index) => (
-                        papelItem && (
-                            <MenuItem key={index} value={papelItem.key}>{papelItem.value}</MenuItem>
+                    {projeto.map((item, index) => (
+                        item && (
+                            <MenuItem key={index} value={item.key}>{item.value}</MenuItem>
                         ) 
                     ))}
                 </Select>
