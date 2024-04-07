@@ -7,7 +7,12 @@ class GestorController {
     async getAll(req: Request, res: Response): Promise<Response> {
         try {
             const gestores = await gestorModel.find({});
-            return res.status(201).json(gestores);
+            const responseGestor = gestores.map((gestor: Gestor) => ({
+                idGestor: gestor._id,
+                nomeGestor: gestor.name,
+                emailGestor: gestor.email
+            }))
+            return res.status(201).json(responseGestor);
         } catch (error: any) {
             return res.status(500).json({ err: error.message });
         }
@@ -45,7 +50,7 @@ class GestorController {
             return res.status(201).json(response._id);
 
         } catch (error: any) {
-            return res.status(500).json({ err: error.message });
+            return res.status(500).json(error.message);
         }
     }
 
@@ -53,9 +58,15 @@ class GestorController {
         try {
             const { idGestor, idProjeto } = req.body;
             const gestor = await gestorModel.findById(idGestor);
+            const projeto = await GradeAtuacaoModel.findById(idProjeto);
 
             if (!gestor) {
-                return res.status(404).json({ err: "Gestor não encontrado!" });
+                return res.status(400).json("Gestor não encontrado!");
+            }
+
+            if (!projeto) {
+                return res.status(400).json("Projeto não encontrado!");
+
             }
 
             const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { gestor: gestor } });
@@ -63,28 +74,22 @@ class GestorController {
 
 
             if (projectLinkedToGestor.modifiedCount === 0) {
-                return res.status(404).json({ err: "Projeto não atualizado!" });
+                return res.status(404).json("Projeto não atualizado!");
 
             }
 
             return res.status(201).json("Projeto atualizado com sucesso!");
         } catch (error: any) {
 
-            return res.status(500).json({ err: error.message });
+            return res.status(500).json( error.message );
         }
     }
 
+    // GAMBIARRA PARA CRIAR O OBJETO GESTOR DENTRO DO DOCUMENTO DOS PROJETOS
     async MichaelGambiarra(): Promise<void> {
         try {
-            const filter = {};
-            const update = {
-                $set: {
-                    gestor: null 
-                }
-            };
-
             // Update all documents in the collection
-            const result = await GradeAtuacaoModel.updateMany(filter, update);
+            const result = await GradeAtuacaoModel.updateMany({}, { $set: { gestor: null } });
 
             // Log the result
             console.log(`${result.modifiedCount} documents atualizados.`);

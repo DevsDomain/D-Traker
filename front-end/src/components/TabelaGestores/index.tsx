@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import Chip from '@mui/material/Chip';
 import { ResponseAdminApi } from '../../types/gestaoDeAcesso';
+import Checkbox from '@mui/material/Checkbox';
 
 function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] }) {
     const statusMap = {
@@ -30,13 +31,16 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
     };
 
     return (
-        <Card>
+        <Card style={{minWidth:700}}>
             <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>Projeto</TableCell>
                         <TableCell>Gestor</TableCell>
+                        <TableCell>E-mail do gestor(a)</TableCell>
                         <TableCell>Status</TableCell>
+                        <TableCell>Acesso</TableCell>
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -47,9 +51,17 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                             <TableRow hover key={gestor.idProjeto}>
                                 <TableCell>{gestor.NomeProjeto}</TableCell>
                                 <TableCell>{gestor.GestorNome}</TableCell>
+                                <TableCell>{gestor.emailGestor}</TableCell>
+
                                 <TableCell>
                                     <Chip color={color} label={label} size="small" />
                                 </TableCell>
+                                <TableCell>
+                                        <Checkbox
+                                            checked={gestor.GestorId ? true : false}
+
+                                        />
+                                        </TableCell>
                             </TableRow>
                         );
                     })}

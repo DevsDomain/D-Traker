@@ -32,6 +32,7 @@ class GradeAtuacaoController {
                 "idProjeto": projeto._id,
                 "GestorNome":projeto.gestor.name,
                 "GestorId": projeto.gestor._id,
+                "emailGestor": projeto.gestor.email,
                 "status" : "andamento"
 
             }))
