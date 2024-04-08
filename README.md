@@ -10,7 +10,7 @@ O desafio proposto é desenvolver uma ferramenta de gerenciamento exclusivamente
 Cada entrega foi realizada a partir da criação de uma **tag** Observe a relação a seguir:
 | Sprint | Previsão de entrega | Status | Release | Kanban | BurnDown |
 |:--:|:----------:|:-------------------|:-------------------:|:-------------------:|:-------------------:|
-| 01 | 03/04/2024 | ✔️ Entregue | [Ver release 1](https://github.com/DevsDomain/D-Traker/blob/main/Documentos/6.png) | [Ver Sprint 1](https://github.com/orgs/DevsDomain/projects/11) | [Ver BurnDown 1](https://github.com/DevsDomain/D-Traker/blob/main/Documentos/Sprint1-%20(1).jpg) |
+| 01 | 03/04/2024 | ✔️ Entregue | [Ver release 1](https://github.com/DevsDomain/D-Traker/releases/tag/1.0) | [Ver Sprint 1](https://github.com/orgs/DevsDomain/projects/11) | [Ver BurnDown 1](https://github.com/DevsDomain/D-Traker/blob/main/Documentos/Sprint1-%20(1).jpg) |
 | 02 | 16/05/2024 | 🚧 Em andamento | [Ver release 2]() | [Ver Sprint 2](2) | [Ver BurnDown 2]() |
 | 03 | 13/06/2024 | 🛑 Não iniciada | [Ver release 3]() | [Ver Sprint 3](3) | [Ver BurnDown 3]() |
 
