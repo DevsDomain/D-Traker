@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import GradeAtuacaoModel, { GradeAtuacao} from '../models/cruzeiro';
+import GradeAtuacaoModel, { GradeAtuacao } from '../models/cruzeiro';
 
 class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -30,10 +30,10 @@ class GradeAtuacaoController {
             const adminData = projetos.map((projeto: GradeAtuacao) => ({
                 "NomeProjeto": projeto.name,
                 "idProjeto": projeto._id,
-                "GestorNome":projeto.gestor.name,
+                "GestorNome": projeto.gestor.name,
                 "GestorId": projeto.gestor._id,
                 "emailGestor": projeto.gestor.email,
-                "status" : "andamento"
+                "status": "andamento"
 
             }))
             return res.status(201).json(adminData)

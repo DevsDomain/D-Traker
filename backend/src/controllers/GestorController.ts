@@ -81,17 +81,17 @@ class GestorController {
             return res.status(201).json("Projeto atualizado com sucesso!");
         } catch (error: any) {
 
-            return res.status(500).json( error.message );
+            return res.status(500).json(error.message);
         }
     }
 
     // GAMBIARRA PARA CRIAR O OBJETO GESTOR DENTRO DO DOCUMENTO DOS PROJETOS
     async MichaelGambiarra(): Promise<void> {
         try {
-            // Update all documents in the collection
+            // CRIA GESTORES NULOS
             const result = await GradeAtuacaoModel.updateMany({}, { $set: { gestor: null } });
 
-            // Log the result
+            // Log
             console.log(`${result.modifiedCount} documents atualizados.`);
         } catch (error: any) {
             console.error("ERROR", error.message);
