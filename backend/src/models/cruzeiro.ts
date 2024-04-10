@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema, mongo } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 import { Gestor, gestorSchema } from "./gestores";
 interface Geometry {
     type: string;
@@ -22,7 +22,7 @@ export interface Properties {
     area_km2: number;
 }
 
-export interface GradeAtuacao{
+export interface GradeAtuacao {
     type: string;
     _id: mongoose.Types.ObjectId;
     name: string;
