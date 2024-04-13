@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
+import gestorModel, { Gestor } from '../models/gestores';
 
-import GradeAtuacaoModel, { GradeAtuacao } from '../models/cruzeiro';
+import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
 
 class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -27,15 +28,20 @@ class GradeAtuacaoController {
     public async Admin(req: Request, res: Response): Promise<Response> {
         try {
             const projetos = await GradeAtuacaoModel.find({});
-            const adminData = projetos.map((projeto: GradeAtuacao) => ({
-                "NomeProjeto": projeto.name,
-                "idProjeto": projeto._id,
-                "GestorNome": projeto.gestor.name,
-                "GestorId": projeto.gestor._id,
-                "emailGestor": projeto.gestor.email,
-                "status": "andamento"
+            const adminData = await Promise.all(projetos.map(async (projeto: GradeAtuacao) => {
+                const gestor = await gestorModel.findOne({idGestor:projeto.idGestor});
 
+                return {
+                    "NomeProjeto": projeto.name,
+                    "idProjeto": projeto._id,
+                    "GestorId": projeto.idGestor,
+                    "GestorNome": gestor?.name,
+                    "GestorEmail": gestor?.email,
+                    "status": "andamento"
+
+                };
             }))
+
             return res.status(201).json(adminData)
 
         } catch (error: any) {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import gestorModel, { Gestor } from '../models/gestores';
-import GradeAtuacaoModel from '../models/cruzeiro';
+import GradeAtuacaoModel from '../models/gradeAtuacao';
 
 class GestorController {
 
@@ -8,9 +8,9 @@ class GestorController {
         try {
             const gestores = await gestorModel.find({});
             const responseGestor = gestores.map((gestor: Gestor) => ({
-                idGestor: gestor._id,
                 nomeGestor: gestor.name,
-                emailGestor: gestor.email
+                emailGestor: gestor.email,
+                idGestor: gestor.idGestor
             }))
             return res.status(201).json(responseGestor);
         } catch (error: any) {
@@ -44,10 +44,19 @@ class GestorController {
                 return res.status(400).json("Usuário já cadastrado!")
             }
 
-            const gestor = new gestorModel({ name, email, password });
+            const ultimoID = await gestorModel.findOne({}).sort({ idGestor: -1 }).limit(1)
+
+            let idGestor:number = 1;
+
+            if (ultimoID) {
+                idGestor = ultimoID.idGestor + 1;
+            }
+
+            console.log("ULTIMO ID", ultimoID, "ID", idGestor)
+            const gestor = new gestorModel({ idGestor, name, email, password });
             const response = await gestor.save()
 
-            return res.status(201).json(response._id);
+            return res.status(201).json(response);
 
         } catch (error: any) {
             return res.status(500).json(error.message);
@@ -69,7 +78,7 @@ class GestorController {
 
             }
 
-            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { gestor: gestor } });
+            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { idGestor:gestor.idGestor} });
             console.log("Update result:", projectLinkedToGestor);
 
 
@@ -82,19 +91,6 @@ class GestorController {
         } catch (error: any) {
 
             return res.status(500).json(error.message);
-        }
-    }
-
-    // GAMBIARRA PARA CRIAR O OBJETO GESTOR DENTRO DO DOCUMENTO DOS PROJETOS
-    async MichaelGambiarra(): Promise<void> {
-        try {
-            // CRIA GESTORES NULOS
-            const result = await GradeAtuacaoModel.updateMany({}, { $set: { gestor: null } });
-
-            // Log
-            console.log(`${result.modifiedCount} documents atualizados.`);
-        } catch (error: any) {
-            console.error("ERROR", error.message);
         }
     }
 

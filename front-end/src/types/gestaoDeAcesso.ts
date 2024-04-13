@@ -13,9 +13,9 @@ export interface PesquisaPapelProps {
 export interface ResponseAdminApi {
     "NomeProjeto": string
     "idProjeto": string,
-    "GestorNome": string,
     "GestorId": string,
-    "emailGestor": string
+    "GestorNome": string,
+    "GestorEmail": string
     "status": "finalizado" | "andamento"
 }
 

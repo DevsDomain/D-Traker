@@ -55,7 +55,7 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                                     <TableRow hover key={gestor.idProjeto}>
                                         <TableCell>{gestor.NomeProjeto}</TableCell>
                                         <TableCell>{gestor.GestorNome}</TableCell>
-                                        <TableCell>{gestor.emailGestor}</TableCell>
+                                        <TableCell>{gestor.GestorEmail}</TableCell>
 
                                         <TableCell>
                                             <Chip color={color} label={label} size="small" />

@@ -9,5 +9,3 @@ gestoresRoutes.get("/gestor",GestorController.findGestor)
 gestoresRoutes.post("/gestorProjeto",GestorController.vincularProjeto);
 
 
-
-

@@ -1,7 +1,7 @@
 import { api } from "../services/index"
 export const cadastrarGestor = async (nome: string, email: string, password: string) => {
     try {
-        const response = await api.post("/admin", {
+        const response = await api.post("/gestor", {
             name: nome,
             email,
             password
