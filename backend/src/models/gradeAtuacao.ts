@@ -1,5 +1,4 @@
 import mongoose, { Model, Schema } from "mongoose";
-import { Gestor, gestorSchema } from "./gestores";
 interface Geometry {
     type: string;
     coordinates: number[][][][];
@@ -27,7 +26,7 @@ export interface GradeAtuacao {
     _id: mongoose.Types.ObjectId;
     name: string;
     crs: any; // Adjust based on the actual structure
-    gestor: Gestor;
+    idGestor: number;
     features: Feature[];
 }
 
@@ -56,10 +55,10 @@ const gradeAtuacaoSchema = new Schema<GradeAtuacao>({
     _id: { type: mongoose.Schema.Types.ObjectId, required: true },
     name: { type: String, required: true },
     crs: { type: Object },
-    gestor: { type: gestorSchema },
+    idGestor: { type:Number },
     features: { type: [featureSchema], required: true }
 });
 
-const GradeAtuacaoModel: Model<GradeAtuacao> = mongoose.model("grade_atuacao", gradeAtuacaoSchema);
+const GradeAtuacaoModel: Model<GradeAtuacao> = mongoose.model<GradeAtuacao>("GradeAtuacao", gradeAtuacaoSchema);
 
 export default GradeAtuacaoModel;

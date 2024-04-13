@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import gestorModel, { Gestor } from '../models/gestores';
-import GradeAtuacaoModel from '../models/cruzeiro';
+import GradeAtuacaoModel from '../models/gradeAtuacao';
 
 class GestorController {
 
@@ -10,7 +10,7 @@ class GestorController {
             const responseGestor = gestores.map((gestor: Gestor) => ({
                 nomeGestor: gestor.name,
                 emailGestor: gestor.email,
-                idGestor: gestor.id
+                idGestor: gestor.idGestor
             }))
             return res.status(201).json(responseGestor);
         } catch (error: any) {
@@ -78,7 +78,7 @@ class GestorController {
 
             }
 
-            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { gestor: gestor } });
+            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { idGestor:gestor.idGestor} });
             console.log("Update result:", projectLinkedToGestor);
 
 
@@ -91,19 +91,6 @@ class GestorController {
         } catch (error: any) {
 
             return res.status(500).json(error.message);
-        }
-    }
-
-    // GAMBIARRA PARA CRIAR O OBJETO GESTOR DENTRO DO DOCUMENTO DOS PROJETOS
-    async MichaelGambiarra(): Promise<void> {
-        try {
-            // CRIA GESTORES NULOS
-            const result = await GradeAtuacaoModel.updateMany({}, { $set: { gestor: null } });
-
-            // Log
-            console.log(`${result.modifiedCount} documents atualizados.`);
-        } catch (error: any) {
-            console.error("ERROR", error.message);
         }
     }
 
