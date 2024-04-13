@@ -8,9 +8,9 @@ class GestorController {
         try {
             const gestores = await gestorModel.find({});
             const responseGestor = gestores.map((gestor: Gestor) => ({
-                idGestor: gestor._id,
                 nomeGestor: gestor.name,
-                emailGestor: gestor.email
+                emailGestor: gestor.email,
+                idGestor: gestor.id
             }))
             return res.status(201).json(responseGestor);
         } catch (error: any) {
@@ -44,10 +44,19 @@ class GestorController {
                 return res.status(400).json("Usuário já cadastrado!")
             }
 
-            const gestor = new gestorModel({ name, email, password });
+            const ultimoID = await gestorModel.findOne({}).sort({ idGestor: -1 }).limit(1)
+
+            let idGestor:number = 1;
+
+            if (ultimoID) {
+                idGestor = ultimoID.idGestor + 1;
+            }
+
+            console.log("ULTIMO ID", ultimoID, "ID", idGestor)
+            const gestor = new gestorModel({ idGestor, name, email, password });
             const response = await gestor.save()
 
-            return res.status(201).json(response._id);
+            return res.status(201).json(response);
 
         } catch (error: any) {
             return res.status(500).json(error.message);
