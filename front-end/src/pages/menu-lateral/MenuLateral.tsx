@@ -1,13 +1,17 @@
-import { AccountCircle, Home, Settings } from "@mui/icons-material";
-import { Button, Divider, Drawer, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { Box } from "@mui/system";
-import { useDrawerContext } from "./contexts";
-import { Lock } from "@mui/icons-material";
-import { LockOpen } from "@phosphor-icons/react/dist/ssr";
+import React from 'react';
+import { Box } from '@mui/system';
+import Typography from '@mui/material/Typography';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import { Home, AccountCircle, Settings, Lock, LockOpen } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useDrawerContext } from './contexts';
 
 interface DrawerOption {
     path: string;
-    icon: JSX.Element; // Alterado para JSX.Element para aceitar ícones do MUI
+    icon: JSX.Element;
     label: string;
 }
 
@@ -15,10 +19,9 @@ interface IMenuLateralProps {
     drawerOptions?: DrawerOption[];
 }
 
-export const MenuLateral: React.FC<IMenuLateralProps> = ({ drawerOptions = [] }) => {
+const MenuLateral: React.FC<IMenuLateralProps> = ({ drawerOptions = [] }) => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
-
     const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
 
     return (
@@ -72,14 +75,9 @@ export const MenuLateral: React.FC<IMenuLateralProps> = ({ drawerOptions = [] })
                 </Box>
             </Drawer>
 
-            <Box
-                height="90vh"
-                marginLeft={smDown ? 0 : theme.spacing(35)}
-                marginTop={theme.spacing(4)} // Adicionando margem acima
-                paddingLeft={smDown ? theme.spacing(2) : theme.spacing(4)} // Adicionando margem à esquerda responsiva
-            >
-                {"Conteúdo da página aqui"}
-            </Box>
         </>
     );
 };
+
+export default MenuLateral;
+
