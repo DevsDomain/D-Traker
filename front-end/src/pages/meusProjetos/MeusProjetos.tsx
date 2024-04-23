@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/system';
-import MenuLateral from '../menu-lateral/MenuLateral';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
@@ -10,15 +9,12 @@ const MeusProjetos: React.FC = () => {
 
     return (
         <>
-            <MenuLateral />
-            <Box
-                height="90vh"
-                marginLeft={smDown ? 0 : theme.spacing(35)}
-                marginTop={theme.spacing(4)} // Adicionando margem acima
-                paddingLeft={smDown ? theme.spacing(2) : theme.spacing(4)} // Adicionando margem à esquerda responsiva
-            >
-                {"Meus projetos"}
-            </Box>
+        <Box
+            height="90vh"
+            paddingLeft={smDown ? theme.spacing(4) : theme.spacing(35)} // Use a variável smDown para determinar o valor do espaçamento
+        >
+            <h1>MEUS PROJETOS</h1>
+        </Box>
         </>
     );
 };
