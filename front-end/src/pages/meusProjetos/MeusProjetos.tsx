@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
-import  Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 
 
 
@@ -36,7 +36,6 @@ export default function TabelaProjetos() {
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
-                        
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell align="right">Nome</TableCell>
@@ -54,7 +53,6 @@ export default function TabelaProjetos() {
                                 <TableCell align="right">{row.name}</TableCell>
                                 <TableCell align="right">{row.data.toLocaleDateString()}</TableCell>
                                 <TableCell align="right">{row.percent}</TableCell>
-
                             </TableRow>
                         ))}
                     </TableBody>
