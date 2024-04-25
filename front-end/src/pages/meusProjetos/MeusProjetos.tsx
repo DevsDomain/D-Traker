@@ -16,10 +16,10 @@ function createData(
     name: string,
     data: Date,
     percent: number,
-
 ) {
     return { ID, name, data, percent };
 }
+
 
 const rows = [
     createData(1, 'Juliana', new Date('2021-09-15'), 6.0),
@@ -31,16 +31,16 @@ const rows = [
 
 export default function TabelaProjetos() {
     return (
-        <Stack spacing={3} margin="2% auto" marginLeft="20%">
-            <Typography variant="h2" sx={{ fontFamily: 'DM Sans', fontSize: '20px' }}>Título da nova tabela</Typography>
+        <Stack spacing={3} margin="3% auto" marginLeft="20%">
+            <Typography variant="h2" sx={{ fontFamily: 'Calibri', fontWeight: 'bold', fontSize: '20px' }}>Meus Projetos</Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell align="right">Nome</TableCell>
-                            <TableCell align="right">Data</TableCell>
-                            <TableCell align="right">% Concluido</TableCell>
+                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">ID</TableCell>
+                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">Nome</TableCell>
+                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">Data</TableCell>
+                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">% Concluido</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -49,10 +49,10 @@ export default function TabelaProjetos() {
                                 key={row.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row"> {row.ID} </TableCell>
-                                <TableCell align="right">{row.name}</TableCell>
-                                <TableCell align="right">{row.data.toLocaleDateString()}</TableCell>
-                                <TableCell align="right">{row.percent}</TableCell>
+                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right"> {row.ID} </TableCell>
+                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.name}</TableCell>
+                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.data.toLocaleDateString()}</TableCell>
+                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.percent}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
