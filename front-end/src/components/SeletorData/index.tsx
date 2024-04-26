@@ -3,6 +3,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Search from '../Search/index';
 
 export default function ReferenceDateDefaultBehavior() {
   return (
@@ -14,6 +15,13 @@ export default function ReferenceDateDefaultBehavior() {
         <DemoItem label="Data Final">
           <DatePicker />
         </DemoItem>
+      <DemoItem label="Projetos">
+         <Search/>
+        </DemoItem>
+      <DemoItem label="Membro">
+         <Search/>
+        </DemoItem>
+        
       </DemoContainer>
     </LocalizationProvider>
   );
