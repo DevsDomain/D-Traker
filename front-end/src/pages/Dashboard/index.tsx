@@ -5,7 +5,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import ReferenceDateDefaultBehavior from '../../components/SeletorData';
 import GraficoBarra from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoPizza';
-import Search from '../../components/Search';
 import SimpleLineChart from '../../components/graficos/GraficoLinha';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
