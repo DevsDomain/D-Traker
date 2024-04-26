@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import gestorModel, { Gestor } from '../models/gestores';
+import gestorModel, { Gestor } from '../models/gestoresModel';
 import GradeAtuacaoModel from '../models/gradeAtuacao';
 
 class GestorController {
@@ -20,8 +20,8 @@ class GestorController {
 
     async findGestor(req: Request, res: Response): Promise<Response> {
         try {
-            const { email } = req.body;
-            const gestor = await gestorModel.findOne({ email });
+            const { idGestor } = req.body;
+            const gestor = await gestorModel.findOne({ idGestor });
 
             if (!gestor) {
                 return res.status(400).json("Gestor não encontrado!");
