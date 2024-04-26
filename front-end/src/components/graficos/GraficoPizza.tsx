@@ -11,7 +11,7 @@ interface CustomLabelProps {
     percent: number;
 }
 
-export default function Grafico() {
+export default function GraficoPizza() {
     const [selectedGroup, setSelectedGroup] = React.useState('Group A');
 
     const handleGroupChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,7 +33,7 @@ export default function Grafico() {
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h2>Gráfico de Pizza</h2>
+                <h2>Projetos</h2>
                 <PieChart width={300} height={300}>
                     <Pie
                         data={[

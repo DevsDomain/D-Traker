@@ -1,5 +1,8 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell } from 'recharts';
 
 // Defina o tipo GetSeriesParams
@@ -34,7 +37,7 @@ const getSeries = ({ hasNegativeValue, stackOffset }: GetSeriesParams) => [
     },
 ];
 
-export default function GraficoBarra() {
+export default function Search() {
     const [stackOffset, setStackOffset] = React.useState<string>('Gráfico');
     const [hasNegativeValue, setHasNegativeValue] = React.useState<boolean>(true);
 
@@ -48,33 +51,27 @@ export default function GraficoBarra() {
     const containerWidth = 640; // Largura do contêiner
 
     return (
-        
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2>Poligono</h2>
+                <Stack direction="row" sx={{ mb: 2 }}>
+                    <TextField
+                        sx={{ minWidth: 150, mr: 5 }}
+                        select
+                        label=""
+                        value={stackOffset}
+                        onChange={(event) => setStackOffset(event.target.value)}
+                    >
+                        {availableStackOffset.map((offset) => (
+                            <MenuItem key={offset} value={offset}>
+                                {offset}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+
+                </Stack>
+
                 
-                <BarChart
-                    width={chartWidth}
-                    height={chartHeight}
-                    data={getSeries({ hasNegativeValue, stackOffset })}
-                    margin={{
-                        top: 20,
-                        right: chartMargin,
-                        bottom: 5,
-                        left: chartMargin,
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    
-                    <Legend />
-                    <Bar dataKey="seriesA" stackId="a" fill="#b34dc0" />
-                    <Bar dataKey="seriesB" stackId="a" fill="#281497" />
-                    <Bar dataKey="seriesC" stackId="a" fill="#18bcc2" />
-                </BarChart>
+           
             </Box>
 
   

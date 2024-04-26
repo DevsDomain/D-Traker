@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Box } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import Drawer from '@mui/material/Drawer';
@@ -46,14 +47,14 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
                     paddingLeft={theme.spacing(4)}
                 >
                     {/* Botões na parte inferior do menu lateral */}
-                    <Button startIcon={<Home />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }}>
+                    <Button startIcon={<Home />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }}  component={Link} to="/">
                         Dashboard
                     </Button>
-                    <Button startIcon={<AccountCircle />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }}>
+                    <Button startIcon={<AccountCircle />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }} component={Link} to="/meusProjetos">
                         Meus Projetos
                     </Button>
-                    <Button startIcon={<Settings />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }}>
-                        Admin
+                    <Button startIcon={<Settings />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }} component={Link} to="/GestaoDeAcesso">
+                    GestaoDeAcesso
                     </Button>
                     <Button startIcon={<Lock />} style={{ color: "white", textTransform: "none" }}>
                         Sign In
