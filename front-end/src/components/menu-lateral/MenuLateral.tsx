@@ -54,11 +54,9 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
                         Meus Projetos
                     </Button>
                     <Button startIcon={<Settings />} style={{ color: "white", textTransform: "none", marginBottom: theme.spacing(1) }} component={Link} to="/GestaoDeAcesso">
-                    GestaoDeAcesso
+                    Gestao De Acesso
                     </Button>
-                    <Button startIcon={<Lock />} style={{ color: "white", textTransform: "none" }}>
-                        Sign In
-                    </Button>
+                    
                     <Button startIcon={<LockOpen />} style={{ color: "white", textTransform: "none" }}>
                         Sign Out
                     </Button>
