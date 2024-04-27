@@ -35,30 +35,7 @@ class GradeAtuacaoController {
             return res.status(500).json({ err: error.message });
         }
     }
-    /* 
-        public async Admin(req: Request, res: Response): Promise<Response> {
-            try {
-                const projetos = await GradeAtuacaoModel.find({});
-                const adminData = await Promise.all(projetos.map(async (projeto: GradeAtuacao) => {
-                    const gestor = await gestorModel.findOne({idGestor:projeto.idGestor});
-    
-                    return {
-                        "NomeProjeto": projeto.name,
-                        "idProjeto": projeto._id,
-                        "GestorId": projeto.idGestor,
-                        "GestorNome": gestor?.name,
-                        "GestorEmail": gestor?.email,
-                        "status": "andamento"
-    
-                    };
-                }))
-    
-                return res.status(201).json(adminData)
-    
-            } catch (error: any) {
-                return res.status(500).json({ err: error.message });
-            }
-        } */
+  
 }
 
 export default new GradeAtuacaoController();
