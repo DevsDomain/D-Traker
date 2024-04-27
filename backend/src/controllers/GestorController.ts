@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import gestorModel, { Gestor } from '../models/gestoresModel';
 import GradeAtuacaoModel from '../models/gradeAtuacao';
+import MunicipioModel from '../models/municipiosModel';
 
 class GestorController {
 
@@ -66,8 +67,9 @@ class GestorController {
     async vincularProjeto(req: Request, res: Response): Promise<Response> {
         try {
             const { idGestor, idProjeto } = req.body;
-            const gestor = await gestorModel.findById(idGestor);
-            const projeto = await GradeAtuacaoModel.findById(idProjeto);
+            const gestor = await gestorModel.findOne({idGestor:idGestor});
+        
+            const projeto = await MunicipioModel.findOne({id:idProjeto});
 
             if (!gestor) {
                 return res.status(400).json("Gestor não encontrado!");
@@ -78,7 +80,7 @@ class GestorController {
 
             }
 
-            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { idGestor:gestor.idGestor} });
+            const projectLinkedToGestor = await MunicipioModel.updateOne({ id: idProjeto }, { $set: { idgestor:gestor.idGestor} });
             console.log("Update result:", projectLinkedToGestor);
 
 

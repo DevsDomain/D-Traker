@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import gestorModel, { Gestor } from '../models/gestoresModel';
 
 import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
 
