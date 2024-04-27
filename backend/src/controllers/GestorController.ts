@@ -27,7 +27,7 @@ class GestorController {
             if (!gestor) {
                 return res.status(400).json("Gestor não encontrado!");
             }
-            return res.status(201).json(gestor._id);
+            return res.status(201).json(gestor);
         } catch (error: any) {
             return res.status(500).json({ err: error.message })
         }
