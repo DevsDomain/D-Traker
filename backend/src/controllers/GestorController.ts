@@ -64,37 +64,7 @@ class GestorController {
         }
     }
 
-    async vincularProjeto(req: Request, res: Response): Promise<Response> {
-        try {
-            const { idGestor, idProjeto } = req.body;
-            const gestor = await gestorModel.findOne({idGestor:idGestor});
-        
-            const projeto = await MunicipioModel.findOne({id:idProjeto});
-
-            if (!gestor) {
-                return res.status(400).json("Gestor não encontrado!");
-            }
-
-            if (!projeto) {
-                return res.status(400).json("Projeto não encontrado!");
-
-            }
-
-            const projectLinkedToGestor = await MunicipioModel.updateOne({ id: idProjeto }, { $set: { idgestor:gestor.idGestor} });
-            console.log("Update result:", projectLinkedToGestor);
-
-
-            if (projectLinkedToGestor.modifiedCount === 0) {
-                return res.status(404).json("Projeto não atualizado!");
-
-            }
-
-            return res.status(201).json("Projeto atualizado com sucesso!");
-        } catch (error: any) {
-
-            return res.status(500).json(error.message);
-        }
-    }
+    
 
 }
 
