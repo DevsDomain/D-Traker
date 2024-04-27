@@ -8,6 +8,9 @@ export interface Municipio {
     area_km2: number;
     idgestor:number;
     geom: String;
+    data_inicio:String;
+    data_entrega:String
+
 }
 
 const MunicipioSchema = new Schema<Municipio>({
@@ -16,7 +19,9 @@ const MunicipioSchema = new Schema<Municipio>({
     nm_mun: { type: String, required: true },
     sigla_uf: { type: String, required: true },
     idgestor: { type: Number, required: true },
-    geom: { type: String, required: true }
+    geom: { type: String, required: true },
+    data_inicio:{ type: String, required: true },
+    data_entrega:{ type: String }
 });
 
 
