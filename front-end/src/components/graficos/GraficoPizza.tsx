@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { Typography } from '@mui/material';
 
 interface CustomLabelProps {
     cx: number;
@@ -33,7 +34,7 @@ export default function GraficoPizza() {
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h2>Projetos</h2>
+            <Typography variant="h5">Projetos</Typography>
                 <PieChart width={300} height={300}>
                     <Pie
                         data={[

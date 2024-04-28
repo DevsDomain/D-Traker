@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell } from 'recharts';
+import { Typography } from '@mui/material';
 
 // Defina o tipo GetSeriesParams
 type GetSeriesParams = {
@@ -51,8 +52,7 @@ export default function GraficoBarra() {
         
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <h2>Poligono</h2>
-                
+            <Typography variant="h5">Poligono</Typography>
                 <BarChart
                     width={chartWidth}
                     height={chartHeight}

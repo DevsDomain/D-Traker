@@ -9,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-
-
 function createData(
     ID: number,
     name: string,
@@ -19,7 +17,6 @@ function createData(
 ) {
     return { ID, name, data, percent };
 }
-
 
 const rows = [
     createData(1, 'Juliana', new Date('2021-09-15'), 6.0),
@@ -32,27 +29,24 @@ const rows = [
 export default function TabelaProjetos() {
     return (
         <Stack spacing={3} margin="3% auto" marginLeft="20%">
-            <Typography variant="h2" sx={{ fontFamily: 'Calibri', fontWeight: 'bold', fontSize: '20px' }}>Meus Projetos</Typography>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Typography variant="h4">Meus Projetos</Typography>
+            <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>
+                <Table sx={{ minWidth: 600 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">ID</TableCell>
-                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">Nome</TableCell>
-                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">Data</TableCell>
-                            <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">% Concluido</TableCell>
+                            <TableCell style={{ minWidth: 50 }} align="center">ID</TableCell>
+                            <TableCell style={{ minWidth: 100 }} align="center">Nome</TableCell>
+                            <TableCell style={{ minWidth: 100 }} align="center">Data</TableCell>
+                            <TableCell style={{ minWidth: 150 }} align="center"> % Concluido</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map((row) => (
-                            <TableRow
-                                key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right"> {row.ID} </TableCell>
-                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.name}</TableCell>
-                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.data.toLocaleDateString()}</TableCell>
-                                <TableCell padding='none' style={{ padding: '15px 5px' }} align="right">{row.percent}</TableCell>
+                            <TableRow key={row.name}>
+                                <TableCell align="center">{row.ID}</TableCell>
+                                <TableCell align="center">{row.name}</TableCell>
+                                <TableCell align="center">{row.data.toLocaleDateString()}</TableCell>
+                                <TableCell align="center">{row.percent}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
