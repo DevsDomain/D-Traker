@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
-import gestorModel, { Gestor } from '../models/gestores';
+import gestorModel, { Gestor } from '../models/gestoresModel';
 import GradeAtuacaoModel from '../models/gradeAtuacao';
+import MunicipioModel from '../models/municipiosModel';
 
 class GestorController {
 
@@ -20,13 +21,13 @@ class GestorController {
 
     async findGestor(req: Request, res: Response): Promise<Response> {
         try {
-            const { email } = req.body;
-            const gestor = await gestorModel.findOne({ email });
+            const { idGestor } = req.body;
+            const gestor = await gestorModel.findOne({ idGestor });
 
             if (!gestor) {
                 return res.status(400).json("Gestor não encontrado!");
             }
-            return res.status(201).json(gestor._id);
+            return res.status(201).json(gestor);
         } catch (error: any) {
             return res.status(500).json({ err: error.message })
         }
@@ -63,36 +64,7 @@ class GestorController {
         }
     }
 
-    async vincularProjeto(req: Request, res: Response): Promise<Response> {
-        try {
-            const { idGestor, idProjeto } = req.body;
-            const gestor = await gestorModel.findById(idGestor);
-            const projeto = await GradeAtuacaoModel.findById(idProjeto);
-
-            if (!gestor) {
-                return res.status(400).json("Gestor não encontrado!");
-            }
-
-            if (!projeto) {
-                return res.status(400).json("Projeto não encontrado!");
-
-            }
-
-            const projectLinkedToGestor = await GradeAtuacaoModel.updateOne({ _id: idProjeto }, { $set: { idGestor:gestor.idGestor} });
-            console.log("Update result:", projectLinkedToGestor);
-
-
-            if (projectLinkedToGestor.modifiedCount === 0) {
-                return res.status(404).json("Projeto não atualizado!");
-
-            }
-
-            return res.status(201).json("Projeto atualizado com sucesso!");
-        } catch (error: any) {
-
-            return res.status(500).json(error.message);
-        }
-    }
+    
 
 }
 

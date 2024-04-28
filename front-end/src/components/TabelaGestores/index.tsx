@@ -40,6 +40,8 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                         <TableHead>
                             <TableRow>
                                 <TableCell>Projeto</TableCell>
+                                <TableCell>Código do municipio</TableCell>
+                                <TableCell>UF</TableCell>
                                 <TableCell>Gestor</TableCell>
                                 <TableCell>E-mail do gestor(a)</TableCell>
                                 <TableCell>Status</TableCell>
@@ -54,6 +56,8 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                                 return (
                                     <TableRow hover key={gestor.idProjeto}>
                                         <TableCell>{gestor.NomeProjeto}</TableCell>
+                                        <TableCell>{gestor['Código Municipio']}</TableCell>
+                                        <TableCell>{gestor.UF}</TableCell>
                                         <TableCell>{gestor.GestorNome}</TableCell>
                                         <TableCell>{gestor.GestorEmail}</TableCell>
 
@@ -62,7 +66,7 @@ function TabelaGestores({ gestores }: { gestores: readonly ResponseAdminApi[] })
                                         </TableCell>
                                         <TableCell>
                                             <Checkbox
-                                                checked={gestor.GestorId ? true : false}
+                                                checked={gestor.idProjeto ? true : false}
 
                                             />
                                         </TableCell>
