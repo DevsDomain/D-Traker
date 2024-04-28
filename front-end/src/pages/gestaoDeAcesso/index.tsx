@@ -58,7 +58,7 @@ export default function GestaoDeAcesso() {
         try {
             const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword);
             if (response.status === 201) {
-                setGestores(prevGestores => [...prevGestores, { key: response.data, value: gestorNome }])
+                setGestores(prevGestores => [...prevGestores, { key: response.data.idGestor, value: gestorNome }])
                 alert("Gestor Cadastrado com sucesso!")
             }
 
@@ -109,36 +109,36 @@ export default function GestaoDeAcesso() {
     }, []);
 
     return (
-        <>
-            <Stack spacing={3} margin="2% auto" marginLeft="25%">
 
+        <Stack spacing={3} margin="2% auto" marginLeft="25%">
+
+
+            <Stack spacing={3}>
+                <Typography variant="h4">Gestores e projetos</Typography>
+                <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
+                <TabelaGestores gestores={selectedProjeto === '' ? gestoresList : filteredGestoresList} />
+            </Stack>
+
+            <Stack direction="row" spacing={10} pl={1}>
+
+                <Stack spacing={3} >
+                    <Typography variant="h5">Cadastrar novo gestor(a)</Typography>
+                    <Input placeholder='Nome do gestor(a)' handleInput={handleGestorNome} type='text' />
+                    <Input placeholder='email' handleInput={handleGestorMail} type='email' />
+                    <Input placeholder='senha' handleInput={handleGestorPassword} type='password' />
+
+                    <Button variant="outlined" onClick={() => CadastarGestor()} >Cadastrar</Button>
+                </Stack>
 
                 <Stack spacing={3}>
-                    <Typography variant="h4">Gestores e projetos</Typography>
-                    <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
-                    <TabelaGestores gestores={selectedProjeto === '' ? gestoresList : filteredGestoresList} />
+                    <Typography variant="h5">Vincular gestor a um projeto</Typography>
+                    <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
+                    <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
+                    <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
                 </Stack>
 
-                <Stack direction="row" spacing={10} pl={1}>
-
-                    <Stack spacing={3} >
-                        <Typography variant="h5">Cadastrar novo gestor(a)</Typography>
-                        <Input placeholder='Nome do gestor(a)' handleInput={handleGestorNome} type='text' />
-                        <Input placeholder='email' handleInput={handleGestorMail} type='email' />
-                        <Input placeholder='senha' handleInput={handleGestorPassword} type='password' />
-
-                        <Button variant="outlined" onClick={() => CadastarGestor()} >Cadastrar</Button>
-                    </Stack>
-
-                    <Stack spacing={3}>
-                        <Typography variant="h5">Vincular gestor a um projeto</Typography>
-                        <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
-                        <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
-                        <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
-                    </Stack>
-
-                </Stack>
             </Stack>
-        </>
+        </Stack>
+
     );
 }

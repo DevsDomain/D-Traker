@@ -11,9 +11,10 @@ export interface PesquisaPapelProps {
 }
 
 export interface ResponseAdminApi {
+    "idProjeto":string,
     "NomeProjeto": string
-    "idProjeto": string,
-    "GestorId": string,
+    "Código Municipio": string,
+    "UF": string,
     "GestorNome": string,
     "GestorEmail": string
     "status": "finalizado" | "andamento"
