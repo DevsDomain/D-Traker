@@ -11,9 +11,7 @@ import Typography from '@mui/material/Typography';
 import { fetchMunicipios } from '../../services/projetos';
 import { MunicipioProps } from '../../types/meusProjetos';
 
-
-
-
+//
 function TabelaMunicipios() {
     const [municipios, setMunicipios] = useState([]);
 
@@ -39,17 +37,19 @@ function TabelaMunicipios() {
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell>Nome</TableCell>
-                            <TableCell>Código</TableCell>
+                            <TableCell>Código IBGE</TableCell>
                             <TableCell>UF</TableCell>
+                            <TableCell> % </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {municipios.map((municipio: MunicipioProps) => (
-                            <TableRow key={municipio._id}>
-                                <TableCell>{municipio._id}</TableCell>
+                            <TableRow key={municipio.id}>
+                                <TableCell>{municipio.id}</TableCell>
                                 <TableCell>{municipio.nm_mun}</TableCell>
                                 <TableCell>{municipio.cd_mun}</TableCell>
                                 <TableCell>{municipio.sigla_uf}</TableCell>
+                                <TableCell>{municipio.area_km2}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
