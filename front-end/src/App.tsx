@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'; // Importe useMediaQuer
 const App: React.FC = () => {
     const theme = useTheme(); // Use o hook useTheme
     const smDown = useMediaQuery(theme.breakpoints.down('sm')); // Use o hook useMediaQuery para verificar se a tela é pequena
-
+    console.log("Helloooo ");
     return (
         <Box
             height="90vh"
