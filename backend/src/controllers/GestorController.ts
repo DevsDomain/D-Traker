@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import gestorModel, { Gestor } from "../models/gestoresModel";
-import GradeAtuacaoModel from "../models/gradeAtuacao";
-import MunicipioModel from "../models/municipiosModel";
+import jwt from "jsonwebtoken";
+import { tokenizer } from "../middlewares";
 
 class GestorController {
   async getAll(req: Request, res: Response): Promise<Response> {
@@ -77,13 +77,15 @@ class GestorController {
       if (gestor.password !== password) {
         return res.status(401).json({ message: "Credenciais inválidas!" });
       }
+      // Se o gestor existe e a senha está correta, gera o token JWT
+      const token = tokenizer({ id: gestor._id, email: gestor.email });
 
-      // Se o gestor existe e a senha está correta, retorna os dados do gestor
+      // Retorna os dados do gestor e o token JWT
       return res.status(200).json({
         id: gestor._id,
         name: gestor.name,
         email: gestor.email,
-        // Você pode adicionar mais campos conforme necessário
+        token: token,
       });
     } catch (error: any) {
       return res.status(500).json({ error: error.message });

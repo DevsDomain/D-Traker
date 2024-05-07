@@ -7,23 +7,22 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({} as UserProps);
-
+  /*
   async function Logar(
-    mail: string,
+    email: string,
     password: string,
     setLoading: Function
   ): Promise<Response | number> {
     try {
-      if (mail !== "" && password !== "") {
+      if (email !== "" && password !== "") {
         const response = await api.post("/login", {
-          mail: mail,
+          email: email,
           password: password,
         });
         setLoading(true);
         setUser(response.data.id);
-        localStorage.setItem("idUsuario", response.data.id);
-        localStorage.setItem("userName", response.data.userName);
-        localStorage.setItem("mail", response.data.mail);
+        localStorage.setItem("user", JSON.stringify(response.data));
+
         api.defaults.headers.common["Authorization"] = `Bearer ${user}`;
 
         return response.status;
@@ -36,7 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       return 401;
     }
-  }
+  }*/
 
   function handleLogOut() {
     api.defaults.headers.common["Authorization"] = `Bearer ''}`;
@@ -55,7 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ Logar, handleLogOut, user, setUser }}>
+    <AuthContext.Provider value={{ handleLogOut, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );

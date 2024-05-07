@@ -28,11 +28,6 @@ export interface GestoresApiResponse {
 
 export interface AuthContextProps {
   user: UserProps;
-  Logar: (
-    mail: string,
-    password: string,
-    setLoading: Function
-  ) => Promise<Response | number>;
   handleLogOut: () => void;
   setUser: (value: UserProps) => void;
 }

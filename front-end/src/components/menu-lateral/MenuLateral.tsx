@@ -28,6 +28,7 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
   const { handleLogOut, user } = useAuth();
 
   useEffect(() => {
+    console.log("user", userName);
     localStorage["userName"] && setUser(localStorage["userName"]);
   }, [user]);
 

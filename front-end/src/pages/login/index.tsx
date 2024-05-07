@@ -15,9 +15,10 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import backgroudImg from "../../assets/Dtracker1.png";
 import useAuth from "../../hooks/auth";
 import { loginGestor } from "../../controller/loginGestor";
+import { api } from "../../services";
 
 function Login() {
-  const [mail, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -27,12 +28,14 @@ function Login() {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await loginGestor(mail, password);
+      const response = await loginGestor(email, password);
 
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        api.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${response.data.token}`;
         setUser(response.data);
-        //navigate("/");
       }
     } catch (error) {
       setError("Credenciais inválidas. Por favor, tente novamente.");
@@ -76,8 +79,8 @@ function Login() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={mail}
-                onChange={(e) => setMail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
