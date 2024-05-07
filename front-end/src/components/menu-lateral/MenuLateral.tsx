@@ -4,17 +4,12 @@ import Typography from "@mui/material/Typography";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
-import {
-  Home,
-  AccountCircle,
-  Settings,
-  Lock,
-  LockOpen,
-} from "@mui/icons-material";
+import { Home, AccountCircle, Settings, LockOpen } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDrawerContext } from "./contexts";
 import useAuth from "../../hooks/auth";
+import { Link } from "react-router-dom";
 
 interface IMenuLateralProps {
   [key: string]: any; // Aceita qualquer propriedade
@@ -82,6 +77,8 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
               textTransform: "none",
               marginBottom: theme.spacing(1),
             }}
+            component={Link}
+            to="/"
           >
             Dashboard
           </Button>
@@ -92,6 +89,8 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
               textTransform: "none",
               marginBottom: theme.spacing(1),
             }}
+            component={Link}
+            to="/meusProjetos"
           >
             Meus Projetos
           </Button>
@@ -102,14 +101,10 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
               textTransform: "none",
               marginBottom: theme.spacing(1),
             }}
+            component={Link}
+            to="/GestaoDeAcesso"
           >
-            Admin
-          </Button>
-          <Button
-            startIcon={<Lock />}
-            style={{ color: "white", textTransform: "none" }}
-          >
-            Sign In
+            Gestao De Acesso
           </Button>
           <Button
             startIcon={<LockOpen />}
