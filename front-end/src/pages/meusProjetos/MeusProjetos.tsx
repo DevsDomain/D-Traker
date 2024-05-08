@@ -10,7 +10,7 @@ import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { fetchMunicipios } from '../../services/projetos';
 import { MunicipioProps } from '../../types/meusProjetos';
-
+import { porcentagemProjeto } from '../../controller/porcentagemProjeto';
 //
 function TabelaMunicipios() {
     const [municipios, setMunicipios] = useState([]);
@@ -49,7 +49,7 @@ function TabelaMunicipios() {
                                 <TableCell>{municipio.nm_mun}</TableCell>
                                 <TableCell>{municipio.cd_mun}</TableCell>
                                 <TableCell>{municipio.sigla_uf}</TableCell>
-                                <TableCell>{municipio.area_km2}</TableCell>
+                                <TableCell>{municipio.completamento}%</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
