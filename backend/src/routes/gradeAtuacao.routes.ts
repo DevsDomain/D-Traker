@@ -4,3 +4,4 @@ import GradeAtuacaoController from '../controllers/GradeAtuacaoController';
 export const gradeAtuacaoRoutes = Router();
 
 gradeAtuacaoRoutes.get("/gradeAtuacao", GradeAtuacaoController.getAll);
+gradeAtuacaoRoutes.post('/municipioCompletamento',GradeAtuacaoController.municipioCompletamento)
