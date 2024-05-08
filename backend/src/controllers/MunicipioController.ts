@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import MunicipioModel, { Municipio } from '../models/municipiosModel';
 import gestorModel, { Gestor } from '../models/gestoresModel';
+import GradeAtuacaoModel from '../models/gradeAtuacao';
 
 class MunicipioController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -76,6 +77,31 @@ class MunicipioController {
         }
     }
 
+
+    public async municipioProjeto(req: Request, res: Response): Promise<Response> {
+        try {
+            const projetos = await MunicipioModel.find({});
+            const adminData = await Promise.all(projetos.map(async (projeto: Municipio) => {
+            const total = await GradeAtuacaoModel.countDocuments({idprojeto:projeto.id});
+            const concluidos = await GradeAtuacaoModel.countDocuments({idprojeto:projeto.id, status:'finalizado'});
+            let resultado = (concluidos / total) * 100; 
+
+                return {
+                    "id": projeto.id,
+                    "nm_mun": projeto.nm_mun,
+                    "cd_mun": projeto.cd_mun,
+                    "sigla_uf": projeto.sigla_uf,
+                    "completamento": resultado.toFixed(2)
+                };
+            }))
+
+            return res.status(201).json(adminData)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
+    
 
 }
 

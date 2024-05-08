@@ -34,7 +34,23 @@ class GradeAtuacaoController {
             return res.status(500).json({ err: error.message });
         }
     }
-  
+    public async municipioCompletamento(req: Request, res: Response): Promise<Response> {
+        try {
+            const {idProjeto} = req.body;
+            const projetos = await GradeAtuacaoModel.countDocuments({idprojeto:idProjeto});
+            const concluidos = await GradeAtuacaoModel.countDocuments({idprojeto:idProjeto, status:'finalizado'});
+
+            console.log("Projetos",projetos)
+            console.log("CONCLUIDOS",concluidos)
+           
+            let resultado = (concluidos / projetos) * 100; 
+
+            return res.status(201).json(resultado)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
 }
 
 export default new GradeAtuacaoController();
