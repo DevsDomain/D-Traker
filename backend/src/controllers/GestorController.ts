@@ -63,6 +63,9 @@ class GestorController {
     }
   }
   async login(req: Request, res: Response): Promise<Response> {
+    console.log("Chamada para login");
+    console.log("Corpo da requisição:", req.body);
+
     try {
       const { email, password } = req.body;
 
@@ -70,6 +73,7 @@ class GestorController {
       const gestor = await gestorModel.findOne({ email });
 
       if (!gestor) {
+        console.log("Gestor não encontrado");
         return res.status(404).json({ message: "Gestor não encontrado!" });
       }
 
@@ -79,6 +83,7 @@ class GestorController {
       }
       // Se o gestor existe e a senha está correta, gera o token JWT
       const token = tokenizer({ id: gestor._id, email: gestor.email });
+      console.log("Token gerado:", token);
 
       // Retorna os dados do gestor e o token JWT
       return res.status(200).json({
@@ -88,6 +93,7 @@ class GestorController {
         token: token,
       });
     } catch (error: any) {
+      console.error("Erro durante login:", error);
       return res.status(500).json({ error: error.message });
     }
   }
