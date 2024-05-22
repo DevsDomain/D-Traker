@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -9,11 +9,36 @@ import SimpleLineChart from '../../components/graficos/GraficoLinha';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
+import { fetchAdmin } from '../../services/admin';
+import { respostaDoBanco } from '../../types/projetos';
+import { CalendarViewDayRounded } from '@mui/icons-material';
 // Import other components if needed
 
 const Dashboard: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const [projetos, setProjetos] = useState<{ idProjeto: string; nomeProjeto: string; }[]>([]);
+    console.log(projetos)
+
+    useEffect(() => {
+        const buscarDados = async () => {
+            try {
+                const dadosAdmin = await fetchAdmin();
+
+                const projetos: { idProjeto: string; nomeProjeto: string }[] = dadosAdmin.map((cidade: respostaDoBanco) => ({
+                    idProjeto: cidade.idProjeto,
+                    nomeProjeto: cidade.NomeProjeto
+                }));
+
+                setProjetos(projetos);
+            } catch (error) {
+                console.error('Ocorreu um erro ao buscar os dados:', error);
+            }
+        };
+
+        buscarDados();
+    }, []);
 
     return (
         <>
@@ -23,7 +48,7 @@ const Dashboard: React.FC = () => {
                 marginTop={theme.spacing(4)} // Adicionando margem acima
                 paddingLeft={smDown ? theme.spacing(2) : theme.spacing(4)} // Adicionando margem à esquerda responsiva
             >
-                <ReferenceDateDefaultBehavior/>
+                <ReferenceDateDefaultBehavior />
             </Box>
 
             <Grid container spacing={3} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(0)}>
@@ -41,20 +66,20 @@ const Dashboard: React.FC = () => {
 
             <Grid container spacing={2} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
                 <Grid item xs={12} sm={3}>
-                    <GraficoBarra/>
+                    <GraficoBarra />
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                    <GraficoPizza/>
+                    <GraficoPizza />
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                    <GraficoPizza/>
+                    <GraficoPizza />
                 </Grid>
                 <Grid item xs={12} sm={6} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
-                    <SimpleLineChart/>
+                    <SimpleLineChart />
                 </Grid>
             </Grid>
 
-           
+
         </>
     );
 };
