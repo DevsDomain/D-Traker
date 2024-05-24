@@ -11,8 +11,8 @@ Cada entrega foi realizada a partir da criação de uma **tag** Observe a relaç
 | Sprint | Previsão de entrega | Status | Release | Kanban | BurnDown |
 |:--:|:----------:|:-------------------|:-------------------:|:-------------------:|:-------------------:|
 | 01 | 03/04/2024 | ✔️ Entregue | [Ver release 1](https://github.com/DevsDomain/D-Traker/releases/tag/1.0) | [Ver Sprint 1](https://github.com/orgs/DevsDomain/projects/11) | [Ver BurnDown 1](https://github.com/DevsDomain/D-Traker/blob/main/Documentos/Sprint1-%20(1).jpg) |
-| 02 | 09/05/2024 | 🚧 Em andamento | [Ver release 2]() | [Ver Sprint 2](2) | [Ver BurnDown 2]() |
-| 03 | 13/06/2024 | 🛑 Não iniciada | [Ver release 3]() | [Ver Sprint 3](3) | [Ver BurnDown 3]() |
+| 02 | 09/05/2024 | ✔️ Entregue | [Ver release 2](https://github.com/DevsDomain/D-Traker/releases/tag/2.0) | [Ver Sprint 2](https://github.com/orgs/DevsDomain/projects/23) | [Ver BurnDown 2](https://github.com/DevsDomain/D-Traker/blob/main/Documentos/Burndown.Sprint2.png) |
+| 03 | 13/06/2024 | 🚧 Em andamento | [Ver release 3]() | [Ver Sprint 3](3) | [Ver BurnDown 3]() |
 
 
 
