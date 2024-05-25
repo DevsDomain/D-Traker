@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -9,11 +9,35 @@ import SimpleLineChart from '../../components/graficos/GraficoLinha';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
+import { respostaDoBanco } from '../../types/projetos';
+import { fetchAdmin } from '../../services/admin';
 // Import other components if needed
 
 const Dashboard: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const [projetos, setProjetos] = useState<{ idProjeto: string; nomeProjeto: string; }[]>([]);
+    console.log(projetos)
+
+    useEffect(() => {
+        const buscarDados = async () => {
+            try {
+                const dadosAdmin = await fetchAdmin();
+
+                const projetos: { idProjeto: string; nomeProjeto: string }[] = dadosAdmin.map((cidade: respostaDoBanco) => ({
+                    idProjeto: cidade.idProjeto,
+                    nomeProjeto: cidade.NomeProjeto
+                }));
+
+                setProjetos(projetos);
+            } catch (error) {
+                console.error('Ocorreu um erro ao buscar os dados:', error);
+            }
+        };
+
+        buscarDados();
+    }, []);
 
     return (
         <>
