@@ -112,7 +112,6 @@ export default function GestaoDeAcesso() {
 
         <Stack spacing={3} margin="2% auto" marginLeft="25%">
 
-
             <Stack spacing={3}>
                 <Typography variant="h4">Gestores e projetos</Typography>
                 <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
