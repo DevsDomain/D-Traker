@@ -3,6 +3,7 @@ import { gestoresRoutes } from "./gestores.routes";
 import { UsuariosRoutes } from "./usuarios.routes";
 import { gradeAtuacaoRoutes } from "./gradeAtuacao.routes";
 import { municipioRoutes } from "./municipio.routes";
+import { apontamentoRoutes } from "./apontamento.routes";
 import cors from "cors";
 
 export const routes = Router();
@@ -12,3 +13,4 @@ routes.use(gestoresRoutes);
 routes.use(gradeAtuacaoRoutes);
 routes.use(UsuariosRoutes);
 routes.use(municipioRoutes);
+routes.use(apontamentoRoutes)
