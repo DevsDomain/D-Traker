@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-
+import ApontamentoAlteracaoModel,{ApontamentoAlteracaoType} from '../models/apontamentoAlteracao';
 import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
-
 class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
         try {
@@ -51,6 +50,44 @@ class GradeAtuacaoController {
             return res.status(500).json({ err: error.message });
         }
     }
+
+    public async getAllEntregues(req: Request, res: Response): Promise<Response> {
+        try {
+            const projetos = await GradeAtuacaoModel.find({status:'finalizado'});
+
+            const ProjetosRetrabalhados = await Promise.all(projetos.map(async (projeto:GradeAtuacao ) => {
+                const retrabalhos:ApontamentoAlteracaoType = await ApontamentoAlteracaoModel.findOne({ idatividade: projeto.id }) as ApontamentoAlteracaoType
+
+                // CASO NÃO TENHA GERADO RETRABALHO
+                if (!retrabalhos) {
+                    return {
+                        "idProjeto": projeto.id,
+                        "idAlteracao": null,
+                        "data_entregue_atuacao": projeto.data_entrega,
+                        "data_ordem_retrabalho": null,
+                        "idanalista": projeto.idanalista,
+                        "idRevisor": null
+                    };
+                }
+                console.log(retrabalhos)
+                // EM CASO DE RETRABALHO
+                return {
+                    "idProjeto": projeto.id,
+                    "idAlteracao": retrabalhos.id,
+                    "data_entregue_atuacao":projeto.data_entrega,
+                    "data_ordem_retrabalho":retrabalhos.data_ordem,
+                    "idanalista":projeto.idanalista,
+                    "idRevisor":retrabalhos.idrevisor
+
+                };
+            }))
+            return res.status(201).json(ProjetosRetrabalhados)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
+
 }
 
 export default new GradeAtuacaoController();
