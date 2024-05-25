@@ -5,12 +5,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import ReferenceDateDefaultBehavior from '../../components/SeletorData';
 import GraficoBarra from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoPizza';
-import SimpleLineChart from '../../components/graficos/GraficoLinha';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
 import { respostaDoBanco } from '../../types/projetos';
 import { fetchAdmin } from '../../services/admin';
+import { fetchAlteracoes } from '../../services/alteracao';
+import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
+import { AlteracaoProps } from '../../types/alteracao';
 // Import other components if needed
 
 const Dashboard: React.FC = () => {
@@ -18,19 +20,24 @@ const Dashboard: React.FC = () => {
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [projetos, setProjetos] = useState<{ idProjeto: string; nomeProjeto: string; }[]>([]);
-    console.log(projetos)
+    const [alteracoes, setAlteracoes] = useState<AlteracaoProps>([]);
 
+    
     useEffect(() => {
         const buscarDados = async () => {
             try {
                 const dadosAdmin = await fetchAdmin();
+                const alteracao:AlteracaoProps = await fetchAlteracoes();
+
 
                 const projetos: { idProjeto: string; nomeProjeto: string }[] = dadosAdmin.map((cidade: respostaDoBanco) => ({
                     idProjeto: cidade.idProjeto,
                     nomeProjeto: cidade.NomeProjeto
                 }));
 
+
                 setProjetos(projetos);
+                setAlteracoes(alteracao)
             } catch (error) {
                 console.error('Ocorreu um erro ao buscar os dados:', error);
             }
@@ -74,7 +81,7 @@ const Dashboard: React.FC = () => {
                     <GraficoPizza/>
                 </Grid>
                 <Grid item xs={12} sm={6} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
-                    <SimpleLineChart/>
+                    <GraficoDeApontamentos alteracoes={alteracoes}/>
                 </Grid>
             </Grid>
 
