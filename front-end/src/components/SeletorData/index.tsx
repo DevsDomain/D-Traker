@@ -15,12 +15,7 @@ export default function ReferenceDateDefaultBehavior() {
         <DemoItem label="Data Final">
           <DatePicker />
         </DemoItem>
-      <DemoItem label="Projetos">
-         <Search/>
-        </DemoItem>
-      <DemoItem label="Membro">
-         <Search/>
-        </DemoItem>
+   
         
       </DemoContainer>
     </LocalizationProvider>

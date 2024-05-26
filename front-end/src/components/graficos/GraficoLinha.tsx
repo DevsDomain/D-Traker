@@ -22,8 +22,15 @@ export default function GraficoDeApontamentos({ alteracoes }: ApontamentoProps) 
   });
 
   useEffect(() => {
-    const updatedMonthsAtuacao = { ...monthsAtuacao };
-    const updatedMonthsRetrabalho = { ...monthsRetrabalho };
+    const updatedMonthsAtuacao = {
+      jan: 0, fev: 0, mar: 0, abr: 0, mai: 0, jun: 0,
+      jul: 0, ago: 0, set: 0, out: 0, nov: 0, dez: 0
+    };
+    const updatedMonthsRetrabalho = {
+      jan: 0, fev: 0, mar: 0, abr: 0, mai: 0, jun: 0,
+      jul: 0, ago: 0, set: 0, out: 0, nov: 0, dez: 0
+    };
+
 
     alteracoes.forEach((alteracao) => {
       const dateAtuacao = new Date(alteracao.data_entregue_atuacao);
@@ -72,6 +79,8 @@ export default function GraficoDeApontamentos({ alteracoes }: ApontamentoProps) 
     setMonthsAtuacao(updatedMonthsAtuacao);
     setMonthsRetrabalho(updatedMonthsRetrabalho);
   }, [alteracoes]);
+
+
 
   const dataAtuacao = [
     monthsAtuacao.jan, monthsAtuacao.fev, monthsAtuacao.mar, monthsAtuacao.abr, monthsAtuacao.mai, monthsAtuacao.jun,

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+// Dashboard.tsx
+import React from 'react';
 import { Box, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -8,53 +9,25 @@ import GraficoPizza from '../../components/graficos/GraficoPizza';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
-import { respostaDoBanco } from '../../types/projetos';
-import { fetchAdmin } from '../../services/admin';
-import { fetchAlteracoes } from '../../services/alteracao';
 import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
-import { AlteracaoProps } from '../../types/alteracao';
-// Import other components if needed
+import BasicSelect from '../../components/Select';
+import { DashboardProvider, useDashboard } from '../../contexts/dashboardContext';
 
-const Dashboard: React.FC = () => {
+const DashboardContent: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
+    const { state, setFiltroMembros } = useDashboard();
 
-    const [projetos, setProjetos] = useState<{ idProjeto: string; nomeProjeto: string; }[]>([]);
-    const [alteracoes, setAlteracoes] = useState<AlteracaoProps>([]);
-
-    
-    useEffect(() => {
-        const buscarDados = async () => {
-            try {
-                const dadosAdmin = await fetchAdmin();
-                const alteracao:AlteracaoProps = await fetchAlteracoes();
-
-
-                const projetos: { idProjeto: string; nomeProjeto: string }[] = dadosAdmin.map((cidade: respostaDoBanco) => ({
-                    idProjeto: cidade.idProjeto,
-                    nomeProjeto: cidade.NomeProjeto
-                }));
-
-
-                setProjetos(projetos);
-                setAlteracoes(alteracao)
-            } catch (error) {
-                console.error('Ocorreu um erro ao buscar os dados:', error);
-            }
-        };
-
-        buscarDados();
-    }, []);
 
     return (
         <>
             <Box
-                height="20vh"
+                height="5vh"
                 marginLeft={smDown ? 0 : theme.spacing(35)}
-                marginTop={theme.spacing(4)} // Adicionando margem acima
-                paddingLeft={smDown ? theme.spacing(2) : theme.spacing(4)} // Adicionando margem à esquerda responsiva
+                marginTop={theme.spacing(4)}
+                paddingLeft={smDown ? theme.spacing(0) : theme.spacing(4)}
             >
-                <ReferenceDateDefaultBehavior/>
+                <BasicSelect projeto={state.membros} handlePesquisaByProjeto={setFiltroMembros} placeHolder='Membros' />
             </Box>
 
             <Grid container spacing={3} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(0)}>
@@ -67,27 +40,30 @@ const Dashboard: React.FC = () => {
                 <Grid item lg={3} sm={6} xs={12}>
                     <TasksProgress sx={{ height: '100%' }} value={75.5} />
                 </Grid>
-                {/* Add imports and grid item for TotalProfit if needed */}
             </Grid>
 
             <Grid container spacing={2} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
-                <Grid item xs={12} sm={3}>
-                    <GraficoBarra/>
+                <Grid item xs={3} sm={3}>
+                    <GraficoPizza />
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                    <GraficoPizza/>
+                <Grid item xs={3} sm={3}>
+                    <GraficoBarra />
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                    <GraficoPizza/>
+                <Grid item xs={3} sm={3}>
+                    <GraficoPizza />
                 </Grid>
-                <Grid item xs={12} sm={6} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
-                    <GraficoDeApontamentos alteracoes={alteracoes}/>
+                <Grid item xs={20} sm={3} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
+                    <GraficoDeApontamentos alteracoes={state.filteredAlteracoes.length === 0 ? state.alteracoes : state.filteredAlteracoes} />
                 </Grid>
             </Grid>
-
-           
         </>
     );
 };
+
+const Dashboard: React.FC = () => (
+    <DashboardProvider>
+        <DashboardContent />
+    </DashboardProvider>
+);
 
 export default Dashboard;
