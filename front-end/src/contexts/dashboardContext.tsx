@@ -1,15 +1,18 @@
 import React, { createContext, useReducer, useContext, useEffect, ReactNode } from 'react';
-import { getAdminData, getAlteracoes, getMembros } from '../services/dashboardApi';
+import { getAdminData, getAlteracoes, getMembros, getProjetoStatus } from '../services/dashboardApi';
 import { AlteracaoProps } from '../types/alteracao';
 import { Filtro } from '../types/membros';
+import { ProjetoStatus } from '../types/projetos';
 
 // DEFINE A ESTRUTURA DO CONTEXTO
 interface DashboardState {
     projetos: { idProjeto: string; nomeProjeto: string }[];
     alteracoes: AlteracaoProps;
+    filteredAlteracoes: AlteracaoProps;
     membros: { key: string; value: string }[];
     filtroMembros: { key: string; value: string }[];
-    filteredAlteracoes: AlteracaoProps;
+    projetoStatus: ProjetoStatus
+    //filteredProjetosStatus: ProjetoStatus
 
 }
 
@@ -17,18 +20,24 @@ interface DashboardState {
 type DashboardAction =
     | { type: 'SET_PROJETOS'; payload: { idProjeto: string; nomeProjeto: string }[] }
     | { type: 'SET_ALTERACOES'; payload: AlteracaoProps }
+    | { type: 'SET_FILTERED_ALTERACOES'; payload: AlteracaoProps }
     | { type: 'SET_MEMBROS'; payload: { key: string; value: string }[] }
-    | { type: 'SET_FILTRO_MEMBROS'; payload: { key: string; value: string }[];}
-    | { type: 'SET_FILTERED_ALTERACOES'; payload: AlteracaoProps };
+    | { type: 'SET_FILTRO_MEMBROS'; payload: { key: string; value: string }[] }
+    | { type: 'SET_PROJETO_STATUS'; payload: ProjetoStatus }
+
+
 
 
 // ESTADO INICIAL = ESTRUTURA INICIAL DO CONTEXTO 
 const initialState: DashboardState = {
     projetos: [],
+    filteredAlteracoes: [],
     alteracoes: [],
     membros: [],
     filtroMembros: [],
-    filteredAlteracoes: [],
+    projetoStatus: { andamento: "", concluidos: "", naoAtribuido: "" },
+    //filteredProjetosStatus:[]
+
 
 };
 
@@ -45,6 +54,8 @@ const dashboardReducer = (state: DashboardState, action: DashboardAction): Dashb
             return { ...state, filtroMembros: action.payload };
         case 'SET_FILTERED_ALTERACOES':
             return { ...state, filteredAlteracoes: action.payload };
+        case 'SET_PROJETO_STATUS':
+            return { ...state, projetoStatus: action.payload };
         default:
             return state;
     }
@@ -74,9 +85,12 @@ export const DashboardProvider: React.FC<DashboardProviderProps> = ({ children }
                 const projetos = await getAdminData();
                 const alteracoes = await getAlteracoes();
                 const membros = await getMembros();
+                const statusProjeto = await getProjetoStatus();
                 dispatch({ type: 'SET_PROJETOS', payload: projetos });
                 dispatch({ type: 'SET_ALTERACOES', payload: alteracoes });
                 dispatch({ type: 'SET_MEMBROS', payload: membros });
+                dispatch({ type: 'SET_PROJETO_STATUS', payload: statusProjeto });
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -92,7 +106,7 @@ export const DashboardProvider: React.FC<DashboardProviderProps> = ({ children }
         }));
 
         const filtro = membrosArray.filter(({ key }) => key === value);
-        dispatch({ type: 'SET_FILTRO_MEMBROS', payload: filtro});
+        dispatch({ type: 'SET_FILTRO_MEMBROS', payload: filtro });
 
         filterAlteracoesByMembro(value);
 

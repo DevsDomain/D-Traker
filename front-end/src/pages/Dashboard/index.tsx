@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ReferenceDateDefaultBehavior from '../../components/SeletorData';
 import GraficoBarra from '../../components/graficos/GraficoBarra';
-import GraficoPizza from '../../components/graficos/GraficoPizza';
+import GraficoPizza from '../../components/graficos/GraficoStatusProjeto';
 import { Budget } from '../../components/Box/Box';
 import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
@@ -17,7 +17,7 @@ const DashboardContent: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
     const { state, setFiltroMembros } = useDashboard();
-
+    const {projetoStatus} = state
 
     return (
         <>
@@ -44,14 +44,17 @@ const DashboardContent: React.FC = () => {
 
             <Grid container spacing={2} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
                 <Grid item xs={3} sm={3}>
-                    <GraficoPizza />
+                    <GraficoPizza andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos}
+                        naoAtribuido={projetoStatus.naoAtribuido} />
+                </Grid>
+                <Grid item xs={3} sm={3}>
+                    <GraficoPizza andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos}
+                        naoAtribuido={projetoStatus.naoAtribuido} />
                 </Grid>
                 <Grid item xs={3} sm={3}>
                     <GraficoBarra />
                 </Grid>
-                <Grid item xs={3} sm={3}>
-                    <GraficoPizza />
-                </Grid>
+
                 <Grid item xs={20} sm={3} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
                     <GraficoDeApontamentos alteracoes={state.filteredAlteracoes.length === 0 ? state.alteracoes : state.filteredAlteracoes} />
                 </Grid>
