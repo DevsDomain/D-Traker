@@ -58,6 +58,7 @@ class GradeAtuacaoController {
                 // CASO NÃO TENHA GERADO RETRABALHO
                 if (!retrabalhos) {
                     return {
+                        "idMunicipio":projeto.idprojeto,
                         "idProjeto": projeto.id,
                         "idAlteracao": null,
                         "data_entregue_atuacao": projeto.data_entrega,
@@ -69,6 +70,7 @@ class GradeAtuacaoController {
                 console.log(retrabalhos)
                 // EM CASO DE RETRABALHO
                 return {
+                    "idMunicipio":projeto.idprojeto,
                     "idProjeto": projeto.id,
                     "idAlteracao": retrabalhos.id,
                     "data_entregue_atuacao": projeto.data_entrega,

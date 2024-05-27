@@ -1,5 +1,4 @@
 // apiService.ts
-import { respostaDoBanco } from '../types/projetos';
 import { fetchAdmin } from '../services/admin';
 import { fetchAlteracoes } from '../services/alteracao';
 import { fetchMembros } from '../services/membros';
@@ -7,22 +6,24 @@ import { AlteracaoProps } from '../types/alteracao';
 import { membrosProps } from '../types/membros';
 import { ProjetoStatus } from '../types/projetos';
 import { FetchProjetoStatus } from './projetosAndamento';
-
-export const getAdminData = async () => {
-    const dadosAdmin = await fetchAdmin();
-    return dadosAdmin.map((cidade: respostaDoBanco) => ({
-        idProjeto: cidade.idProjeto,
-        nomeProjeto: cidade.NomeProjeto
-    }));
-};
+import { ResponseAdminApi } from '../types/gestaoDeAcesso';
 
 export const getAlteracoes = async (): Promise<AlteracaoProps> => {
     return await fetchAlteracoes();
 };
 
-export const getProjetoStatus = async(idProjeto:string = ""): Promise<ProjetoStatus> => {
+export const getProjetoStatus = async (idProjeto: string = ""): Promise<ProjetoStatus> => {
     return await FetchProjetoStatus(idProjeto)
 };
+
+export const getProjetos = async () => {
+    const projetos = await fetchAdmin()
+    return projetos.map((projeto: ResponseAdminApi) => ({
+        key: projeto.idProjeto,
+        value: projeto.NomeProjeto
+    }));
+
+}
 
 export const getMembros = async () => {
     const membrosApi = await fetchMembros();

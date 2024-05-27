@@ -63,11 +63,8 @@ function TabelaMunicipios() {
     return (
         <Stack spacing={3} margin="3% auto" marginLeft="20%">
             <Stack spacing={3}>
-                <BasicSelect
-                    handlePesquisaByProjeto={handlePesquisaByProjeto}
-                    projeto={projeto}
-                    placeHolder="Projeto"
-                />
+            <BasicSelect onChange={handlePesquisaByProjeto} value={selectedProjeto} handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Selecione o Projeto' />
+
             </Stack>
             <Typography variant="h4">Municípios</Typography>
             <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>

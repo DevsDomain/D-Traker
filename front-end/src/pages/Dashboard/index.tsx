@@ -1,6 +1,6 @@
 // Dashboard.tsx
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import ReferenceDateDefaultBehavior from '../../components/SeletorData';
@@ -16,19 +16,23 @@ import { DashboardProvider, useDashboard } from '../../contexts/dashboardContext
 const DashboardContent: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
-    const { state, setFiltroMembros } = useDashboard();
+    const { state, setFiltroMembros,setFiltroProjetos} = useDashboard();
     const {projetoStatus} = state
+    const handleProjetoChange = (value: string) => {
+        setFiltroProjetos(value);
+    };
 
+    const handleMembroChange = (value: string) => {
+        setFiltroMembros(value);
+    };
     return (
         <>
-            <Box
-                height="5vh"
-                marginLeft={smDown ? 0 : theme.spacing(35)}
-                marginTop={theme.spacing(4)}
-                paddingLeft={smDown ? theme.spacing(0) : theme.spacing(4)}
-            >
-                <BasicSelect projeto={state.membros} handlePesquisaByProjeto={setFiltroMembros} placeHolder='Membros' />
-            </Box>
+            <Stack width={'50vw'} direction={"row"} marginLeft={60}>
+                <BasicSelect  projeto={state.projetos} handlePesquisaByProjeto={setFiltroProjetos} onChange={handleProjetoChange} placeHolder='Projetos' value={state.selectedProject || ""}/>
+      
+                <BasicSelect projeto={state.membros} handlePesquisaByProjeto={setFiltroMembros} onChange={handleMembroChange} placeHolder='Membros' value={state.selectedMember || ""} />
+                </Stack>
+          
 
             <Grid container spacing={3} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(0)}>
                 <Grid item lg={3} sm={6} xs={12}>
