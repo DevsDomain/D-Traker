@@ -6,3 +6,4 @@ export const gradeAtuacaoRoutes = Router();
 gradeAtuacaoRoutes.get("/gradeAtuacao", GradeAtuacaoController.getAll);
 gradeAtuacaoRoutes.get("/concluidos",GradeAtuacaoController.getAllEntregues)
 gradeAtuacaoRoutes.post('/municipioCompletamento',GradeAtuacaoController.municipioCompletamento)
+gradeAtuacaoRoutes.post('/municipioAndamento',GradeAtuacaoController.municipioProjetosPorcentagem)

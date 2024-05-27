@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import ApontamentoAlteracaoModel,{ApontamentoAlteracaoType} from '../models/apontamentoAlteracao';
+import ApontamentoAlteracaoModel, { ApontamentoAlteracaoType } from '../models/apontamentoAlteracao';
 import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
 class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -35,14 +35,11 @@ class GradeAtuacaoController {
     }
     public async municipioCompletamento(req: Request, res: Response): Promise<Response> {
         try {
-            const {idProjeto} = req.body;
-            const projetos = await GradeAtuacaoModel.countDocuments({idprojeto:idProjeto});
-            const concluidos = await GradeAtuacaoModel.countDocuments({idprojeto:idProjeto, status:'finalizado'});
+            const { idProjeto } = req.body;
+            const projetos = await GradeAtuacaoModel.countDocuments({ idprojeto: idProjeto });
+            const concluidos = await GradeAtuacaoModel.countDocuments({ idprojeto: idProjeto, status: 'finalizado' });
 
-            console.log("Projetos",projetos)
-            console.log("CONCLUIDOS",concluidos)
-           
-            let resultado = (concluidos / projetos) * 100; 
+            let resultado = (concluidos / projetos) * 100;
 
             return res.status(201).json(resultado)
 
@@ -53,14 +50,15 @@ class GradeAtuacaoController {
 
     public async getAllEntregues(req: Request, res: Response): Promise<Response> {
         try {
-            const projetos = await GradeAtuacaoModel.find({status:'finalizado'});
+            const projetos = await GradeAtuacaoModel.find({ status: 'finalizado' });
 
-            const ProjetosRetrabalhados = await Promise.all(projetos.map(async (projeto:GradeAtuacao ) => {
-                const retrabalhos:ApontamentoAlteracaoType = await ApontamentoAlteracaoModel.findOne({ idatividade: projeto.id }) as ApontamentoAlteracaoType
+            const ProjetosRetrabalhados = await Promise.all(projetos.map(async (projeto: GradeAtuacao) => {
+                const retrabalhos: ApontamentoAlteracaoType = await ApontamentoAlteracaoModel.findOne({ idatividade: projeto.id }) as ApontamentoAlteracaoType
 
                 // CASO NÃO TENHA GERADO RETRABALHO
                 if (!retrabalhos) {
                     return {
+                        "idMunicipio":projeto.idprojeto,
                         "idProjeto": projeto.id,
                         "idAlteracao": null,
                         "data_entregue_atuacao": projeto.data_entrega,
@@ -72,16 +70,45 @@ class GradeAtuacaoController {
                 console.log(retrabalhos)
                 // EM CASO DE RETRABALHO
                 return {
+                    "idMunicipio":projeto.idprojeto,
                     "idProjeto": projeto.id,
                     "idAlteracao": retrabalhos.id,
-                    "data_entregue_atuacao":projeto.data_entrega,
-                    "data_ordem_retrabalho":retrabalhos.data_ordem,
-                    "idanalista":projeto.idanalista,
-                    "idRevisor":retrabalhos.idrevisor
+                    "data_entregue_atuacao": projeto.data_entrega,
+                    "data_ordem_retrabalho": retrabalhos.data_ordem,
+                    "idanalista": projeto.idanalista,
+                    "idRevisor": retrabalhos.idrevisor
 
                 };
             }))
             return res.status(201).json(ProjetosRetrabalhados)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
+
+    public async municipioProjetosPorcentagem(req: Request, res: Response): Promise<Response> {
+        try {
+            const { idProjeto } = req.body;
+            const filtro = idProjeto ? { idprojeto: idProjeto } : {};
+
+
+            const [desenvolvimento, concluidos, naoAtribuido] = await Promise.all([
+                GradeAtuacaoModel.countDocuments({ ...filtro, status: 'andamento' }),
+                GradeAtuacaoModel.countDocuments({ ...filtro, status: 'finalizado' }),
+                GradeAtuacaoModel.countDocuments({ ...filtro, status: "NULL" }),
+            ]);
+
+
+            const andamentoProjetos = {
+                "andamento": desenvolvimento.toFixed(2),
+                "concluidos": concluidos.toFixed(2),
+                "naoAtribuido": naoAtribuido.toFixed(2)
+            }
+
+
+
+            return res.status(201).json(andamentoProjetos)
 
         } catch (error: any) {
             return res.status(500).json({ err: error.message });

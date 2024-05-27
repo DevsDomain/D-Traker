@@ -1,4 +1,5 @@
 interface Alteracao {
+    idMunicipio:number;
     idProjeto: number;
     idAlteracao: number;
     data_entregue_atuacao: string;
