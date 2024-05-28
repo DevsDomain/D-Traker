@@ -66,7 +66,7 @@ function Login() {
               component="form"
               noValidate
               onSubmit={handleLogin}
-              sx={{ mt: 1 }}
+              sx={{ mt: 1, maxWidth: "400px" }}
             >
               <TextField
                 margin="normal"
@@ -176,7 +176,7 @@ function Login() {
               alt="Logo"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
-            <Typography variant="h6" component="h2" sx={{ color: "white", fontWeight: "bold", textAlign: "center", fontSize: "3rem" }}>
+            <Typography variant="h6" component="h2" sx={{ color: "white", fontWeight: "bold", textAlign: "center", fontSize: "240%" }}>
               D TRACKER
             </Typography>
           </Box>
@@ -187,4 +187,3 @@ function Login() {
 }
 
 export default Login;
-
