@@ -13,7 +13,7 @@ import { MunicipioProps } from "../../types/meusProjetos";
 import BasicSelect from "../../components/Select";
 import { fetchAdmin } from '../../services/admin'
 import { ResponseAdminApi } from '../../types/gestaoDeAcesso';
-import { porcentagemProjeto } from "../../controller/porcentagemProjeto";
+// import { porcentagemProjeto } from "../../controller/porcentagemProjeto";
 
 function TabelaMunicipios() {
     const [municipios, setMunicipios] = useState<MunicipioProps[]>([]);
