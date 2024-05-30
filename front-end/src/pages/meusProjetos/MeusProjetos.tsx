@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { Stack } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Stack, Typography, TextField, Grid } from "@mui/material";
 import { fetchMunicipios } from "../../services/projetos";
 import { MunicipioProps } from "../../types/meusProjetos";
 import BasicSelect from "../../components/Select";
-import { fetchAdmin } from '../../services/admin'
+import { fetchAdmin } from '../../services/admin';
 import { ResponseAdminApi } from '../../types/gestaoDeAcesso';
-// import { porcentagemProjeto } from "../../controller/porcentagemProjeto";
 
 function TabelaMunicipios() {
     const [municipios, setMunicipios] = useState<MunicipioProps[]>([]);
     const [projeto, setProjeto] = useState<{ key: string; value: string }[]>([]);
     const [selectedProjeto, setSelectedProjeto] = useState<string>("");
     const [filteredMunicipios, setFilteredMunicipios] = useState<MunicipioProps[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     function handlePesquisaByProjeto(value: string) {
         setSelectedProjeto(value);
@@ -29,6 +21,10 @@ function TabelaMunicipios() {
             const filtered = municipios.filter(({ id }) => id === value);
             setFilteredMunicipios(filtered);
         }
+    }
+
+    function handleSearchTermChange(event: React.ChangeEvent<HTMLInputElement>) {
+        setSearchTerm(event.target.value);
     }
 
     useEffect(() => {
@@ -60,12 +56,37 @@ function TabelaMunicipios() {
         fetchMunicipiosData();
     }, []);
 
+    //Inserido para filtrar os municípios pelo nome na caixa de Matchcode → TextField
+    useEffect(() => {
+        const filtered = municipios.filter(municipio =>
+            municipio.nm_mun.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (selectedProjeto === "" || municipio.id === selectedProjeto)
+        );
+        setFilteredMunicipios(filtered);
+    }, [searchTerm, selectedProjeto, municipios]);
+
     return (
         <Stack spacing={3} margin="3% auto" marginLeft="20%">
-            <Stack spacing={3}>
-            <BasicSelect onChange={handlePesquisaByProjeto} value={selectedProjeto} handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Selecione o Projeto' />
-
-            </Stack>
+            <Grid container spacing={3} alignItems="center">
+                <Grid item xs={6}>
+                    <BasicSelect
+                        onChange={handlePesquisaByProjeto}
+                        value={selectedProjeto}
+                        handlePesquisaByProjeto={handlePesquisaByProjeto}
+                        projeto={projeto}
+                        sx={{ flex: 1 }}
+                        placeHolder='Selecione o Projeto'
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField
+                        label="Pesquise por projeto"
+                        variant="outlined"
+                        value={searchTerm}
+                        onChange={handleSearchTermChange}
+                        sx={{ flex: 1 }} />
+                </Grid>
+            </Grid>
             <Typography variant="h4">Municípios</Typography>
             <TableContainer component={Paper} sx={{ maxWidth: 1000 }}>
                 <Table sx={{ minWidth: 600 }} aria-label="simple table">
