@@ -31,7 +31,7 @@ export function TotalTasks({ value, naoAtribuido, sx }: TotalTasksProps): React.
         <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
           <Stack spacing={1}>
           <Typography color="text.secondary" variant="overline">
-              Total Tasks
+              New Tasks
             <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
               <TaskAltIcon style={{ width: '100%', height: '100%' }} /> {/* Ícone de tarefas do Material-UI */}
             </Avatar>
