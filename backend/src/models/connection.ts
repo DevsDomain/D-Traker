@@ -8,7 +8,7 @@ export default function connect() {
     mongoose.connection.on("disconnected", () => console.log("Database Disconnected"));
  
  
-    mongoose.connect(uriLocal, {
+    mongoose.connect(uri, {
         serverSelectionTimeoutMS: 5000,
         maxPoolSize: 10,
         serverApi:{version:'1',strict:true, deprecationErrors:true}
