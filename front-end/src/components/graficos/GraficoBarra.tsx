@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Typography from '@mui/material/Typography';
+import { ProjetoStatus } from '../../types/projetos';
 
 // Defina o tipo GetSeriesParams
 type GetSeriesParams = {
@@ -58,7 +59,8 @@ const getSeries = (projetos: Projeto[], { hasNegativeValue, stackOffset }: GetSe
     }));
 };
 
-const GraficoBarra: React.FC = () => {
+export default function GraficoBarras({andamento,concluidos,naoAtribuido}:ProjetoStatus){
+    console.log(andamento,concluidos,naoAtribuido);
     const [stackOffset, setStackOffset] = useState<string>('Gráfico');
     const [hasNegativeValue, setHasNegativeValue] = useState<boolean>(true);
     const [projetos, setProjetos] = useState<Projeto[]>([]);
@@ -108,5 +110,3 @@ const GraficoBarra: React.FC = () => {
         </Box>
     );
 };
-
-export default GraficoBarra;
