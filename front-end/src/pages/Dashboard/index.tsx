@@ -3,11 +3,8 @@ import React from 'react';
 import { Box, Grid, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import ReferenceDateDefaultBehavior from '../../components/SeletorData';
 import GraficoBarras from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoStatusProjeto';
-
-import { TotalCustomers } from '../../components/Box/total-customers';
 import { TasksProgress } from '../../components/Box/tasks-progress';
 import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
 import BasicSelect from '../../components/Select';

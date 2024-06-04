@@ -2,9 +2,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { ProjetoStatus } from '../../types/projetos';
 import type { SxProps } from '@mui/material/styles'; // Importando o tipo SxProps
-
 
 export interface TotalPoligonosProps {
   sx?: SxProps;
