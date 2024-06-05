@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, makeStyles, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import useAuth from "../../hooks/auth";
 import { loginGestor } from "../../controller/loginGestor";
 import { api } from "../../services";
@@ -21,6 +21,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { setUser } = useAuth();
+  const { setRole } = useAuth();
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ function Login() {
           "Authorization"
         ] = `Bearer ${response.data.token}`;
         setUser(response.data);
+        setRole(response.data.role);
       }
     } catch (error) {
       setError("Credenciais inválidas. Por favor, tente novamente.");
@@ -44,9 +46,23 @@ function Login() {
 
   return (
     <ThemeProvider theme={createTheme()}>
-      <Grid container component="main" sx={{ height: "100vh", backgroundColor: "#000000" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh", backgroundColor: "#000000" }}
+      >
         <CssBaseline />
-        <Grid item xs={false} sm={false} md={7} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Grid
+          item
+          xs={false}
+          sm={false}
+          md={7}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Box
             sx={{
               my: 8,
@@ -88,8 +104,8 @@ function Login() {
                 InputLabelProps={{
                   sx: {
                     color: "blue", // Define a cor do rótulo
-                    position: 'absolute', // Posiciona o rótulo acima da linha da caixa
-                    top: '-8px', // Ajusta a posição vertical do rótulo
+                    position: "absolute", // Posiciona o rótulo acima da linha da caixa
+                    top: "-8px", // Ajusta a posição vertical do rótulo
                   },
                 }}
                 sx={{
@@ -120,8 +136,8 @@ function Login() {
                 InputLabelProps={{
                   sx: {
                     color: "blue", // Define a cor do rótulo
-                    position: 'absolute', // Posiciona o rótulo acima da linha da caixa
-                    top: '-8px', // Ajusta a posição vertical do rótulo
+                    position: "absolute", // Posiciona o rótulo acima da linha da caixa
+                    top: "-8px", // Ajusta a posição vertical do rótulo
                   },
                 }}
                 sx={{
@@ -138,8 +154,18 @@ function Login() {
                 </Typography>
               )}
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" sx={{ color: "white" }} />}
-                label={<Typography variant="body2" sx={{ color: "white" }}>Remember me</Typography>}
+                control={
+                  <Checkbox
+                    value="remember"
+                    color="primary"
+                    sx={{ color: "white" }}
+                  />
+                }
+                label={
+                  <Typography variant="body2" sx={{ color: "white" }}>
+                    Remember me
+                  </Typography>
+                }
               />
               <Button
                 type="submit"
@@ -147,7 +173,11 @@ function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
                 disabled={loading}
-                style={{ backgroundColor: "blue", color: "white", fontWeight: "bold" }}
+                style={{
+                  backgroundColor: "blue",
+                  color: "white",
+                  fontWeight: "bold",
+                }}
               >
                 {loading ? "Signing in..." : "Sign In"}
               </Button>
@@ -166,7 +196,17 @@ function Login() {
             </Box>
           </Box>
         </Grid>
-        <Grid item xs={12} sm={12} md={5} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={5}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Box
             alignItems="center"
             sx={{ height: "50%", width: "50%" }} // Adiciona espaçamento à direita
@@ -176,7 +216,16 @@ function Login() {
               alt="Logo"
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
-            <Typography variant="h6" component="h2" sx={{ color: "white", fontWeight: "bold", textAlign: "center", fontSize: "240%" }}>
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{
+                color: "white",
+                fontWeight: "bold",
+                textAlign: "center",
+                fontSize: "240%",
+              }}
+            >
               D TRACKER
             </Typography>
           </Box>
