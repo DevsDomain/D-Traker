@@ -102,9 +102,9 @@ export default function GraficoBarras({andamento,concluidos,naoAtribuido}:Projet
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Não Atribuido" stackId="a" fill="#b44124" />
-                    <Bar dataKey="Em andamento" stackId="a" fill="#328aad" />
-                    <Bar dataKey="Concluido" stackId="a" fill="#77d65f" />
+                    <Bar dataKey="Não Atribuido" stackId="a" fill="#D941CF" />
+                    <Bar dataKey="Em andamento" stackId="a" fill="#5854BF" />
+                    <Bar dataKey="Concluido" stackId="a" fill="#1BF28E" />
                 </BarChart>
             </Box>
         </Box>
