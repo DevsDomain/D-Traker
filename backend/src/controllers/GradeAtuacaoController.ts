@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import ApontamentoAlteracaoModel, { ApontamentoAlteracaoType } from '../models/apontamentoAlteracao';
 import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
+import MunicipioModel from '../models/municipiosModel'
+
 class GradeAtuacaoController {
     public async getAll(req: Request, res: Response): Promise<Response> {
         try {
@@ -58,7 +60,7 @@ class GradeAtuacaoController {
                 // CASO NÃO TENHA GERADO RETRABALHO
                 if (!retrabalhos) {
                     return {
-                        "idMunicipio":projeto.idprojeto,
+                        "idMunicipio": projeto.idprojeto,
                         "idProjeto": projeto.id,
                         "idAlteracao": null,
                         "data_entregue_atuacao": projeto.data_entrega,
@@ -67,10 +69,9 @@ class GradeAtuacaoController {
                         "idRevisor": null
                     };
                 }
-                console.log(retrabalhos)
                 // EM CASO DE RETRABALHO
                 return {
-                    "idMunicipio":projeto.idprojeto,
+                    "idMunicipio": projeto.idprojeto,
                     "idProjeto": projeto.id,
                     "idAlteracao": retrabalhos.id,
                     "data_entregue_atuacao": projeto.data_entrega,
@@ -109,6 +110,53 @@ class GradeAtuacaoController {
 
 
             return res.status(201).json(andamentoProjetos)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
+
+    public async municipioProjetosPoligonos(_: Request, res: Response): Promise<Response> {
+        try {
+            let poligonos: andamentoProjetos[] = []
+
+            type andamentoProjetos = {
+                "projeto": string,
+                "nomeProjeto": string,
+                "andamento": string,
+                "concluidos": string,
+                "naoAtribuido": string
+            }
+
+            for (let i = 1; i < 4; i++) {
+                console.log(i)
+
+                const projeto = await GradeAtuacaoModel.findOne({ idprojeto: i });
+                console.log(projeto)
+                if (!projeto) continue;
+    
+                const nomeProjeto = await MunicipioModel.findOne({ id: projeto.idprojeto });
+                if (!nomeProjeto) continue;
+    
+                const [desenvolvimento, concluidos, naoAtribuido] = await Promise.all([
+                    GradeAtuacaoModel.countDocuments({ idprojeto: i, status: 'andamento' }),
+                    GradeAtuacaoModel.countDocuments({ idprojeto: i, status: 'finalizado' }),
+                    GradeAtuacaoModel.countDocuments({ idprojeto: i, status: "NULL" }),
+                ]);
+    
+                poligonos.push({
+                    "projeto": projeto.idprojeto.toString(),
+                    "nomeProjeto": nomeProjeto.nm_mun.toString(),
+                    "andamento": desenvolvimento.toString(),
+                    "concluidos": concluidos.toString(),
+                    "naoAtribuido": naoAtribuido.toString()
+                });
+            }
+
+
+            return res.status(201).json(poligonos)
+
+
 
         } catch (error: any) {
             return res.status(500).json({ err: error.message });
