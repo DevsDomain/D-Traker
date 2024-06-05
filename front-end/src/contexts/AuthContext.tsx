@@ -7,35 +7,7 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({} as UserProps);
-  /*
-  async function Logar(
-    email: string,
-    password: string,
-    setLoading: Function
-  ): Promise<Response | number> {
-    try {
-      if (email !== "" && password !== "") {
-        const response = await api.post("/login", {
-          email: email,
-          password: password,
-        });
-        setLoading(true);
-        setUser(response.data.id);
-        localStorage.setItem("user", JSON.stringify(response.data));
-
-        api.defaults.headers.common["Authorization"] = `Bearer ${user}`;
-
-        return response.status;
-      } else {
-        alert("Preencha todos os campos!");
-        return 401;
-      }
-    } catch (error: any) {
-      alert("Email ou senha inválidos");
-
-      return 401;
-    }
-  }*/
+  const [role, setRole] = useState<string | null>(null);
 
   function handleLogOut() {
     api.defaults.headers.common["Authorization"] = `Bearer ''}`;
@@ -46,15 +18,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const user = localStorage.getItem("user");
     console.log("User:", user);
+    const role = localStorage.getItem("role");
+    console.log("Role:", role);
 
-    if (user) {
+    if (user && role) {
       api.defaults.headers.common["Authorization"] = `Bearer${user}`;
       setUser(JSON.parse(user));
+      setRole(role);
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ handleLogOut, user, setUser }}>
+    <AuthContext.Provider
+      value={{ handleLogOut, user, setUser, role, setRole }}
+    >
       {children}
     </AuthContext.Provider>
   );
