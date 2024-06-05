@@ -18,7 +18,7 @@ function TabelaMunicipios() {
         <Stack spacing={3} margin="3% auto" marginLeft="20%">
             <Grid container spacing={3} alignItems="center">
                 <Grid item xs={6}>
-                <BasicSelect
+                    <BasicSelect
                         onChange={handlePesquisaByProjeto}
                         value={selectedProjeto}
                         handlePesquisaByProjeto={handlePesquisaByProjeto}
