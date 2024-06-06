@@ -11,6 +11,7 @@ export interface TotalPoligonosProps {
   naoAtribuido: string;
 }
 
+/*
 function formatNumber(value: string): string {
   const number = parseFloat(value);
   if (number >= 1000) {
@@ -19,10 +20,11 @@ function formatNumber(value: string): string {
     return number.toString();
   }
 }
+*/
 
 export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: TotalPoligonosProps) {
   const total = parseFloat(andamento) + parseFloat(concluidos) + parseFloat(naoAtribuido);
-  const formattedTotal = formatNumber(total.toString());
+  //const formattedTotal = formatNumber(total.toString());
 
   return (
     <Card sx={sx}>
@@ -33,7 +35,7 @@ export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: Tota
               <Typography color="text.secondary" variant="overline">
                 TOTAL DE POLIGONOS
               </Typography>
-              <Typography variant="h4">{formattedTotal}</Typography>
+              <Typography variant="h4">{total}</Typography>
             </Stack>
           </Stack>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
