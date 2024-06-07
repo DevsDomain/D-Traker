@@ -47,9 +47,9 @@ export default function GraficoPizza({andamento,concluidos,naoAtribuido}:Projeto
                         label={renderCustomLabel}
                         labelLine={false}
                     >
-                        <Cell fill="#77d65f" />
-                        <Cell fill="#328aad" />
-                        <Cell fill="#b44124" />
+                        <Cell fill="#1BF28E" />
+                        <Cell fill="#5854BF" />
+                        <Cell fill="#D941CF" />
                     </Pie>
                     <Tooltip />
                     <Legend />

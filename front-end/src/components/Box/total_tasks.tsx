@@ -16,11 +16,12 @@ export interface TotalTasksProps {
 function formatNumber(value: string): string {
   const number = parseFloat(value);
   if (number >= 1000) {
-    return (number / 1000).toFixed(1) + 'k';
+    return (number / 1000).toString();
   } else {
     return number.toString();
   }
 }
+
 
 export function TotalTasks({ value, naoAtribuido, sx }: TotalTasksProps): React.JSX.Element {
   const formattedValue = formatNumber(value);

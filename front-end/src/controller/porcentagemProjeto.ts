@@ -1,4 +1,6 @@
 import { api } from "../services/index"
+
+/*
 export const porcentagemProjeto = async (idProjeto: string) => {
     try {
         const response = await api.post("/municipioCompletamento", {
@@ -15,3 +17,4 @@ export const porcentagemProjeto = async (idProjeto: string) => {
     }
 
 }
+*/

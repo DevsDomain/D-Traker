@@ -9,6 +9,7 @@ import { PesquisaPapelProps } from '../../types/gestaoDeAcesso';
 interface BasicSelectProps extends PesquisaPapelProps {
     value: string; 
     onChange: (value: string) => void; 
+    sx?: any; //inserido para caixa de pesquisa em "Meus Projetos"
 }
 
 export default function BasicSelect({ handlePesquisaByProjeto, projeto, placeHolder, value, onChange }: BasicSelectProps) {
