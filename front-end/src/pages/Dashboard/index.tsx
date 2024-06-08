@@ -5,12 +5,13 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import GraficoBarras from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoStatusProjeto';
-import { TasksProgress } from '../../components/Box/tasks-progress';
+import { TasksProgress } from '../../components/Box/tasks_progress';
 import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
 import BasicSelect from '../../components/Select';
 import { DashboardProvider, useDashboard } from '../../contexts/dashboardContext';
 import { TotalTasks } from '../../components/Box/total_tasks';
 import { TotalPoligonos } from '../../components/Box/total_poligonos';
+import { AreaMapeada } from '../../components/Box/area_mapeada';
 
 
 const DashboardContent: React.FC = () => {
@@ -49,6 +50,10 @@ const DashboardContent: React.FC = () => {
 
                 <Grid item lg={2.3} sm={6} xs={12}>
                     <TasksProgress andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos} naoAtribuido={projetoStatus.naoAtribuido} />
+                </Grid>
+
+                <Grid item lg={2.3} sm={6} xs={12}>
+                    <AreaMapeada andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos} naoAtribuido={projetoStatus.naoAtribuido} />
                 </Grid>
 
             </Grid>

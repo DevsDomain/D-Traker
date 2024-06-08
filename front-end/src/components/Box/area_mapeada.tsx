@@ -1,26 +1,26 @@
+import * as React from 'react';
 import { Card, CardContent, Stack, Typography } from '@mui/material';
-import type { SxProps } from '@mui/material/styles'; // Importando o tipo SxProps
+import type { SxProps } from '@mui/material/styles';
+import { ProjetoStatus } from '../../types/projetos';
 
-export interface TotalPoligonosProps {
+export interface TasksProgressProps {
   sx?: SxProps;
-  andamento: string;
-  concluidos: string;
-  naoAtribuido: string;
+  value: any;
 }
 
-export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: TotalPoligonosProps) {
+export function AreaMapeada({ andamento, concluidos, naoAtribuido }: ProjetoStatus): React.JSX.Element {
   const total = parseFloat(andamento) + parseFloat(concluidos) + parseFloat(naoAtribuido);
 
   return (
-    <Card sx={sx}>
+    <Card >
       <CardContent>
         <Stack spacing={2}>
           <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
-            <Stack spacing={3}>
-              <Typography color="text.secondary" variant="overline">
-                TOTAL DE POLIGONOS
+            <Stack spacing={1}>
+              <Typography color="text.secondary" gutterBottom variant="overline">
+                Áreas Mapeadas
               </Typography>
-              <Typography variant="h4">{total}</Typography>
+              <Typography variant="h4">{total} Km</Typography>
             </Stack>
           </Stack>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
@@ -33,3 +33,5 @@ export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: Tota
     </Card>
   );
 }
+
+

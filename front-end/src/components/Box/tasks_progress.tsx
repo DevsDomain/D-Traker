@@ -1,11 +1,6 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import LinearProgress from '@mui/material/LinearProgress';
-import Stack from '@mui/material/Stack';
+import { Avatar, Card, CardContent, Stack, Typography } from '@mui/material';
 import type { SxProps } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { ListBullets as ListBulletsIcon } from '@phosphor-icons/react/dist/ssr/ListBullets';
 import { ProjetoStatus } from '../../types/projetos';
 
@@ -14,7 +9,7 @@ export interface TasksProgressProps {
   value: any;
 }
 
-export function TasksProgress({ andamento,concluidos,naoAtribuido }: ProjetoStatus): React.JSX.Element {
+export function TasksProgress({ andamento, concluidos, naoAtribuido }: ProjetoStatus): React.JSX.Element {
   const total = parseFloat(andamento) + parseFloat(concluidos) + parseFloat(naoAtribuido);
   const ResultPercent = parseFloat(((parseFloat(concluidos) / total) * 100).toFixed(2));
   return (
@@ -32,9 +27,9 @@ export function TasksProgress({ andamento,concluidos,naoAtribuido }: ProjetoStat
               <ListBulletsIcon fontSize="var(--icon-fontSize-lg)" />
             </Avatar>
           </Stack>
-          <div>
-            <LinearProgress value={ResultPercent} variant="determinate" />
-          </div>
+          <Typography color="text.secondary" variant="caption">
+            Em projetos listados.
+          </Typography>
         </Stack>
       </CardContent>
     </Card>
