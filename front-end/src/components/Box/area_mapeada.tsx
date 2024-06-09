@@ -8,11 +8,11 @@ export interface TasksProgressProps {
   value: any;
 }
 
-export function AreaMapeada({ andamento, concluidos, naoAtribuido }: ProjetoStatus): React.JSX.Element {
+export function AreaMapeada({ andamento, concluidos, naoAtribuido, area }: ProjetoStatus): React.JSX.Element {
   const total = parseFloat(andamento) + parseFloat(concluidos) + parseFloat(naoAtribuido);
 
   return (
-    <Card >
+    <Card>
       <CardContent>
         <Stack spacing={2}>
           <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
@@ -28,10 +28,9 @@ export function AreaMapeada({ andamento, concluidos, naoAtribuido }: ProjetoStat
               Em projetos listados.
             </Typography>
           </Stack>
+          
         </Stack>
       </CardContent>
     </Card>
   );
 }
-
-
