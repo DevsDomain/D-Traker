@@ -11,12 +11,6 @@ class ApontamentoAlteracao {
             return res.status(500).json({ err: error.message });
         }
     }
-
-
-
-
-
-
 }
 
 export default new ApontamentoAlteracao();

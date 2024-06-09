@@ -16,7 +16,6 @@ class MunicipioController {
         }
     }
 
-
     public async Admin(req: Request, res: Response): Promise<Response> {
         try {
             const projetos = await MunicipioModel.find({});
@@ -30,7 +29,8 @@ class MunicipioController {
                     "UF": projeto.sigla_uf,
                     "GestorNome": gestor?.name,
                     "GestorEmail": gestor?.email,
-                    "status": "andamento"
+                    "status": "andamento",
+                    "area_km2": projeto.area_km2,
 
                 };
             }))
@@ -101,8 +101,6 @@ class MunicipioController {
             return res.status(500).json({ err: error.message });
         }
     }
-    
-
 }
 
 export default new MunicipioController();
