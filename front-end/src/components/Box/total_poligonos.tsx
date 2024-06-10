@@ -1,5 +1,7 @@
 import { Card, CardContent, Stack, Typography } from '@mui/material';
 import type { SxProps } from '@mui/material/styles'; // Importando o tipo SxProps
+import { Avatar } from '@mui/material';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 export interface TotalPoligonosProps {
   sx?: SxProps;
@@ -15,10 +17,13 @@ export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: Tota
     <Card sx={sx}>
       <CardContent>
         <Stack spacing={2}>
-          <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
+          <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }} spacing={3}>
             <Stack spacing={3}>
               <Typography color="text.secondary" variant="overline">
                 TOTAL DE POLIGONOS
+                <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
+                  <LeaderboardIcon style={{ width: '100%', height: '100%' }} /> {/* Ícone de tarefas do Material-UI */}
+                </Avatar>
               </Typography>
               <Typography variant="h4">{total}</Typography>
             </Stack>
