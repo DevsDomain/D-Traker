@@ -18,5 +18,5 @@ export interface ProjetoStatus {
   andamento: string;
   concluidos: string;
   naoAtribuido: string;
-  area: string;
+  
 }

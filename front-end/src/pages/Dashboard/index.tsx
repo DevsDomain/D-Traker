@@ -1,6 +1,6 @@
 // Dashboard.tsx
 import React from 'react';
-import { Box, Grid, Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import GraficoBarras from '../../components/graficos/GraficoBarra';
@@ -57,7 +57,6 @@ const DashboardContent: React.FC = () => {
                 </Grid>
 
             </Grid>
-
 
             <Grid container spacing={0} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
                 <Grid item xs={3} sm={3}>

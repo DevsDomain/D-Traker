@@ -77,7 +77,7 @@ class MunicipioController {
         }
     }
 
-
+    
     public async municipioProjeto(req: Request, res: Response): Promise<Response> {
         try {
             const projetos = await MunicipioModel.find({});
