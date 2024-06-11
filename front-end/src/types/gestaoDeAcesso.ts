@@ -30,13 +30,16 @@ export interface AuthContextProps {
   user: UserProps;
   handleLogOut: () => void;
   setUser: (value: UserProps) => void;
-  role: string | null;
-  setRole: (value: string | null) => void;
+  role: string;
+  setRole: (value: string) => void;
+  token: string;
+  setToken: (value: string) => void;
 }
 
 export interface UserProps {
   id: string;
   name: string;
   email: string;
-  role: string | null;
+  role: string;
+  token: string;
 }

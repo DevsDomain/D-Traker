@@ -3,11 +3,7 @@ import { SignedRoutes } from "./signed.routes";
 import { UnsignedRoutes } from "./unsigned.routes";
 
 export function Rotas() {
-  const { user, role } = useAuth();
-
-  return user && user.id ? (
-    <SignedRoutes user={user} role={role} />
-  ) : (
-    <UnsignedRoutes />
-  );
+  const { user } = useAuth();
+  console.log("User oi", user);
+  return user && user.id ? <SignedRoutes /> : <UnsignedRoutes />;
 }

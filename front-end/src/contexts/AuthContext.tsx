@@ -7,7 +7,8 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({} as UserProps);
-  const [role, setRole] = useState<string | null>(null);
+  const [role, setRole] = useState({} as string);
+  const [token, setToken] = useState({} as string);
 
   function handleLogOut() {
     api.defaults.headers.common["Authorization"] = `Bearer ''}`;
@@ -17,20 +18,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log("User:", user);
-    const role = localStorage.getItem("role");
-    console.log("Role:", role);
-
-    if (user && role) {
-      api.defaults.headers.common["Authorization"] = `Bearer${user}`;
+    const token = localStorage.getItem("token");
+    if (user && role && token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setUser(JSON.parse(user));
-      setRole(role);
+      setRole(JSON.parse(user).role);
+      setToken(token);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ handleLogOut, user, setUser, role, setRole }}
+      value={{ handleLogOut, user, setUser, role, setRole, token, setToken }}
     >
       {children}
     </AuthContext.Provider>
