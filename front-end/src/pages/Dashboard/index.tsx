@@ -13,7 +13,6 @@ import { TotalTasks } from '../../components/Box/total_tasks';
 import { TotalPoligonos } from '../../components/Box/total_poligonos';
 import { AreaMapeada } from '../../components/Box/area_mapeada';
 
-
 const DashboardContent: React.FC = () => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
@@ -53,7 +52,7 @@ const DashboardContent: React.FC = () => {
                 </Grid>
 
                 <Grid item lg={2.3} sm={6} xs={12}>
-                    <AreaMapeada andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos} naoAtribuido={projetoStatus.naoAtribuido} />
+                    <AreaMapeada sx={{ height: '100%', width: '80%' }} />
                 </Grid>
 
             </Grid>

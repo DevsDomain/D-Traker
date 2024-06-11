@@ -77,7 +77,7 @@ class MunicipioController {
         }
     }
 
-    
+
     public async municipioProjeto(req: Request, res: Response): Promise<Response> {
         try {
             const projetos = await MunicipioModel.find({});
@@ -96,6 +96,22 @@ class MunicipioController {
             }))
 
             return res.status(201).json(adminData)
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
+
+    public async totalArea(req: Request, res: Response): Promise<Response> {
+        try {
+            const municipios = await MunicipioModel.find({});
+            let totalArea = 0;
+
+            municipios.forEach((municipio: Municipio) => {
+                totalArea += municipio.area_km2;
+            });
+
+            return res.status(201).json({ totalArea });
 
         } catch (error: any) {
             return res.status(500).json({ err: error.message });
