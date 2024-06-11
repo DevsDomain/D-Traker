@@ -1,12 +1,15 @@
 import React from "react";
 import { Rotas } from "./routes";
 import { AuthProvider } from "./contexts/AuthContext";
+import { BrowserRouter } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <Rotas />
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Rotas />
+      </AuthProvider>
+    </BrowserRouter>
   );
 };
 
