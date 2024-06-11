@@ -22,6 +22,7 @@ function Login() {
   const [error, setError] = useState("");
   const { setUser } = useAuth();
   const { setRole } = useAuth();
+  const { setToken } = useAuth();
 
   const handleLogin = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -31,11 +32,13 @@ function Login() {
 
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("token", response.data.token);
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${response.data.token}`;
         setUser(response.data);
         setRole(response.data.role);
+        setToken(response.data.token);
       }
     } catch (error) {
       setError("Credenciais inválidas. Por favor, tente novamente.");

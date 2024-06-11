@@ -1,19 +1,15 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import GestaoDeAcesso from "../pages/gestaoDeAcesso";
 import MeusProjetos from "../pages/meusProjetos/MeusProjetos";
 import Dashboard from "../pages/Dashboard/index";
 import MenuLateral from "../components/menu-lateral/MenuLateral";
-import { UserProps } from "../types/gestaoDeAcesso";
 import AcessoNegado from "../pages/acessoNegado/acessoNegado";
+import useAuth from "../hooks/auth";
 
-interface SignedRoutesProps {
-  user: UserProps;
-  role: string | null;
-}
-
-export function SignedRoutes({ user, role }: SignedRoutesProps) {
+export function SignedRoutes() {
+  const { role } = useAuth();
   return (
-    <BrowserRouter>
+    <>
       <MenuLateral />
       <Routes>
         <Route path="/" element={<Dashboard />} />
@@ -25,6 +21,6 @@ export function SignedRoutes({ user, role }: SignedRoutesProps) {
 
         <Route path="/meusProjetos" element={<MeusProjetos />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
