@@ -26,7 +26,7 @@ const DashboardContent: React.FC = () => {
         setFiltroMembros(value);
     };
     return (
-        <>
+        <Box overflow="hidden">
             <Stack width={'50vw'} direction={"row"} marginLeft={60}>
                 <BasicSelect projeto={state.projetos} handlePesquisaByProjeto={setFiltroProjetos} onChange={handleProjetoChange} placeHolder='Projetos' value={state.selectedProject || ""} />
 
@@ -72,7 +72,7 @@ const DashboardContent: React.FC = () => {
                     <GraficoDeApontamentos alteracoes={state.filteredAlteracoes.length === 0 ? state.alteracoes : state.filteredAlteracoes} />
                 </Grid>
             </Grid>
-        </>
+            </Box>
     );
 };
 
