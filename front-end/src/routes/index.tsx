@@ -4,5 +4,6 @@ import { UnsignedRoutes } from "./unsigned.routes";
 
 export function Rotas() {
   const { user } = useAuth();
+  console.log("User oi", user);
   return user && user.id ? <SignedRoutes /> : <UnsignedRoutes />;
 }

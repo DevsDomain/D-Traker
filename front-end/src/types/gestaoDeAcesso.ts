@@ -11,6 +11,7 @@ export interface PesquisaPapelProps {
 }
 
 export interface ResponseAdminApi {
+  idGestor:string;
   idProjeto: string;
   NomeProjeto: string;
   "Código Municipio": string;
@@ -30,10 +31,17 @@ export interface AuthContextProps {
   user: UserProps;
   handleLogOut: () => void;
   setUser: (value: UserProps) => void;
+  role: string;
+  setRole: (value: string) => void;
+  token: string;
+  setToken: (value: string) => void;
 }
 
 export interface UserProps {
   id: string;
   name: string;
   email: string;
+  role: string;
+  token: string;
+  idProjeto:string;
 }

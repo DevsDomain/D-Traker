@@ -2,6 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Typography } from '@mui/material';
+import { ProjetoStatus } from '../../types/projetos';
 
 interface CustomLabelProps {
     cx: number;
@@ -12,12 +13,7 @@ interface CustomLabelProps {
     percent: number;
 }
 
-export default function GraficoPizza() {
-    const [selectedGroup, setSelectedGroup] = React.useState('Group A');
-
-    const handleGroupChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedGroup(event.target.value);
-    };
+export default function GraficoPizza({andamento,concluidos,naoAtribuido}:ProjetoStatus) {
 
     const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: CustomLabelProps) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -38,10 +34,10 @@ export default function GraficoPizza() {
                 <PieChart width={300} height={300}>
                     <Pie
                         data={[
-                            { name: 'Projeto Atibaia', value: 400 },
-                            { name: 'Projeto Taubaté', value: 300 },
-                            { name: 'Projeto Cruzeiro', value: 300 },
-                            { name: 'Projeto D', value: 200 },
+                            { name: 'Finalizado', value: parseInt(concluidos) },
+                            { name: 'Em andamentos', value: parseInt(andamento) },
+                            { name: 'Não atribuido', value: parseInt(naoAtribuido) },
+ 
                         ]}
                         cx="50%"
                         cy="50%"
@@ -51,23 +47,14 @@ export default function GraficoPizza() {
                         label={renderCustomLabel}
                         labelLine={false}
                     >
-                        <Cell fill="#b34dc0" />
-                        <Cell fill="#281497" />
-                        <Cell fill="#18bcc2" />
-                        <Cell fill="#431e58" />
+                        <Cell fill="#1BF28E" />
+                        <Cell fill="#5854BF" />
+                        <Cell fill="#D941CF" />
                     </Pie>
                     <Tooltip />
                     <Legend />
                 </PieChart>
-                <div>
-                    <label htmlFor="group-select">Selecione um projeto:</label>
-                    <select id="group-select" value={selectedGroup} onChange={handleGroupChange}>
-                        <option value="Projeto A">Atibaia</option>
-                        <option value="Projeto B">Taubaté</option>
-                        <option value="Projeto C">Cruzeiro</option>
-                        <option value="Projeto D">D</option>
-                    </select>
-                </div>
+        
             </Box>
         </Box>
     );

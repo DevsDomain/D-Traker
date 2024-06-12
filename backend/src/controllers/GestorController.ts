@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import gestorModel, { Gestor } from "../models/gestoresModel";
 import jwt from "jsonwebtoken";
 import { tokenizer } from "../middlewares";
+import MunicipioModel from "../models/municipiosModel";
 
 class GestorController {
   async getAll(req: Request, res: Response): Promise<Response> {
@@ -34,9 +35,9 @@ class GestorController {
 
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password, role } = req.body;
 
-      // VERIFICA SE O EMAIL JÁ ESTA CADASTRADO
+      // Verifica se o e-mail já está cadastrado
       const userExists = await gestorModel.findOne({ email });
       if (userExists) {
         return res.status(400).json("Usuário já cadastrado!");
@@ -53,8 +54,7 @@ class GestorController {
         idGestor = ultimoID.idGestor + 1;
       }
 
-      console.log("ULTIMO ID", ultimoID, "ID", idGestor);
-      const gestor = new gestorModel({ idGestor, name, email, password });
+      const gestor = new gestorModel({ idGestor, name, email, password, role });
       const response = await gestor.save();
 
       return res.status(201).json(response);
@@ -78,14 +78,24 @@ class GestorController {
         return res.status(401).json({ message: "Credenciais inválidas!" });
       }
       // Se o gestor existe e a senha está correta, gera o token JWT
-      const token = tokenizer({ id: gestor._id, email: gestor.email });
+      const token = tokenizer({
+        id: gestor._id,
+        email: gestor.email,
+        role: gestor.role,
+        
+    
+      });
 
+     const projeto = await MunicipioModel.findOne({idgestor:gestor.idGestor})
       // Retorna os dados do gestor e o token JWT
       return res.status(200).json({
         id: gestor._id,
         name: gestor.name,
         email: gestor.email,
         token: token,
+        role: gestor.role,
+       idProjeto: projeto?.id
+
       });
     } catch (error: any) {
       return res.status(500).json({ error: error.message });

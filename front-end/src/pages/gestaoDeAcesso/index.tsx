@@ -112,10 +112,9 @@ export default function GestaoDeAcesso() {
 
         <Stack spacing={3} margin="2% auto" marginLeft="25%">
 
-
             <Stack spacing={3}>
                 <Typography variant="h4">Gestores e projetos</Typography>
-                <BasicSelect handlePesquisaByProjeto={handlePesquisaByProjeto} projeto={projeto} placeHolder='Projeto' />
+                <BasicSelect onChange={handlePesquisaByProjeto} value={selectedProjeto} handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
                 <TabelaGestores gestores={selectedProjeto === '' ? gestoresList : filteredGestoresList} />
             </Stack>
 
@@ -132,8 +131,8 @@ export default function GestaoDeAcesso() {
 
                 <Stack spacing={3}>
                     <Typography variant="h5">Vincular gestor a um projeto</Typography>
-                    <BasicSelect handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
-                    <BasicSelect handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
+                    <BasicSelect onChange={handlePesquisaByProjeto} value={selectedProjeto} handlePesquisaByProjeto={selectedProjetoGestor} projeto={projeto} placeHolder='Selecione o Projeto' />
+                    <BasicSelect onChange={handleGestorNome} value={idGestor || ""} handlePesquisaByProjeto={selectedGestor} projeto={gestores} placeHolder='Selecione o Gestor' />
                     <Button variant="outlined" style={{ width: 300 }} onClick={() => AtribuirGestorProjeto()}>Atribuir</Button>
                 </Stack>
 

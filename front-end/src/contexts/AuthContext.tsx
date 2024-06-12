@@ -7,35 +7,8 @@ export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState({} as UserProps);
-  /*
-  async function Logar(
-    email: string,
-    password: string,
-    setLoading: Function
-  ): Promise<Response | number> {
-    try {
-      if (email !== "" && password !== "") {
-        const response = await api.post("/login", {
-          email: email,
-          password: password,
-        });
-        setLoading(true);
-        setUser(response.data.id);
-        localStorage.setItem("user", JSON.stringify(response.data));
-
-        api.defaults.headers.common["Authorization"] = `Bearer ${user}`;
-
-        return response.status;
-      } else {
-        alert("Preencha todos os campos!");
-        return 401;
-      }
-    } catch (error: any) {
-      alert("Email ou senha inválidos");
-
-      return 401;
-    }
-  }*/
+  const [role, setRole] = useState({} as string);
+  const [token, setToken] = useState({} as string);
 
   function handleLogOut() {
     api.defaults.headers.common["Authorization"] = `Bearer ''}`;
@@ -45,16 +18,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log("User:", user);
-
-    if (user) {
-      api.defaults.headers.common["Authorization"] = `Bearer${user}`;
+    const token = localStorage.getItem("token");
+    if (user && role && token) {
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setUser(JSON.parse(user));
+      setRole(JSON.parse(user).role);
+      setToken(token);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <AuthContext.Provider value={{ handleLogOut, user, setUser }}>
+    <AuthContext.Provider
+      value={{ handleLogOut, user, setUser, role, setRole, token, setToken }}
+    >
       {children}
     </AuthContext.Provider>
   );
