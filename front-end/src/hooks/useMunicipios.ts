@@ -3,8 +3,11 @@ import { fetchMunicipios } from "../services/projetos";
 import { MunicipioProps } from "../types/meusProjetos";
 import { fetchAdmin } from "../services/admin";
 import { ResponseAdminApi } from "../types/gestaoDeAcesso";
+import useAuth from "./auth";
 
 export const useMunicipios = () => {
+  const { user } = useAuth()
+
   const [municipios, setMunicipios] = useState<MunicipioProps[]>([]);
   const [projeto, setProjeto] = useState<{ key: string; value: string }[]>([]);
   const [selectedProjeto, setSelectedProjeto] = useState<string>("");
@@ -31,12 +34,16 @@ export const useMunicipios = () => {
     const fetchData = async () => {
       try {
         const projetos = await fetchAdmin();
-        const projetosUnicos: { key: string; value: string }[] = projetos.map(
+        let projetosUnicos: { key: string; value: string }[] = projetos.map(
           (projeto: ResponseAdminApi) => ({
             key: projeto.idProjeto,
             value: projeto.NomeProjeto,
           })
         );
+        if (user.role !== 'adm') {
+          projetosUnicos = projetosUnicos.filter((projeto) => projeto.key === user.idProjeto);
+        }
+
         setProjeto(projetosUnicos);
       } catch (error) {
         console.error(error);
@@ -59,11 +66,17 @@ export const useMunicipios = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = municipios.filter(
+    let filtered = municipios.filter(
       (municipio) =>
         municipio.nm_mun.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedProjeto === "" || municipio.id === selectedProjeto)
+
     );
+    if (user.role !== 'adm') {
+      filtered = filtered.filter((municipio) => municipio.idGestor === user.id);
+    }
+
+
     setFilteredMunicipios(filtered);
   }, [searchTerm, selectedProjeto, municipios]);
 
