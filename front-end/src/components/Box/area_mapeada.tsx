@@ -5,9 +5,13 @@ import axios from 'axios';
 import type { SxProps } from '@mui/material/styles';
 import { Avatar } from '@mui/material';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import { fetchTotalkm } from '../../services/totalArea';
 
 export interface AreaMapeadaProps {
   sx?: SxProps;
+}
+export interface AreaMapeadaResponse {
+  totalArea: number;
 }
 
 export function AreaMapeada({ sx }: AreaMapeadaProps): React.JSX.Element {
@@ -16,8 +20,8 @@ export function AreaMapeada({ sx }: AreaMapeadaProps): React.JSX.Element {
   useEffect(() => {
     async function fetchTotalArea() {
       try {
-        const response = await axios.get('/api/municipio/totalArea'); // Ajuste a URL conforme necessário
-        const totalArea = response.data.totalArea;
+        const response : AreaMapeadaResponse = await fetchTotalkm(); // Ajuste a URL conforme necessário
+        const totalArea = response.totalArea;
 
         setTotalArea(totalArea);
       } catch (error) {

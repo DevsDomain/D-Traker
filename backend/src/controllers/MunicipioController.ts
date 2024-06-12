@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import MunicipioModel, { Municipio } from '../models/municipiosModel';
 import gestorModel, { Gestor } from '../models/gestoresModel';
-import GradeAtuacaoModel from '../models/gradeAtuacao';
+import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
 
 class MunicipioController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -104,11 +104,12 @@ class MunicipioController {
 
     public async totalArea(req: Request, res: Response): Promise<Response> {
         try {
-            const municipios = await MunicipioModel.find({});
+            const municipios = await GradeAtuacaoModel.find({});
             let totalArea = 0;
 
-            municipios.forEach((municipio: Municipio) => {
-                totalArea += municipio.area_km2;
+            municipios.forEach((gradeAtuacao: GradeAtuacao) => {
+                totalArea += Number(gradeAtuacao.area_km2);
+                console.log("totalArea",gradeAtuacao.area_km2)
             });
 
             return res.status(201).json({ totalArea });

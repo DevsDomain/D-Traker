@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Typography from '@mui/material/Typography';
 import { ProjetoStatus } from '../../types/projetos';
+import { fetchPoligonos } from '../../services/poligonos';
+import { api } from '../../services';
 
 // Defina o tipo GetSeriesParams
 type GetSeriesParams = {
@@ -16,36 +18,38 @@ type StackOffset = typeof availableStackOffset[number];
 
 // Defina o tipo Projeto
 type Projeto = {
-    idProjeto: string;
+    Projeto: string;
     NomeProjeto: string;
-    "Não Atribuido": number;
-    "Em andamento": number;
-    "Concluido": number;
+    "Não Atribuido": string;
+    "Em andamento": string;
+    "Concluido": string;
 };
 
-const fetchProjectsData = async (): Promise<Projeto[]> => {
-    // Simulando uma chamada de API
+const fetchProjectsData = async ({ andamento, concluidos, naoAtribuido } : ProjetoStatus): Promise<Projeto[]> => {
+    const apiResponse = await fetchPoligonos();
+    console.log(apiResponse);
+
     return [
         {
-            idProjeto: '1',
-            NomeProjeto: 'Atibaia',
-            "Não Atribuido": 125,
-            "Em andamento": 450,
-            "Concluido": 492,
+            Projeto: apiResponse[0].projeto,
+            NomeProjeto: apiResponse[0].nomeProjeto,
+            "Não Atribuido": apiResponse[0].naoAtribuido,
+            "Em andamento": apiResponse[0].andamento,
+            "Concluido": apiResponse[0].concluidos,
         },
         {
-            idProjeto: '2',
-            NomeProjeto: 'Cruzeiro',
-            "Não Atribuido": 125,
-            "Em andamento": 145,
-            "Concluido": 203,
+            Projeto: apiResponse[1].projeto,
+            NomeProjeto: apiResponse[1].nomeProjeto,
+            "Não Atribuido": apiResponse[1].naoAtribuido,
+            "Em andamento": apiResponse[1].andamento,
+            "Concluido": apiResponse[1].concluidos,
         },
         {
-            idProjeto: '3',
-            NomeProjeto: 'Taubaté',
-            "Não Atribuido": 134,
-            "Em andamento": 215,
-            "Concluido": 342,
+            Projeto: apiResponse[2].projeto,
+            NomeProjeto: apiResponse[2].nomeProjeto,
+            "Não Atribuido": apiResponse[2].naoAtribuido,
+            "Em andamento": apiResponse[2].andamento,
+            "Concluido": apiResponse[2].concluidos,
         },
     ];
 };
@@ -59,16 +63,22 @@ const getSeries = (projetos: Projeto[], { hasNegativeValue, stackOffset }: GetSe
     }));
 };
 
-export default function GraficoBarras({andamento,concluidos,naoAtribuido}:ProjetoStatus){
-    console.log(andamento,concluidos,naoAtribuido);
+interface GraficoBarrasProps {
+    andamento: string;
+    concluidos: string;
+    naoAtribuido: string;
+}
+
+const GraficoBarras: React.FC<GraficoBarrasProps> = ({ andamento, concluidos, naoAtribuido }) => {
+    console.log(andamento, concluidos, naoAtribuido);
     const [stackOffset, setStackOffset] = useState<string>('Gráfico');
-    const [hasNegativeValue, setHasNegativeValue] = useState<boolean>(true);
+    const [hasNegativeValue, setHasNegativeValue] = useState<boolean>(false); // Assume that there are no negative values initially
     const [projetos, setProjetos] = useState<Projeto[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchProjectsData();
+                const data = await fetchProjectsData({ andamento, concluidos, naoAtribuido });
                 setProjetos(data);
             } catch (error) {
                 console.error("Erro ao buscar os projetos:", error);
@@ -85,7 +95,7 @@ export default function GraficoBarras({andamento,concluidos,naoAtribuido}:Projet
     return (
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h5">Poligonos</Typography>
+                <Typography variant="h5">Polígonos</Typography>
                 <BarChart
                     width={chartWidth}
                     height={chartHeight}
@@ -110,3 +120,5 @@ export default function GraficoBarras({andamento,concluidos,naoAtribuido}:Projet
         </Box>
     );
 };
+
+export default GraficoBarras;
