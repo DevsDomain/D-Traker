@@ -24,6 +24,7 @@ class MunicipioController {
                 const gestor = await gestorModel.findOne({ idGestor: projeto.idgestor });
 
                 return {
+                    "idGestor":gestor?.idGestor,
                     "idProjeto": projeto.id,
                     "NomeProjeto": projeto.nm_mun,
                     "Código Municipio": projeto.cd_mun,
@@ -84,9 +85,11 @@ class MunicipioController {
             const adminData = await Promise.all(projetos.map(async (projeto: Municipio) => {
             const total = await GradeAtuacaoModel.countDocuments({idprojeto:projeto.id});
             const concluidos = await GradeAtuacaoModel.countDocuments({idprojeto:projeto.id, status:'finalizado'});
+            const gestor = await gestorModel.findOne({idGestor:projeto.idgestor})
             let resultado = (concluidos / total) * 100; 
 
                 return {
+                    "idGestor":gestor?.id,
                     "id": projeto.id,
                     "nm_mun": projeto.nm_mun,
                     "cd_mun": projeto.cd_mun,

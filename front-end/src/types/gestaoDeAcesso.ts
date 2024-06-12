@@ -11,6 +11,7 @@ export interface PesquisaPapelProps {
 }
 
 export interface ResponseAdminApi {
+  idGestor:string;
   idProjeto: string;
   NomeProjeto: string;
   "Código Municipio": string;
@@ -42,4 +43,5 @@ export interface UserProps {
   email: string;
   role: string;
   token: string;
+  idProjeto:string;
 }

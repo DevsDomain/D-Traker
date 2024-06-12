@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import gestorModel, { Gestor } from "../models/gestoresModel";
 import jwt from "jsonwebtoken";
 import { tokenizer } from "../middlewares";
+import MunicipioModel from "../models/municipiosModel";
 
 class GestorController {
   async getAll(req: Request, res: Response): Promise<Response> {
@@ -81,8 +82,11 @@ class GestorController {
         id: gestor._id,
         email: gestor.email,
         role: gestor.role,
+        
+    
       });
 
+     const projeto = await MunicipioModel.findOne({idgestor:gestor.idGestor})
       // Retorna os dados do gestor e o token JWT
       return res.status(200).json({
         id: gestor._id,
@@ -90,6 +94,8 @@ class GestorController {
         email: gestor.email,
         token: token,
         role: gestor.role,
+       idProjeto: projeto?.id
+
       });
     } catch (error: any) {
       return res.status(500).json({ error: error.message });

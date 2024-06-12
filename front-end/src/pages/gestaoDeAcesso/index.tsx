@@ -10,6 +10,7 @@ import Input from '../../components/Input';
 import { fetchGestores } from '../../services/gestores';
 import { cadastrarGestor } from '../../controller/cadastrarGestor';
 import { atribuirGestorProjeto } from '../../controller/linkGestorProjeto';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 export default function GestaoDeAcesso() {
     const [gestoresList, setGestoresList] = useState<ResponseAdminApi[]>([]);
@@ -26,6 +27,7 @@ export default function GestaoDeAcesso() {
     // VINCULAR GESTOR A PROJETO
     const [idGestor, setIdGestor] = useState<string>('');
     const [idProjeto, setIdProjeto] = useState<string>('');
+    const [role, setRole] = useState("user")
 
     function handlePesquisaByProjeto(value: string) {
         setSelectedProjeto(value);
@@ -54,9 +56,13 @@ export default function GestaoDeAcesso() {
         setGestorPassword(value);
     }
 
+    const handleChange = (event: SelectChangeEvent) => {
+        setRole(event.target.value)
+    }
+
     async function CadastarGestor() {
         try {
-            const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword);
+            const response = await cadastrarGestor(gestorNome, gestorMail, gestorPassword,role);
             if (response.status === 201) {
                 setGestores(prevGestores => [...prevGestores, { key: response.data.idGestor, value: gestorNome }])
                 alert("Gestor Cadastrado com sucesso!")
@@ -125,7 +131,19 @@ export default function GestaoDeAcesso() {
                     <Input placeholder='Nome do gestor(a)' handleInput={handleGestorNome} type='text' />
                     <Input placeholder='email' handleInput={handleGestorMail} type='email' />
                     <Input placeholder='senha' handleInput={handleGestorPassword} type='password' />
-
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Atribuição</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={role}
+                            label="Age"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={"adm"}>Administrador</MenuItem>
+                            <MenuItem value={"user"}>Usuário</MenuItem>
+                        </Select>
+                    </FormControl>
                     <Button variant="outlined" onClick={() => CadastarGestor()} >Cadastrar</Button>
                 </Stack>
 
