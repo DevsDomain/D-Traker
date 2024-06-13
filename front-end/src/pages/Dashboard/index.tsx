@@ -29,6 +29,7 @@ const DashboardContent: React.FC = () => {
   const handleMembroChange = (value: string) => {
     setFiltroMembros(value);
   };
+
   return (
     <Box overflow="hidden">
       <Stack width={"50vw"} direction={"row"} marginLeft={60}>
@@ -43,11 +44,12 @@ const DashboardContent: React.FC = () => {
 
       <Grid
         container
-        spacing={2}
+        spacing={3}
+        justifyContent="left"
         marginLeft={smDown ? 0 : theme.spacing(35)}
-        marginTop={smDown ? 0 : theme.spacing(3)}
+        marginTop={smDown ? 0 : theme.spacing(0)}
       >
-        <Grid item lg={2.3} sm={6} xs={12}>
+        <Grid item lg={2.3} sm={3} xs={12}>
           <TotalTasks
             value="Total"
             naoAtribuido={projetoStatus.naoAtribuido}
@@ -55,7 +57,7 @@ const DashboardContent: React.FC = () => {
           />
         </Grid>
 
-        <Grid item lg={2.3} sm={6} xs={12}>
+        <Grid item lg={2.3} sm={3} xs={12}>
           <TotalPoligonos
             andamento={projetoStatus.andamento}
             concluidos={projetoStatus.concluidos}
@@ -64,7 +66,7 @@ const DashboardContent: React.FC = () => {
           />
         </Grid>
 
-        <Grid item lg={2.3} sm={6} xs={12}>
+        <Grid item lg={2.3} sm={3} xs={12}>
           <TasksProgress
             andamento={projetoStatus.andamento}
             concluidos={projetoStatus.concluidos}
@@ -72,7 +74,7 @@ const DashboardContent: React.FC = () => {
           />
         </Grid>
 
-        <Grid item lg={2.3} sm={6} xs={12}>
+        <Grid item lg={2.3} sm={3} xs={12}>
           <AreaMapeada sx={{ height: "100%", width: "80%" }} />
         </Grid>
       </Grid>
