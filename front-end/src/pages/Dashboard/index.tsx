@@ -29,8 +29,6 @@ const DashboardContent: React.FC = () => {
         <Box overflow="hidden">
             <Stack width={'50vw'} direction={"row"} marginLeft={60}>
                 <BasicSelect projeto={state.projetos} handlePesquisaByProjeto={setFiltroProjetos} onChange={handleProjetoChange} placeHolder='Projetos' value={state.selectedProject || ""} />
-
-                <BasicSelect projeto={state.membros} handlePesquisaByProjeto={setFiltroMembros} onChange={handleMembroChange} placeHolder='Membros' value={state.selectedMember || ""} />
             </Stack>
 
             <Grid container spacing={2} marginLeft={smDown ? 0 : theme.spacing(35)} marginTop={smDown ? 0 : theme.spacing(3)}>
@@ -69,10 +67,13 @@ const DashboardContent: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={20} sm={3} marginLeft={smDown ? 0 : theme.spacing(5)} marginTop={smDown ? 0 : theme.spacing(15)}>
+                    <BasicSelect projeto={state.projetos} handlePesquisaByProjeto={setFiltroProjetos} onChange={handleProjetoChange} placeHolder='Projetos' value={state.selectedProject || ""} />
+
+                    <BasicSelect projeto={state.membros} handlePesquisaByProjeto={setFiltroMembros} onChange={handleMembroChange} placeHolder='Membros' value={state.selectedMember || ""} />
                     <GraficoDeApontamentos alteracoes={state.filteredAlteracoes.length === 0 ? state.alteracoes : state.filteredAlteracoes} />
                 </Grid>
             </Grid>
-            </Box>
+        </Box>
     );
 };
 
