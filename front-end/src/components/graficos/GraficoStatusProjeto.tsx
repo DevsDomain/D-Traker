@@ -28,8 +28,8 @@ export default function GraficoPizza({andamento,concluidos,naoAtribuido}:Projeto
     };
 
     return (
-        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ width: '120%', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography variant="h5">Projetos</Typography>
                 <PieChart width={300} height={300}>
                     <Pie
@@ -47,7 +47,7 @@ export default function GraficoPizza({andamento,concluidos,naoAtribuido}:Projeto
                         label={renderCustomLabel}
                         labelLine={false}
                     >
-                        <Cell fill="#1BF28E" />
+                        <Cell fill="#1c9942" />
                         <Cell fill="#5854BF" />
                         <Cell fill="#D941CF" />
                     </Pie>
@@ -55,7 +55,7 @@ export default function GraficoPizza({andamento,concluidos,naoAtribuido}:Projeto
                     <Legend />
                 </PieChart>
         
-            </Box>
-        </Box>
+            </div>
+        </div>
     );
 }

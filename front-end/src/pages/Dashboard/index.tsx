@@ -32,7 +32,7 @@ const DashboardContent: React.FC = () => {
 
   return (
     <Box overflow="hidden">
-      <Stack width={"50vw"} direction={"row"} marginLeft={60}>
+      <Stack width={"50vw"} direction={"row"} marginLeft={42} marginTop={2}>
         <BasicSelect
           projeto={state.projetos}
           handlePesquisaByProjeto={setFiltroProjetos}
@@ -85,21 +85,14 @@ const DashboardContent: React.FC = () => {
         marginLeft={smDown ? 0 : theme.spacing(30)}
         marginTop={smDown ? 0 : theme.spacing(5)}
       >
-        <Grid item xs={3} sm={3}>
+        <Grid item xs={5} sm={4}>
           <GraficoPizza
             andamento={projetoStatus.andamento}
             concluidos={projetoStatus.concluidos}
             naoAtribuido={projetoStatus.naoAtribuido}
           />
         </Grid>
-        <Grid item xs={3} sm={3}>
-          <GraficoPizza
-            andamento={projetoStatus.andamento}
-            concluidos={projetoStatus.concluidos}
-            naoAtribuido={projetoStatus.naoAtribuido}
-          />
-        </Grid>
-        <Grid item xs={3} sm={3}>
+        <Grid item xs={4} sm={5}>
           <GraficoBarras
             andamento={projetoStatus.andamento}
             naoAtribuido={projetoStatus.naoAtribuido}
