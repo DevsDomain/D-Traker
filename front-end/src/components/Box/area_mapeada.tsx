@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Card, CardContent, Stack, Typography } from '@mui/material';
-import axios from 'axios';
+import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import type { SxProps } from '@mui/material/styles';
 import { Avatar } from '@mui/material';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
@@ -41,16 +41,13 @@ export function AreaMapeada({ sx }: AreaMapeadaProps): React.JSX.Element {
               <Typography color="text.secondary" variant="overline">
                 TOTAL DE ÁREAS
                 <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
-                  <LeaderboardIcon style={{ width: '100%', height: '100%' }} /> {/* Ícone de tarefas do Material-UI */}
+                  <LayersRoundedIcon style={{ width: '100%', height: '100%' }} />
                 </Avatar>
               </Typography>
               <Typography variant="h4">{totalArea.toFixed(2)} Km²</Typography>
             </Stack>
           </Stack>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
-            <Typography color="text.secondary" variant="caption">
-              Em projetos listados.
-            </Typography>
           </Stack>
         </Stack>
       </CardContent>
