@@ -18,7 +18,7 @@ export function TasksProgress({ andamento, concluidos, naoAtribuido }: ProjetoSt
       <CardContent>
         <Stack spacing={9}>
           <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }} spacing={7}>
-            <Stack spacing={2}>
+            <Stack spacing={3}>
             <Typography color="text.secondary" variant="overline" style={{ marginRight: '8px', whiteSpace: 'nowrap' }}>
                 Projetos concluídos
               </Typography>

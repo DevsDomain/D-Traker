@@ -155,7 +155,7 @@ const GraficoBarras: React.FC<GraficoBarrasProps> = ({
           <Legend />
           <Bar dataKey="Não Atribuido" stackId="a" fill="#D941CF" />
           <Bar dataKey="Em andamento" stackId="a" fill="#5854BF" />
-          <Bar dataKey="Concluido" stackId="a" fill="#1BF28E" />
+          <Bar dataKey="Concluido" stackId="a" fill="#1C9942" />
         </BarChart>
       </Box>
     </Box>
