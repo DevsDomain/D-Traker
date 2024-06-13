@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { ProjetoStatus } from "../../types/projetos";
 import { fetchPoligonos } from "../../services/poligonos";
 import useAuth from "../../hooks/auth";
+import { useDashboard } from "../../contexts/dashboardContext";
 
 // Defina o tipo GetSeriesParams
 type GetSeriesParams = {
@@ -114,6 +115,8 @@ const GraficoBarras: React.FC<GraficoBarrasProps> = ({
   const [hasNegativeValue, setHasNegativeValue] = useState<boolean>(false); // Assume that there are no negative values initially
   const [projetos, setProjetos] = useState<Projeto[]>([]);
 
+  const {state} = useDashboard()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -136,7 +139,8 @@ const GraficoBarras: React.FC<GraficoBarrasProps> = ({
       <Box
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Typography variant="h5">Polígonos</Typography>
+        <Typography variant="h5">Quantidade de Polígonos Mapeados</Typography>
+
         <BarChart
           width={chartWidth}
           height={chartHeight}
