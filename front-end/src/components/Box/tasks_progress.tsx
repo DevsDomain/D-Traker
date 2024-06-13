@@ -14,17 +14,17 @@ export function TasksProgress({ andamento, concluidos, naoAtribuido }: ProjetoSt
   const total = parseFloat(andamento) + parseFloat(concluidos) + parseFloat(naoAtribuido);
   const ResultPercent = parseFloat(((parseFloat(concluidos) / total) * 100).toFixed(2));
   return (
-    <Card>
+    <Card sx={{ width: 200, height: 278  }}> 
       <CardContent>
-        <Stack spacing={5}>
-          <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
-            <Stack spacing={1}>
+        <Stack spacing={9}>
+          <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }} spacing={7}>
+            <Stack spacing={2}>
             <Typography color="text.secondary" variant="overline" style={{ marginRight: '8px', whiteSpace: 'nowrap' }}>
                 Projetos concluídos
               </Typography>
               <div>
-                <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px' }}>
-                  <DoneOutline style={{ width: '100%', height: '100%' }} /> {/* Ícone de tarefas do Material-UI */}
+                <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', marginTop: '-15px' }}>
+                  <DoneOutline style={{ width: '100%', height: '80%' }} /> {/* Ícone de tarefas do Material-UI */}
                 </Avatar>
               </div>
               <Typography variant="h4">{ResultPercent}%</Typography>
