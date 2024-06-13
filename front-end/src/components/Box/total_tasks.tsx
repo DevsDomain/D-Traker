@@ -24,17 +24,20 @@ export function TotalTasks({ value, naoAtribuido, sx }: TotalTasksProps): React.
   const formattedValue = formatNumber(value);
   const formattedNaoAtribuido = formatNumber(naoAtribuido);
   return (
-    <Card sx={sx}>
+    <Card sx={{ width: 200, height: 278 }}>
       <CardContent>
-        <Stack direction="row" sx={{ alignItems: 'flex-start', justifyContent: 'space-between' }} spacing={3}>
-          <Stack spacing={1}>
-          <Typography color="text.secondary" variant="overline">
-              New Tasks
-            <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
-              <TaskAltIcon style={{ width: '100%', height: '100%' }} /> {/* Ícone de tarefas do Material-UI */}
-            </Avatar>
-            <Typography color="text.primary" variant="h4">{formattedNaoAtribuido}</Typography> {/* Exibe apenas o número de tarefas não atribuídas */}
-            </Typography>
+        <Stack spacing={4}>
+          <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }} spacing={3}>
+            <Stack spacing={3} alignItems="center">
+              <Typography color="text.secondary" variant="overline">
+                New Tasks
+                <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
+                  <TaskAltIcon style={{ width: '100%', height: '80%' }} /> {/* Ícone de tarefas do Material-UI */}
+                </Avatar>
+              </Typography>
+              <Typography color="text.primary" variant="h4">{formattedNaoAtribuido}</Typography> {/* Exibe apenas o número de tarefas não atribuídas */}
+
+            </Stack>
           </Stack>
         </Stack>
       </CardContent>

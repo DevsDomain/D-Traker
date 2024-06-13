@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, Stack, Typography, Avatar } from '@mui/material';
 import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import type { SxProps } from '@mui/material/styles';
+import { Avatar } from '@mui/material';
+import InsightsIcon from '@mui/icons-material/Insights';
 import { fetchTotalkm } from '../../services/totalArea';
 
 export interface AreaMapeadaProps {
@@ -31,15 +33,15 @@ export function AreaMapeada({ sx }: AreaMapeadaProps): React.JSX.Element {
   }, []); // Dependências vazias significam que isso será executado apenas uma vez, quando o componente for montado
 
   return (
-    <Card sx={sx}>
+    <Card sx={{ width: 200, height: 278  }}> 
       <CardContent>
-        <Stack spacing={2}>
+        <Stack spacing={4}>
           <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }} spacing={3}>
-            <Stack spacing={3}>
+            <Stack spacing={2}>
               <Typography color="text.secondary" variant="overline">
                 TOTAL DE ÁREAS
                 <Avatar sx={{ backgroundColor: '#1f7cd3', height: '56px', width: '56px', align: 'center' }}>
-                  <LayersRoundedIcon style={{ width: '100%', height: '100%' }} />
+                  <InsightsIcon style={{ width: '100%', height: '80%' }} /> {/* Ícone de tarefas do Material-UI */}
                 </Avatar>
               </Typography>
               <Typography variant="h4">{totalArea.toFixed(2)} Km²</Typography>
