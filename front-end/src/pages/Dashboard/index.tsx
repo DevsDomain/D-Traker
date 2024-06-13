@@ -1,17 +1,17 @@
 // Dashboard.tsx
 import React from 'react';
-import { Box, Grid, Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import GraficoBarras from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoStatusProjeto';
-import { TasksProgress } from '../../components/Box/tasks-progress';
+import { TasksProgress } from '../../components/Box/tasks_progress';
 import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
 import BasicSelect from '../../components/Select';
 import { DashboardProvider, useDashboard } from '../../contexts/dashboardContext';
 import { TotalTasks } from '../../components/Box/total_tasks';
 import { TotalPoligonos } from '../../components/Box/total_poligonos';
-
+import { AreaMapeada } from '../../components/Box/area_mapeada';
 
 const DashboardContent: React.FC = () => {
     const theme = useTheme();
@@ -49,8 +49,11 @@ const DashboardContent: React.FC = () => {
                     <TasksProgress andamento={projetoStatus.andamento} concluidos={projetoStatus.concluidos} naoAtribuido={projetoStatus.naoAtribuido} />
                 </Grid>
 
-            </Grid>
+                <Grid item lg={2.3} sm={6} xs={12}>
+                    <AreaMapeada sx={{ height: '100%', width: '80%' }} />
+                </Grid>
 
+            </Grid>
 
             <Grid container spacing={0} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
                 <Grid item xs={3} sm={3}>

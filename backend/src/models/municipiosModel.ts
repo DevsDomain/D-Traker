@@ -24,8 +24,6 @@ const MunicipioSchema = new Schema<Municipio>({
     data_entrega:{ type: String }
 });
 
-
-
 const MunicipioModel: Model<Municipio> = mongoose.model<Municipio>("Municipio", MunicipioSchema);
 
 export default MunicipioModel;

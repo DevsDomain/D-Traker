@@ -1,11 +1,8 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Stack from '@mui/material/Stack';
+import { Avatar, Card, CardContent, Stack, Typography } from '@mui/material';
 import type { SxProps } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
+
 
 export interface TotalTasksProps {
   sx?: SxProps;
