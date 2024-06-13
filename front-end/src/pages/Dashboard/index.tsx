@@ -1,6 +1,6 @@
 // Dashboard.tsx
-import React from "react";
-import { Grid, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import GraficoBarras from "../../components/graficos/GraficoBarra";
@@ -16,12 +16,17 @@ import { TotalTasks } from "../../components/Box/total_tasks";
 import { TotalPoligonos } from "../../components/Box/total_poligonos";
 import { AreaMapeada } from "../../components/Box/area_mapeada";
 import { Box } from "@mui/system";
+import useAuth from "../../hooks/auth";
 
 const DashboardContent: React.FC = () => {
   const theme = useTheme();
   const smDown = useMediaQuery(theme.breakpoints.down("sm"));
   const { state, setFiltroMembros, setFiltroProjetos } = useDashboard();
+  const {user} = useAuth()
   const { projetoStatus } = state;
+  const [projetoSelecionado,setProjetoSelecionado] = useState("")
+
+  
   const handleProjetoChange = (value: string) => {
     setFiltroProjetos(value);
   };
@@ -30,6 +35,18 @@ const DashboardContent: React.FC = () => {
     setFiltroMembros(value);
   };
 
+  useEffect(() => {
+    console.log("USEEFFET", state.filtroProjetos)
+    if(user.role === 'adm'){
+    state.filtroProjetos.length === 1 && setProjetoSelecionado(state.filtroProjetos[0].value)
+    }
+    else{
+      state.projetos.length === 1 && setProjetoSelecionado(state.projetos[0].value)
+
+    }
+
+  }, [state]);
+  
   return (
     <Box overflow="hidden">
       <Stack width={"50vw"} direction={"row"} marginLeft={42} marginTop={2}>
@@ -40,6 +57,8 @@ const DashboardContent: React.FC = () => {
           placeHolder="Projetos"
           value={state.selectedProject || ""}
         />
+      {projetoSelecionado && <Typography marginTop={2} marginLeft={5}>Visualizando o projeto: <strong>{ projetoSelecionado}</strong></Typography>}
+
       </Stack>
 
       <Grid
