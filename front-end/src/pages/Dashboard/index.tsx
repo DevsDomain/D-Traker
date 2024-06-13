@@ -1,17 +1,16 @@
-// Dashboard.tsx
 import React from 'react';
-import { Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import GraficoBarras from '../../components/graficos/GraficoBarra';
 import GraficoPizza from '../../components/graficos/GraficoStatusProjeto';
-import { TasksProgress } from '../../components/Box/tasks_progress';
 import GraficoDeApontamentos from '../../components/graficos/GraficoLinha';
 import BasicSelect from '../../components/Select';
 import { DashboardProvider, useDashboard } from '../../contexts/dashboardContext';
 import { TotalTasks } from '../../components/Box/total_tasks';
-import { TotalPoligonos } from '../../components/Box/total_poligonos';
 import { AreaMapeada } from '../../components/Box/area_mapeada';
+import { TasksProgress } from '../../components/Box/tasks_progress';
+import { TotalPoligonos } from '../../components/Box/total_poligonos';
 
 const DashboardContent: React.FC = () => {
     const theme = useTheme();
@@ -31,7 +30,7 @@ const DashboardContent: React.FC = () => {
                 <BasicSelect projeto={state.projetos} handlePesquisaByProjeto={setFiltroProjetos} onChange={handleProjetoChange} placeHolder='Projetos' value={state.selectedProject || ""} />
             </Stack>
 
-            <Grid container spacing={2} marginLeft={smDown ? 0 : theme.spacing(35)} marginTop={smDown ? 0 : theme.spacing(3)}>
+            <Grid container spacing={4} marginLeft={smDown ? 0 : theme.spacing(35)} marginTop={smDown ? 0 : theme.spacing(3)}>
                 <Grid item lg={2.3} sm={6} xs={12}>
                     <TotalTasks value="Total" naoAtribuido={projetoStatus.naoAtribuido} sx={{ height: '100%', width: '80%' }} />
                 </Grid>
@@ -54,6 +53,7 @@ const DashboardContent: React.FC = () => {
                 </Grid>
 
             </Grid>
+
 
             <Grid container spacing={0} marginLeft={smDown ? 0 : theme.spacing(30)} marginTop={smDown ? 0 : theme.spacing(5)}>
                 <Grid item xs={3} sm={3}>
