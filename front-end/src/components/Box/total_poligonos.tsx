@@ -25,7 +25,7 @@ export function TotalPoligonos({ andamento, concluidos, naoAtribuido, sx }: Tota
                   <LeaderboardIcon style={{ width: '100%', height: '80%' }} /> {/* Ícone de tarefas do Material-UI */}
                 </Avatar>
               </Typography>
-              <Typography variant="h4">{total}</Typography>
+              <Typography variant="h4">{total || 0}</Typography>
             </Stack>
           </Stack>
           <Stack sx={{ alignItems: 'center' }} direction="row" spacing={2}>
