@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Card, CardContent, Stack, Typography } from '@mui/material';
+import { Card, CardContent, Stack, Typography, Avatar } from '@mui/material';
 import LayersRoundedIcon from '@mui/icons-material/LayersRounded';
 import type { SxProps } from '@mui/material/styles';
-import { Avatar } from '@mui/material';
-import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import { fetchTotalkm } from '../../services/totalArea';
 
 export interface AreaMapeadaProps {

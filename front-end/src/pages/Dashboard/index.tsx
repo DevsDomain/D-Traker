@@ -8,10 +8,7 @@ import GraficoPizza from "../../components/graficos/GraficoStatusProjeto";
 import { TasksProgress } from "../../components/Box/tasks_progress";
 import GraficoDeApontamentos from "../../components/graficos/GraficoLinha";
 import BasicSelect from "../../components/Select";
-import {
-  DashboardProvider,
-  useDashboard,
-} from "../../contexts/dashboardContext";
+import {  DashboardProvider, useDashboard, } from "../../contexts/dashboardContext";
 import { TotalTasks } from "../../components/Box/total_tasks";
 import { TotalPoligonos } from "../../components/Box/total_poligonos";
 import { AreaMapeada } from "../../components/Box/area_mapeada";

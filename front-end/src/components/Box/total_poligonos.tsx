@@ -1,6 +1,5 @@
-import { Card, CardContent, Stack, Typography } from '@mui/material';
+import { Card, CardContent, Stack, Typography, Avatar } from '@mui/material';
 import type { SxProps } from '@mui/material/styles'; // Importando o tipo SxProps
-import { Avatar } from '@mui/material';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 export interface TotalPoligonosProps {
