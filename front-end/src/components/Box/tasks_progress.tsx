@@ -27,7 +27,7 @@ export function TasksProgress({ andamento, concluidos, naoAtribuido }: ProjetoSt
                   <DoneOutline style={{ width: '100%', height: '80%' }} /> {/* Ícone de tarefas do Material-UI */}
                 </Avatar>
               </div>
-              <Typography variant="h4">{ResultPercent}%</Typography>
+              <Typography variant="h4">{ResultPercent || 0}%</Typography>
             </Stack>
             <Avatar sx={{ backgroundColor: 'var(--mui-palette-warning-main)', height: '56px', width: '56px' }}>
               <ListBulletsIcon fontSize="var(--icon-fontSize-lg)" />

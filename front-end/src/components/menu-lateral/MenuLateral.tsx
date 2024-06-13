@@ -23,9 +23,9 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
   const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
   const [userName, setUser] = useState<string | null>(null);
   const { handleLogOut, user } = useAuth();
+  const name = user.name.split(" ")[0]
 
   useEffect(() => {
-    console.log("user", userName);
     localStorage["userName"] && setUser(localStorage["userName"]);
   }, [user]);
 
@@ -57,8 +57,8 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
           justifyContent="center"
         >
           {/* Texto "Bem-vindo" */}
-          <Typography variant="h5" align="center" sx={{ marginBottom: theme.spacing(2) }}>
-            Bem-vindo
+          <Typography variant="h6" align="center" sx={{ margin: theme.spacing(2) }}>
+            Bem-vindo(a)
           </Typography>
 
           {/* Ícone do usuário */}
@@ -75,8 +75,8 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
           justifyContent="center"
         >
 
-          <Typography variant="h5" align="center" sx={{ color: '#3797cf' }}>
-            <strong>@USUÁRIO</strong>
+          <Typography variant="h6" align="center" sx={{ color: '#3797cf' }}>
+            <span>{name}</span>
           </Typography>
 
         </Box>
