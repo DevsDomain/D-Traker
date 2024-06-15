@@ -3,7 +3,7 @@ import {  getAlteracoes, getMembros, getProjetoStatus,getProjetos} from '../serv
 import { AlteracaoProps } from '../types/alteracao';
 import { Filtro, membrosProps } from '../types/membros';
 import { ProjetoStatus } from '../types/projetos';
-
+import useAuth from '../hooks/auth';
 // DEFINE A ESTRUTURA DO CONTEXTO
 interface DashboardState {
     projetos: { key: string; value: string }[];
@@ -98,15 +98,18 @@ interface DashboardProviderProps {
 
 // PROVIDER
 export const DashboardProvider: React.FC<DashboardProviderProps> = ({ children }) => {
+    const {user} = useAuth();
+
     const [state, dispatch] = useReducer(dashboardReducer, initialState);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const projetos = await getProjetos();
-                const alteracoes = await getAlteracoes();
+
+                const projetos = await getProjetos(user.idProjeto,user.role);
+                const alteracoes = await getAlteracoes(user.idProjeto,user.role);
                 const membros = await getMembros();
-                const statusProjeto = await getProjetoStatus();
+                const statusProjeto = await getProjetoStatus("",user.idProjeto,user.role);
                 dispatch({ type: 'SET_PROJETOS', payload: projetos });
                 dispatch({ type: 'SET_ALTERACOES', payload: alteracoes });
                 dispatch({ type: 'SET_MEMBROS', payload: membros });
@@ -181,7 +184,7 @@ export const DashboardProvider: React.FC<DashboardProviderProps> = ({ children }
         dispatch({ type: "SET_FILTERED_ALTERACOES", payload: filteredAlteracoes })
 
 
-        getProjetoStatus(value).then((data) => {
+        getProjetoStatus(value,user.idProjeto,user.role).then((data) => {
             dispatch({ type: "SET_PROJETO_STATUS", payload: data })
 
         })

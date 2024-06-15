@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { AlteracaoProps } from '../../types/alteracao';
+import { Typography } from '@mui/material';
 
 const xLabels = [
   'Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
@@ -93,6 +94,9 @@ export default function GraficoDeApontamentos({ alteracoes }: ApontamentoProps) 
   ];
 
   return (
+    <>
+    <Typography textAlign="center" marginTop={2} width={950} variant="h5">Quantidade de Atuação X necessidade de Retrabalho por mês</Typography>
+
     <LineChart
       width={1000}
       height={300}
@@ -102,5 +106,6 @@ export default function GraficoDeApontamentos({ alteracoes }: ApontamentoProps) 
       ]}
       xAxis={[{ scaleType: 'band', data: xLabels }]}
     />
+    </>
   );
 }

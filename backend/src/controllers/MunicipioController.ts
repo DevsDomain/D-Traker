@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import MunicipioModel, { Municipio } from '../models/municipiosModel';
 import gestorModel, { Gestor } from '../models/gestoresModel';
-import GradeAtuacaoModel from '../models/gradeAtuacao';
+import GradeAtuacaoModel, { GradeAtuacao } from '../models/gradeAtuacao';
 
 class MunicipioController {
     public async getAll(req: Request, res: Response): Promise<Response> {
@@ -15,7 +15,6 @@ class MunicipioController {
             return res.status(500).json({ err: error.message });
         }
     }
-
 
     public async Admin(req: Request, res: Response): Promise<Response> {
         try {
@@ -31,7 +30,8 @@ class MunicipioController {
                     "UF": projeto.sigla_uf,
                     "GestorNome": gestor?.name,
                     "GestorEmail": gestor?.email,
-                    "status": "andamento"
+                    "status": "andamento",
+                    "area_km2": projeto.area_km2,
 
                 };
             }))
@@ -104,8 +104,23 @@ class MunicipioController {
             return res.status(500).json({ err: error.message });
         }
     }
-    
 
+    public async totalArea(req: Request, res: Response): Promise<Response> {
+        try {
+            const municipios = await GradeAtuacaoModel.find({});
+            let totalArea = 0;
+
+            municipios.forEach((gradeAtuacao: GradeAtuacao) => {
+                totalArea += Number(gradeAtuacao.area_km2);
+                console.log("totalArea",gradeAtuacao.area_km2)
+            });
+
+            return res.status(201).json({ totalArea });
+
+        } catch (error: any) {
+            return res.status(500).json({ err: error.message });
+        }
+    }
 }
 
 export default new MunicipioController();

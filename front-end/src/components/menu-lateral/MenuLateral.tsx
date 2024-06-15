@@ -10,6 +10,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDrawerContext } from "./contexts";
 import useAuth from "../../hooks/auth";
 import { Link } from "react-router-dom";
+import { Stack } from "@mui/material";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 interface IMenuLateralProps {
   [key: string]: any; // Aceita qualquer propriedade
@@ -21,9 +23,9 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
   const { isDrawerOpen, toggleDrawerOpen } = useDrawerContext();
   const [userName, setUser] = useState<string | null>(null);
   const { handleLogOut, user } = useAuth();
+  const name = user.name.split(" ")[0]
 
   useEffect(() => {
-    console.log("user", userName);
     localStorage["userName"] && setUser(localStorage["userName"]);
   }, [user]);
 
@@ -48,16 +50,37 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
       >
         <Box
           width="100%"
-          height={theme.spacing(20)}
+          height={theme.spacing(12)}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {/* Texto "Bem-vindo" */}
+          <Typography variant="h6" align="center" sx={{ margin: theme.spacing(2) }}>
+            Bem-vindo(a)
+          </Typography>
+
+          {/* Ícone do usuário */}
+          <Stack direction="row" alignItems="center" justifyContent="center" spacing={15}>
+            <AccountCircle sx={{ fontSize: 40 }} /> {/* Ajuste o tamanho do ícone aqui */}
+          </Stack>
+        </Box>
+
+        <Box
+          width="100%"
+          height={theme.spacing(15)}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
-          {/* Substituído o Avatar por Typography com o texto "Dtracker" estilizado */}
-          <Typography variant="h5" align="center">
-            <strong>D</strong>TRACKER
+
+          <Typography variant="h6" align="center" sx={{ color: '#3797cf' }}>
+            <span>{name}</span>
           </Typography>
+
         </Box>
+
 
         <Divider style={{ backgroundColor: "gray" }} />
 
@@ -66,8 +89,8 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
           display="flex"
           flexDirection="column"
           alignItems="flex-start"
-          marginTop={theme.spacing(3)}
-          paddingLeft={theme.spacing(4)}
+          marginTop={theme.spacing(4)}
+          paddingLeft={theme.spacing(2)}
         >
           {/* Botões na parte inferior do menu lateral */}
           <Button
@@ -83,7 +106,7 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
             Dashboard
           </Button>
           <Button
-            startIcon={<AccountCircle />}
+            startIcon={<ListAltIcon/>}
             style={{
               color: "white",
               textTransform: "none",
@@ -117,13 +140,25 @@ const MenuLateral: React.FC<IMenuLateralProps> = (props) => {
         <Box
           display="flex"
           justifyContent="center"
-          marginTop={theme.spacing(12)}
+          marginTop={theme.spacing(14)}
         >
           <img
             src="/dtracker-192x192-semfundo.png"
             alt="Logo"
-            style={{ width: "50%", height: "auto" }}
+            style={{ width: "50%", height: "auto", marginBottom: theme.spacing(0) }}
           />
+        </Box>
+        <Box
+          width="100%"
+          height={theme.spacing(10)}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {/* Substituído o Avatar por Typography com o texto "Dtracker" estilizado */}
+          <Typography variant="h6" align="center">
+            <strong>D</strong>TRACKER
+          </Typography>
         </Box>
       </Box>
     </Drawer>
