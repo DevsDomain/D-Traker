@@ -3,6 +3,11 @@
 ## :memo: Desafio
 O desafio proposto é desenvolver uma ferramenta de gerenciamento exclusivamente para o gestor de projetos, onde ele poderá administrar os dados apontados pelo editor e pelo revisor. O sistema deve permitir que o gestor delimite a área do projeto, carregue dados de suporte, cadastre usuários (editores e revisores), atribua áreas de trabalho e extraia estatísticas. Dessa forma, a ferramenta visa melhorar a eficiência e a qualidade dos projetos de mapeamento, centralizando as tarefas de gerenciamento dos dados fornecidos pelos colaboradores envolvidos no processo.
 
+## 🖥️ Produto
+[Assista ao funcionamento do produto!](https://www.youtube.com/watch?v=MeI-_kXoLfY)
+<br><br>
+![image](https://github.com/user-attachments/assets/4795422b-82ce-40e1-8193-7f5dcf7b8682)
+
 
 
 ### 🏁 Entregas de Sprints
