@@ -1,4 +1,4 @@
-<h1 align="center">🗺️ D-Traker</h1>
+<h1 align="center">🗺️ D-Tracker</h1>
 
 ## :memo: Desafio
 O desafio proposto é desenvolver uma ferramenta de gerenciamento exclusivamente para o gestor de projetos, onde ele poderá administrar os dados apontados pelo editor e pelo revisor. O sistema deve permitir que o gestor delimite a área do projeto, carregue dados de suporte, cadastre usuários (editores e revisores), atribua áreas de trabalho e extraia estatísticas. Dessa forma, a ferramenta visa melhorar a eficiência e a qualidade dos projetos de mapeamento, centralizando as tarefas de gerenciamento dos dados fornecidos pelos colaboradores envolvidos no processo.
